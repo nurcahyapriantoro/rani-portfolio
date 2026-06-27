@@ -2,9 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 import { Leaf, Sparkles, Users as UsersIcon } from 'lucide-react';
+import { generateCircleParams } from '@/lib/seeded-random';
 
 export function Projects() {
   const t = useTranslations('projects');
+  const circles = generateCircleParams(20);
 
   return (
     <section className="py-24 md:py-32 relative">
@@ -59,19 +61,19 @@ export function Projects() {
               </div>
 
               <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 400">
-                {[...Array(20)].map((_, i) => (
+                {circles.map((c, i) => (
                   <circle
                     key={i}
-                    cx={Math.random() * 400}
-                    cy={Math.random() * 400}
-                    r={Math.random() * 2 + 1}
+                    cx={c.cx}
+                    cy={c.cy}
+                    r={c.r}
                     fill="currentColor"
                     className="text-accent"
                   >
                     <animate
                       attributeName="opacity"
                       values="0;1;0"
-                      dur={`${Math.random() * 3 + 2}s`}
+                      dur={`${c.dur}s`}
                       repeatCount="indefinite"
                     />
                   </circle>

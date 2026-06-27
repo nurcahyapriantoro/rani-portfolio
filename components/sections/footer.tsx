@@ -5,7 +5,7 @@ import { Heart } from 'lucide-react';
 
 export function Footer() {
   const t = useTranslations('footer');
-  const year = new Date().getFullYear();
+  const year = 2025;
 
   return (
     <footer className="py-12 border-t border-border">

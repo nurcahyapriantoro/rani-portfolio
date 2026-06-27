@@ -3,6 +3,7 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { seededRandom } from '@/lib/seeded-random';
 
 interface FloatingElement {
   position: [number, number, number];
@@ -11,77 +12,87 @@ interface FloatingElement {
   type: 'atom' | 'helix-segment' | 'molecule' | 'bond';
   rotationSpeed?: number;
   phase?: number;
+  seed: number;
 }
 
 const ATOM_COUNT = 60;
 
 function generateElements(): FloatingElement[] {
   const elements: FloatingElement[] = [];
+  let seedCounter = 1;
 
   for (let i = 0; i < ATOM_COUNT; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 4 + Math.random() * 8;
+    const s = seedCounter++;
+    const angle = seededRandom(s * 0.1) * Math.PI * 2;
+    const radius = 4 + seededRandom(s * 0.2) * 8;
     const x = Math.cos(angle) * radius;
-    const y = (Math.random() - 0.5) * 12;
-    const z = -2 - Math.random() * 6;
+    const y = (seededRandom(s * 0.3) - 0.5) * 12;
+    const z = -2 - seededRandom(s * 0.4) * 6;
 
     elements.push({
       position: [x, y, z],
-      size: 0.04 + Math.random() * 0.12,
-      speed: 0.2 + Math.random() * 0.5,
+      size: 0.04 + seededRandom(s * 0.5) * 0.12,
+      speed: 0.2 + seededRandom(s * 0.6) * 0.5,
       type: 'atom',
-      phase: Math.random() * Math.PI * 2
+      phase: seededRandom(s * 0.7) * Math.PI * 2,
+      seed: s
     });
   }
 
   for (let i = 0; i < 12; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 5 + Math.random() * 6;
+    const s = seedCounter++;
+    const angle = seededRandom(s * 0.1) * Math.PI * 2;
+    const radius = 5 + seededRandom(s * 0.2) * 6;
     const x = Math.cos(angle) * radius;
-    const y = (Math.random() - 0.5) * 10;
-    const z = -1 - Math.random() * 4;
+    const y = (seededRandom(s * 0.3) - 0.5) * 10;
+    const z = -1 - seededRandom(s * 0.4) * 4;
 
     elements.push({
       position: [x, y, z],
-      size: 0.08 + Math.random() * 0.06,
-      speed: 0.15 + Math.random() * 0.3,
+      size: 0.08 + seededRandom(s * 0.5) * 0.06,
+      speed: 0.15 + seededRandom(s * 0.6) * 0.3,
       type: 'helix-segment',
-      rotationSpeed: 0.2 + Math.random() * 0.4,
-      phase: Math.random() * Math.PI * 2
+      rotationSpeed: 0.2 + seededRandom(s * 0.7) * 0.4,
+      phase: seededRandom(s * 0.8) * Math.PI * 2,
+      seed: s
     });
   }
 
   for (let i = 0; i < 8; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 6 + Math.random() * 4;
+    const s = seedCounter++;
+    const angle = seededRandom(s * 0.1) * Math.PI * 2;
+    const radius = 6 + seededRandom(s * 0.2) * 4;
     const x = Math.cos(angle) * radius;
-    const y = (Math.random() - 0.5) * 10;
-    const z = -3 - Math.random() * 3;
+    const y = (seededRandom(s * 0.3) - 0.5) * 10;
+    const z = -3 - seededRandom(s * 0.4) * 3;
 
     elements.push({
       position: [x, y, z],
-      size: 0.15 + Math.random() * 0.1,
-      speed: 0.1 + Math.random() * 0.2,
+      size: 0.15 + seededRandom(s * 0.5) * 0.1,
+      speed: 0.1 + seededRandom(s * 0.6) * 0.2,
       type: 'molecule',
-      rotationSpeed: 0.1 + Math.random() * 0.3,
-      phase: Math.random() * Math.PI * 2
+      rotationSpeed: 0.1 + seededRandom(s * 0.7) * 0.3,
+      phase: seededRandom(s * 0.8) * Math.PI * 2,
+      seed: s
     });
   }
 
   for (let i = 0; i < 15; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 4.5 + Math.random() * 7;
+    const s = seedCounter++;
+    const angle = seededRandom(s * 0.1) * Math.PI * 2;
+    const radius = 4.5 + seededRandom(s * 0.2) * 7;
     const x = Math.cos(angle) * radius;
-    const y = (Math.random() - 0.5) * 11;
-    const z = -2 - Math.random() * 5;
+    const y = (seededRandom(s * 0.3) - 0.5) * 11;
+    const z = -2 - seededRandom(s * 0.4) * 5;
 
     elements.push({
       position: [x, y, z],
-      size: 0.3 + Math.random() * 0.3,
-      speed: 0.2 + Math.random() * 0.3,
+      size: 0.3 + seededRandom(s * 0.5) * 0.3,
+      speed: 0.2 + seededRandom(s * 0.6) * 0.3,
       type: 'bond',
-      rotationSpeed: 0.15 + Math.random() * 0.4,
-      phase: Math.random() * Math.PI * 2
+      rotationSpeed: 0.15 + seededRandom(s * 0.7) * 0.4,
+      phase: seededRandom(s * 0.8) * Math.PI * 2,
+      seed: s
     });
   }
 
@@ -115,7 +126,7 @@ function Atom({ position, size, speed, phase = 0 }: FloatingElement) {
   );
 }
 
-function HelixSegment({ position, size, speed, rotationSpeed = 0.3, phase = 0 }: FloatingElement) {
+function HelixSegment({ position, size, speed, rotationSpeed = 0.3, phase = 0, seed = 1 }: FloatingElement) {
   const groupRef = useRef<THREE.Group>(null);
   const spheres = useMemo(() => {
     const arr = [];
@@ -132,7 +143,7 @@ function HelixSegment({ position, size, speed, rotationSpeed = 0.3, phase = 0 }:
       });
     }
     return arr;
-  }, [size]);
+  }, [size, seed]);
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
@@ -159,21 +170,21 @@ function HelixSegment({ position, size, speed, rotationSpeed = 0.3, phase = 0 }:
   );
 }
 
-function Molecule({ position, size, speed, rotationSpeed = 0.2, phase = 0 }: FloatingElement) {
+function Molecule({ position, size, speed, rotationSpeed = 0.2, phase = 0, seed = 1 }: FloatingElement) {
   const groupRef = useRef<THREE.Group>(null);
   const atoms = useMemo(() => {
     const arr = [];
-    const numAtoms = 4 + Math.floor(Math.random() * 3);
+    const numAtoms = 4 + Math.floor(seededRandom(seed * 0.9) * 3);
     for (let i = 0; i < numAtoms; i++) {
       const angle = (i / numAtoms) * Math.PI * 2;
       const radius = size * 1.5;
       arr.push({
-        pos: [Math.cos(angle) * radius, (Math.random() - 0.5) * size * 2, Math.sin(angle) * radius] as [number, number, number],
-        size: size * (0.6 + Math.random() * 0.4)
+        pos: [Math.cos(angle) * radius, (seededRandom(seed * 0.3 + i) - 0.5) * size * 2, Math.sin(angle) * radius] as [number, number, number],
+        size: size * (0.6 + seededRandom(seed * 0.5 + i) * 0.4)
       });
     }
     return arr;
-  }, [size]);
+  }, [size, seed]);
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
