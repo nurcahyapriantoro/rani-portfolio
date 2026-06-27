@@ -5,7 +5,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
-import { SmoothScroll } from '@/components/effects/smooth-scroll';
+import { SmoothScrollProvider } from '@/components/effects/smooth-scroll';
 import { Navbar } from '@/components/ui/navbar';
 import { routing } from '@/lib/routing';
 import '../globals.css';
@@ -94,9 +94,10 @@ export default async function LocaleLayout({
       <body>
         <ThemeProvider defaultTheme="light" storageKey="rani-theme">
           <NextIntlClientProvider messages={messages}>
-            <SmoothScroll />
-            <Navbar />
-            {children}
+            <SmoothScrollProvider>
+              <Navbar />
+              {children}
+            </SmoothScrollProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
