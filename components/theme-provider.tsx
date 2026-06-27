@@ -28,18 +28,19 @@ export function ThemeProvider({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(storageKey) as Theme | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initial = stored || (prefersDark ? 'dark' : defaultTheme);
-    setThemeState(initial);
+    const root = window.document.documentElement;
+    const current = root.classList.contains('dark') ? 'dark' : 'light';
+    setThemeState(current);
     setMounted(true);
-  }, [defaultTheme, storageKey]);
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(theme);
+    root.style.colorScheme = theme;
+    root.setAttribute('data-theme', theme);
     localStorage.setItem(storageKey, theme);
   }, [theme, mounted, storageKey]);
 

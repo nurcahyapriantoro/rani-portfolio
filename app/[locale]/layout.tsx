@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SmoothScroll } from '@/components/effects/smooth-scroll';
 import { Navbar } from '@/components/ui/navbar';
@@ -26,6 +27,22 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap'
 });
+
+const themeInitScript = `
+(function() {
+  try {
+    var storageKey = 'rani-theme';
+    var stored = localStorage.getItem(storageKey);
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = stored || (prefersDark ? 'dark' : 'light');
+    var root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    root.style.colorScheme = theme;
+    root.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+`;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rani.vercel.app'),
@@ -69,6 +86,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
+      </head>
       <body>
         <ThemeProvider defaultTheme="light" storageKey="rani-theme">
           <NextIntlClientProvider messages={messages}>
