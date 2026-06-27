@@ -1,0 +1,110 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "education": "Pendidikan",
+    "experience": "Pengalaman",
+    "skills": "Keahlian",
+    "publications": "Publikasi",
+    "awards": "Penghargaan",
+    "contact": "Kontak",
+    "admin": "Admin"
+  },
+  "hero": {
+    "greeting": "Halo, saya",
+    "name": "Rani Andriani Tunggal",
+    "title": "Mahasiswa Biokimia",
+    "subtitle": "Mahasiswa Tingkat Akhir @ IPB University · Divisi Biomolekuler",
+    "cta_contact": "Hubungi Saya",
+    "cta_cv": "Unduh CV",
+    "scroll": "Gulir untuk menjelajah"
+  },
+  "about": {
+    "label": "Tentang",
+    "title": "Mengkaji Molekul,\nMembangun Dampak",
+    "description": "Saya mahasiswa tingkat akhir Biokimia di IPB University, dengan spesialisasi Divisi Biomolekuler. Memiliki pengalaman langsung dalam analisis biomolekuler, mengembangkan keterampilan praktis dalam memeriksa dan menganalisis struktur dan fungsi molekul biologis melalui magang dan asisten laboratorium. Partisipasi aktif dalam kegiatan organisasi,ボランティア, dan kompetisi telah memperkuat kemampuan kepemimpinan, pemecahan masalah, dan kerja tim saya.",
+    "stats": {
+      "gpa": "IPK",
+      "experience": "Pengalaman",
+      "awards": "Penghargaan",
+      "publications": "Publikasi"
+    }
+  },
+  "education": {
+    "label": "Pendidikan",
+    "title": "Perjalanan Akademik",
+    "degree": "Sarjana Sains - S.Si, Biokimia",
+    "school": "IPB University",
+    "period": "2022 – 2026",
+    "location": "Bogor, Jawa Barat, Indonesia"
+  },
+  "experience": {
+    "label": "Pengalaman",
+    "title": "Jalur Profesional",
+    "subtitle": "Linimasa pengalaman laboratorium, riset, dan kepemimpinan",
+    "present": "Sekarang"
+  },
+  "skills": {
+    "label": "Keahlian",
+    "title": "Yang Saya Bawa",
+    "subtitle": "Teknik laboratorium, piranti molekuler, dan soft skills",
+    "categories": {
+      "laboratory": "Laboratorium",
+      "molecular": "Biologi Molekuler",
+      "analysis": "Analisis",
+      "soft": "Soft Skills"
+    }
+  },
+  "projects": {
+    "label": "Proyek Unggulan",
+    "title": "Independent Pilot",
+    "subtitle": "Pengembangan Bina Diri & Keterampilan Sosial melalui Horticultural Therapy",
+    "description": "Program holistik yang dirancang untuk individu dengan disabilitas intelektual dan mental di Rumah Azaki, Bogor. Menggabungkan horticultural therapy dengan kegiatan terstruktur untuk meningkatkan keterampilan bina diri, kognitif, dan sosial.",
+    "impact": "Dampak",
+    "impact_text": "Hingga 80% peningkatan pada aktivitas menanam & merawat tanaman untuk peserta disabilitas intelektual, dan 40% untuk peserta disabilitas mental.",
+    "team": "Tim",
+    "published": "Dipublikasikan"
+  },
+  "publications": {
+    "label": "Publikasi",
+    "title": "Riset & Tulisan",
+    "subtitle": "Kontribusi untuk komunitas ilmiah"
+  },
+  "awards": {
+    "label": "Penghargaan",
+    "title": "Pengakuan",
+    "subtitle": "Pencapaian dalam perjalanan akademik dan kompetisi"
+  },
+  "contact": {
+    "label": "Kontak",
+    "title": "Mari Terhubung",
+    "subtitle": "Terbuka untuk kolaborasi, peluang riset, dan diskusi bermakna",
+    "name": "Nama",
+    "email": "Email",
+    "message": "Pesan",
+    "send": "Kirim Pesan",
+    "send_email": "Kirim via Email",
+    "send_wa": "Chat via WhatsApp",
+    "location": "Lokasi",
+    "follow": "Ikuti saya"
+  },
+  "footer": {
+    "built_with": "Dibuat dengan Next.js · Deploy di Vercel",
+    "rights": "Hak cipta dilindungi"
+  },
+  "common": {
+    "view_more": "Lihat lebih",
+    "view_less": "Lihat lebih sedikit",
+    "loading": "Memuat...",
+    "back": "Kembali",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "edit": "Edit",
+    "delete": "Hapus",
+    "add": "Tambah",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "light": "Terang",
+    "dark": "Gelap"
+  }
+}

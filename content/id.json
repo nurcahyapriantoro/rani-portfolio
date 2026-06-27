@@ -1,0 +1,182 @@
+{
+  "profile": {
+    "fullName": "Rani Andriani Tunggal",
+    "nickname": "Rani",
+    "pronouns": "She/Her",
+    "title": "Mahasiswa Biokimia Tingkat Akhir",
+    "subtitle": "Divisi Biomolekuler · IPB University",
+    "tagline": "Mengkaji molekul, membangun dampak.",
+    "location": "Bogor, Jawa Barat, Indonesia",
+    "email": "raniandrianitunggal@gmail.com",
+    "phone": "+62-812-3456-7890",
+    "whatsapp": "6281234567890",
+    "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal/",
+    "github": "",
+    "instagram": "",
+    "cvUrl": "/cv-rani-andriani-tunggal.pdf",
+    "avatarInitials": "RT",
+    "avatarColor": "#16a34a"
+  },
+  "stats": {
+    "gpa": "3.85",
+    "experienceCount": 6,
+    "awardsCount": 5,
+    "publicationsCount": 1
+  },
+  "experiences": [
+    {
+      "id": "exp-1",
+      "role": "Asisten Laboratorium Nucleic Acid and Protein Engineering",
+      "company": "IPB University",
+      "type": "Kontrak",
+      "period": "Agu 2025 - Des 2025",
+      "duration": "5 bln",
+      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
+      "description": "Membimbing dan mengawasi mahasiswa dalam sesi praktikum isolasi gen dan kloning gen pengkode amilase dari Bacillus licheniformis, mencakup desain primer hingga analisis koloni menggunakan PCR dan elektroforesis gel. Mengevaluasi dan mencatat performa serta nilai mahasiswa.",
+      "skills": ["Isolasi DNA", "PCR", "Elektroforesis Gel", "Desain Primer"]
+    },
+    {
+      "id": "exp-2",
+      "role": "Asisten Laboratorium Karakterisasi Biomolekuler",
+      "company": "IPB University",
+      "type": "Kontrak",
+      "period": "Agu 2025 - Des 2025",
+      "duration": "5 bln",
+      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
+      "description": "Membimbing dan mengawasi mahasiswa dalam sesi praktikum analisis karbohidrat, protein, lipid, dan asam nukleat. Mengevaluasi dan mencatat performa serta nilai mahasiswa sesuai dengan требования mata kuliah.",
+      "skills": ["Spektrofotometri UV/Vis", "Kromatografi Lapis Tipis (KLT)", "Analisis Biomolekuler"]
+    },
+    {
+      "id": "exp-3",
+      "role": "Asisten Laboratorium Biomolekul",
+      "company": "Indonesian Oil Palm Research Institute (IOPRI)",
+      "type": "Magang",
+      "period": "Jul 2025 - Agu 2025",
+      "duration": "2 bln",
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Mengisolasi dan menganalisis DNA dari lebih dari 10 sampel daun tanaman. Melakukan analisis sekuens dan konstruksi pohon filogenetik menggunakan perangkat lunak MEGA. Menyiapkan dan mengamati kultur jaringan dalam riset self-DNA kelapa sawit.",
+      "skills": ["Isolasi DNA", "PCR", "Perangkat Lunak MEGA", "Filogenetika", "Kultur Jaringan"]
+    },
+    {
+      "id": "exp-4",
+      "role": "Asisten Laboratorium Biomolekul",
+      "company": "Indonesian Oil Palm Research Institute (IOPRI)",
+      "type": "Magang",
+      "period": "Des 2024 - Jan 2025",
+      "duration": "2 bln",
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Mengukur kadar air menggunakan metode gravimetri dan kadar fosfat menggunakan spektrofotometri UV-VIS pada lebih dari 30 sampel tanaman. Menganalisis aktivitas protein dan xilanase pada lebih dari 10 sampel layanan. Menyiapkan buffer laboratorium dan pelarut kimia.",
+      "skills": ["Spektrofotometri UV/Vis", "Molecular Docking", "Analisis Gravimetri"]
+    },
+    {
+      "id": "exp-5",
+      "role": "Staf Bisnis dan Kemitraan",
+      "company": "BEM FMIPA IPB",
+      "type": "Musiman",
+      "period": "Jan 2024 - Des 2024",
+      "duration": "1 thn",
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Merencanakan konsep program kerja utama, G-astip dan Tutor BEM FMIPA, dengan mengatur skema bagi hasil dan sistem implementasi. Mencapai lebih dari 20 pelanggan G-astip dan berhasil melibatkan 3 mahasiswa dalam program Tutor BEM FMIPA.",
+      "skills": ["Perencanaan Bisnis", "Kemitraan", "Kepemimpinan", "Manajemen Acara"]
+    },
+    {
+      "id": "exp-6",
+      "role": "Sekretaris Pendanaan dan Sponsorship",
+      "company": "CREBs IPB · UBIQUINON 2024",
+      "type": "Paruh Waktu",
+      "period": "Mar 2024 - Sep 2024",
+      "duration": "7 bln",
+      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
+      "description": "Mengelola proposal pendanaan dan penjangkauan sponsorship untuk acara UBIQUINON 2024. Berkoordinasi dengan sponsor dan pemangku kepentingan untuk mengamankan dukungan finansial.",
+      "skills": ["Sponsorship", "Korespondensi", "Koordinasi Acara"]
+    }
+  ],
+  "skills": [
+    { "name": "Isolasi DNA", "category": "molecular", "level": 95 },
+    { "name": "Transformasi Plasmid", "category": "molecular", "level": 88 },
+    { "name": "PCR", "category": "molecular", "level": 92 },
+    { "name": "Elektroforesis Gel", "category": "molecular", "level": 90 },
+    { "name": "Spektrofotometri UV/Vis", "category": "analysis", "level": 90 },
+    { "name": "KLT", "category": "analysis", "level": 85 },
+    { "name": "Molecular Docking", "category": "analysis", "level": 80 },
+    { "name": "Analisis Filogenetik (MEGA)", "category": "analysis", "level": 82 },
+    { "name": "Kultur Jaringan", "category": "laboratory", "level": 80 },
+    { "name": "Preparasi Buffer", "category": "laboratory", "level": 88 },
+    { "name": "Kepemimpinan", "category": "soft", "level": 90 },
+    { "name": "Kerja Tim", "category": "soft", "level": 95 },
+    { "name": "Pemecahan Masalah", "category": "soft", "level": 88 },
+    { "name": "Public Speaking", "category": "soft", "level": 85 }
+  ],
+  "publications": [
+    {
+      "id": "pub-1",
+      "title": "Pengembangan Bina Diri dan Keterampilan Sosial Penyandang Disabilitas Intelektual dan Mental Melalui Program Independent Pilot",
+      "authors": ["Rani Andriani Tunggal", "Heni Atika Putri", "J. Salsabila", "Nurcahya Priantoro", "Santa Veronika Sidauruk", "Syaefudin Suminto"],
+      "venue": "AGROKREATIF: Jurnal Ilmiah Pengabdian kepada Masyarakat",
+      "date": "16 Jun 2025",
+      "type": "jurnal",
+      "abstract": "Rumah Azaki, lembaga kesejahteraan sosial di Kabupaten Bogor, menghadapi tantangan dalam memfasilitasi penyandang disabilitas untuk mengembangkan keterampilan bina diri dan kompetensi sosial. Program Independent Pilot dirancang untuk mengatasi isu tersebut melalui pendekatan horticultural therapy, menunjukkan peningkatan hingga 80% pada aktivitas menanam untuk peserta disabilitas intelektual.",
+      "url": "https://journal.ipb.ac.id/index.php/agrokreatif"
+    }
+  ],
+  "awards": [
+    {
+      "id": "award-1",
+      "rank": "Juara 1",
+      "title": "Lomba Penulisan Esai Ilmiah NEXT-G 2025",
+      "issuer": "NEXT-G",
+      "date": "Nov 2025",
+      "associatedWith": "IPB University"
+    },
+    {
+      "id": "award-2",
+      "rank": "Juara 2",
+      "title": "Lomba Penulisan Ilmiah Airlangga Ideas Competition ke-13 2025",
+      "issuer": "Universitas Airlangga",
+      "date": "Nov 2025",
+      "associatedWith": "IPB University"
+    },
+    {
+      "id": "award-3",
+      "rank": "Juara 3",
+      "title": "Business of the Year - Program Mahasiswa Wirausaha 2024 (Batiknese)",
+      "issuer": "PMW 2024",
+      "date": "Des 2024",
+      "associatedWith": "IPB University"
+    },
+    {
+      "id": "award-4",
+      "rank": "Finalis Nasional",
+      "title": "Pekan Ilmiah Mahasiswa Nasional ke-37 (PIMNAS|PKM-PM) 2024",
+      "issuer": "Kemdiktisaintek",
+      "date": "Sep 2024",
+      "associatedWith": "IPB University"
+    },
+    {
+      "id": "award-5",
+      "rank": "Penerima Dana",
+      "title": "Program Kreativitas Mahasiswa Riset Sosial Humaniora (PKM-RSH) 2023",
+      "issuer": "Belmawa Kemdiktisaintek",
+      "date": "Jun 2023",
+      "associatedWith": "IPB University"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-1",
+      "title": "7 Habits of Highly Effective People",
+      "issuer": "FranklinCovey",
+      "date": "Agu 2022"
+    }
+  ],
+  "volunteering": [
+    {
+      "id": "vol-1",
+      "role": "Relawan Masyarakat",
+      "organization": "Jaber Zillenial Kota Bogor",
+      "period": "Mei 2023",
+      "duration": "1 bln",
+      "category": "Layanan Sosial"
+    }
+  ]
+}

@@ -1,36 +1,214 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rani Andriani Tunggal — Portfolio Website
 
-## Getting Started
+A production-ready, bilingual (English & Indonesian) portfolio website for **Rani Andriani Tunggal**, Final-Year Biochemistry Student at IPB University.
 
-First, run the development server:
+Built with **Next.js 16** (App Router), **Three.js**, **GSAP**, **Lenis**, **Swiper**, and **Tailwind CSS v4**. Features a stunning 3D DNA helix in the hero, smooth scroll, parallax effects, theme switching (Light/Dark), and a built-in admin panel for dynamic content editing.
+
+---
+
+## ✨ Features
+
+### Landing Page (Single Page)
+- 🎨 **Hero** — Animated 3D DNA double-helix (Three.js) with floating particles
+- 📊 **About** — Animated stats counter on scroll
+- 🎓 **Education** — Glass-morphism card with gradient border
+- 💼 **Experience** — Vertical timeline with scroll-triggered reveal (6 positions)
+- 🧬 **Skills** — Categorized proficiency bars with category icons
+- 🌱 **Featured Project** — Independent Pilot (horticultural therapy)
+- 📚 **Publications** — Swiper coverflow carousel
+- 🏆 **Awards** — Tilt cards with shine sweep (Vanilla-tilt.js)
+- ✉️ **Contact** — mailto + WhatsApp deep link
+- 🦶 **Footer** — Subtle social links
+
+### Technical Features
+- 🌐 **2 Languages** — English (`/en`) & Indonesian (`/id`) with `next-intl`
+- 🌓 **2 Themes** — Light × Green & Dark × Neon Green via CSS variables
+- 📜 **Smooth Scroll** — Lenis global smooth scroll
+- ✨ **Animations** — GSAP-style fade-up on scroll via Intersection Observer
+- 🎯 **Custom Cursor** — Smooth hover effects
+- 📱 **Responsive** — Mobile-first, fully responsive
+- ♿ **A11y** — `prefers-reduced-motion` respected, semantic HTML
+- 🔍 **SEO** — OpenGraph, metadata, locale alternates
+
+### Admin Panel (`/admin`)
+- 🔒 **Password-protected** — bcrypt + httpOnly cookie
+- 📊 **Dashboard** — Overview with stats
+- ✏️ **CRUD Editors** for:
+  - Profile (name, contacts, social links)
+  - Experiences (add/edit/delete/reorder)
+  - Skills (with category & level)
+  - Publications (with abstract)
+  - Awards (with rank & issuer)
+- 💾 **JSON File Backend** — Server Actions write directly to `content/{locale}.json`
+- 🔄 **Auto Revalidate** — Changes appear immediately on landing page
+
+---
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Default Admin Credentials
+- **URL**: `http://localhost:3000/en/admin/login`
+- **Password**: `admin123` (change in `.env.local` → `ADMIN_PASSWORD`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Deploy to Vercel
 
-## Learn More
+### Option A: One-Click Deploy
+1. Push this repo to GitHub:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/rani-portfolio.git
+   git push -u origin main
+   ```
+2. Visit [vercel.com/new](https://vercel.com/new) → Import the repo
+3. Add environment variables:
+   - `ADMIN_PASSWORD` = your strong password
+   - `COOKIE_SECRET` = random 32+ character string
+4. Click **Deploy**
 
-To learn more about Next.js, take a look at the following resources:
+### Option B: Vercel CLI
+```bash
+npm i -g vercel
+vercel
+# Follow prompts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Custom Domain
+After deploy, in Vercel dashboard → **Settings** → **Domains** → Add your custom domain.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Category | Library |
+|---|---|
+| Framework | Next.js 16 (App Router) + TypeScript |
+| Styling | Tailwind CSS v4 |
+| i18n | next-intl v4 |
+| 3D | Three.js + @react-three/fiber + @react-three/drei |
+| Animation | Intersection Observer, CSS transitions |
+| Smooth Scroll | Lenis |
+| Slider | Swiper.js (Coverflow effect) |
+| Card Tilt | Vanilla-tilt.js |
+| Icons | Lucide React |
+| Auth | bcryptjs + httpOnly cookies |
+| Backend | Server Actions + JSON file storage |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📁 Project Structure
+
+```
+rani-portfolio/
+├── app/
+│   ├── [locale]/
+│   │   ├── layout.tsx          # Locale + theme + smooth scroll provider
+│   │   ├── page.tsx            # Landing page composition
+│   │   └── admin/              # Admin panel
+│   │       ├── login/
+│   │       └── dashboard/
+│   │           ├── profile/
+│   │           ├── experiences/
+│   │           ├── skills/
+│   │           ├── publications/
+│   │           └── awards/
+│   ├── globals.css             # Tailwind + theme variables
+├── components/
+│   ├── sections/               # All landing page sections
+│   ├── three/                  # Three.js DNA helix
+│   ├── effects/                # Reusable animation wrappers
+│   ├── ui/                     # Navbar, Language switcher
+│   └── admin/                  # Admin form components
+├── content/
+│   ├── en.json                 # English content (editable)
+│   └── id.json                 # Indonesian content (editable)
+├── messages/
+│   ├── en.json                 # UI labels (English)
+│   └── id.json                 # UI labels (Indonesian)
+├── lib/
+│   ├── routing.ts              # next-intl routing config
+│   ├── navigation.ts           # Localized Link, useRouter, etc
+│   ├── content.ts              # JSON read/write helpers
+│   ├── auth.ts                 # bcrypt + cookie helpers
+│   ├── actions.ts              # Server Actions
+│   └── utils.ts
+├── proxy.ts                    # i18n + admin auth middleware
+├── i18n.ts                     # next-intl config
+└── next.config.ts
+```
+
+---
+
+## ✏️ Editing Content
+
+### Option 1: Via Admin Panel
+1. Navigate to `/en/admin/login` (or `/id/admin/login`)
+2. Login with password from `.env.local`
+3. Edit any section via forms
+4. Save → changes appear immediately
+
+### Option 2: Edit JSON Files Directly
+Edit `content/en.json` and `content/id.json` for content, or `messages/en.json` and `messages/id.json` for UI labels.
+
+---
+
+## 🎨 Customization
+
+### Theme Colors
+Edit CSS variables in `app/globals.css`:
+```css
+:root {
+  --accent: #16a34a;       /* Light theme green */
+  --bg-primary: #ffffff;
+}
+
+.dark {
+  --accent: #4ade80;       /* Dark theme neon green */
+  --bg-primary: #0a0f0d;
+}
+```
+
+### Add New Language
+1. Add locale to `lib/routing.ts`:
+   ```ts
+   locales: ['en', 'id', 'jp'] as const,
+   ```
+2. Create `messages/jp.json` + `content/jp.json`
+3. Add to language switcher in `components/ui/language-switcher.tsx`
+
+---
+
+## 🔐 Security Notes
+
+1. **Change `ADMIN_PASSWORD`** in `.env.local` before deploy
+2. **Change `COOKIE_SECRET`** to a random 32+ char string in production
+3. **Set environment variables in Vercel dashboard** (not committed to git)
+4. **HTTPS only** — Vercel provides automatically
+
+---
+
+## 📝 License
+
+This portfolio is personal work for Rani Andriani Tunggal. Content (text, images, data) belongs to her. Code can be referenced as inspiration for similar projects.
+
+---
+
+## 🙏 Credits
+
+- 3D DNA helix: Custom Three.js implementation
+- Icons: [Lucide](https://lucide.dev)
+- Fonts: Space Grotesk, Inter, JetBrains Mono via Google Fonts
+- Built with ❤️ using Next.js

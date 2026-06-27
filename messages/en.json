@@ -1,0 +1,110 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "education": "Education",
+    "experience": "Experience",
+    "skills": "Skills",
+    "publications": "Publications",
+    "awards": "Awards",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Rani Andriani Tunggal",
+    "title": "Biochemistry Student",
+    "subtitle": "Final-Year Student @ IPB University · Biomolecular Division",
+    "cta_contact": "Get in touch",
+    "cta_cv": "Download CV",
+    "scroll": "Scroll to explore"
+  },
+  "about": {
+    "label": "About",
+    "title": "Crafting Molecules,\nBuilding Impact",
+    "description": "I am a final-year Biochemistry student at IPB University, specializing in the Biomolecular Division. I have hands-on experience in biomolecular analysis, developing practical skills in examining and analyzing the structure and function of biological molecules through internships and laboratory assistantship. Active participation in organizational, volunteer, and competition activities has strengthened my leadership, problem-solving, and teamwork abilities.",
+    "stats": {
+      "gpa": "GPA",
+      "experience": "Experiences",
+      "awards": "Awards",
+      "publications": "Publications"
+    }
+  },
+  "education": {
+    "label": "Education",
+    "title": "Academic Journey",
+    "degree": "Bachelor of Science - BS, Biochemistry",
+    "school": "IPB University",
+    "period": "2022 – 2026",
+    "location": "Bogor, West Java, Indonesia"
+  },
+  "experience": {
+    "label": "Experience",
+    "title": "Professional Path",
+    "subtitle": "A timeline of laboratory, research, and leadership experiences",
+    "present": "Present"
+  },
+  "skills": {
+    "label": "Skills",
+    "title": "What I Bring",
+    "subtitle": "Laboratory techniques, molecular tools, and soft skills",
+    "categories": {
+      "laboratory": "Laboratory",
+      "molecular": "Molecular Biology",
+      "analysis": "Analysis",
+      "soft": "Soft Skills"
+    }
+  },
+  "projects": {
+    "label": "Featured Project",
+    "title": "Independent Pilot",
+    "subtitle": "Pengembangan Bina Diri & Keterampilan Sosial melalui Horticultural Therapy",
+    "description": "A holistic program designed for individuals with intellectual and mental disabilities at Rumah Azaki, Bogor. Combining horticultural therapy with structured activities to enhance self-care, cognitive, and social skills.",
+    "impact": "Impact",
+    "impact_text": "Up to 80% improvement in planting & plant care for intellectually disabled participants, and 40% improvement for mentally disabled participants.",
+    "team": "Team",
+    "published": "Published"
+  },
+  "publications": {
+    "label": "Publications",
+    "title": "Research & Writing",
+    "subtitle": "Contributions to scientific community"
+  },
+  "awards": {
+    "label": "Honors & Awards",
+    "title": "Recognitions",
+    "subtitle": "Milestones in academic and competition journey"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's Connect",
+    "subtitle": "Open for collaboration, research opportunities, and meaningful conversations",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "send_email": "Send via Email",
+    "send_wa": "Chat on WhatsApp",
+    "location": "Location",
+    "follow": "Follow me"
+  },
+  "footer": {
+    "built_with": "Built with Next.js · Deployed on Vercel",
+    "rights": "All rights reserved"
+  },
+  "common": {
+    "view_more": "View more",
+    "view_less": "View less",
+    "loading": "Loading...",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark"
+  }
+}
