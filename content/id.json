@@ -12,7 +12,7 @@
     "whatsapp": "6283875715839",
     "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal",
     "github": "",
-    "instagram": "",
+    "instagram": "https://www.instagram.com/raniandrnni/",
     "cvUrl": "/cv-rani-andriani-tunggal.pdf",
     "avatarInitials": "RT",
     "avatarColor": "#16a34a",
@@ -60,7 +60,8 @@
       "duration": "2 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
       "description": "Membantu analisis 30+ sampel DNA daun salak menggunakan gradient PCR dan elektroforesis gel agarose. Membantu analisis 41 sampel DNA daun kelapa sawit menggunakan PCR dan elektroforesis gel poliakrilamida (PAGE). Mendukung riset kultur jaringan self-DNA kelapa sawit dengan berkontribusi pada persiapan 100+ sampel bibit, termasuk sterilisasi dan pengamatan.",
-      "skills": ["Gradient PCR", "PAGE", "Elektroforesis Gel Agarose", "Kultur Jaringan", "Preparasi Sampel"]
+      "skills": ["Gradient PCR", "PAGE", "Elektroforesis Gel Agarose", "Kultur Jaringan", "Preparasi Sampel"],
+      "images": ["/exp-1.jpg", "/exp-2.jpg", "/exp-3.jpg"]
     },
     {
       "id": "exp-4",
@@ -71,7 +72,8 @@
       "duration": "2 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
       "description": "Melakukan analisis kadar air dan fosfat pada 30+ sampel tanaman menggunakan gravimetri dan spektrofotometri UV-VIS, serta mempersiapkan peralatan laboratorium, buffer, dan reagen kimia esensial. Melakukan uji aktivitas protein dan xilanase pada 30+ sampel layanan, memastikan generasi data yang akurat. Memelihara penyimpanan bahan baku dan penanganan limbah laboratorium sesuai protokol keselamatan dan lingkungan.",
-      "skills": ["Analisis Gravimetri", "Spektrofotometri UV-VIS", "Uji Xilanase", "Preparasi Reagen", "Kepatuhan GLP"]
+      "skills": ["Analisis Gravimetri", "Spektrofotometri UV-VIS", "Uji Xilanase", "Preparasi Reagen", "Kepatuhan GLP"],
+      "images": ["/exp-4.jpg", "/exp-5.jpg", "/exp-6.jpg"]
     },
     {
       "id": "exp-5",
@@ -82,7 +84,8 @@
       "duration": "3 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
       "description": "Melakukan analisis proksimat dan fitokimia dengan penerapan ketat standar Good Laboratory Practice (GLP) untuk memastikan akurasi data dan keselamatan laboratorium, termasuk penentuan kadar air/abu dan kuantifikasi antioksidan, flavonoid, dan fenolik menggunakan spektrofotometri UV–VIS. Melakukan identifikasi dan karakterisasi 10+ sampel menggunakan FTIR dan spektroskopi TLC untuk sidik jari kimia.",
-      "skills": ["Spektroskopi FTIR", "TLC", "Analisis Fitokimia", "Analisis Proksimat", "Standar GLP", "Spektrofotometri UV-VIS"]
+      "skills": ["Spektroskopi FTIR", "TLC", "Analisis Fitokimia", "Analisis Proksimat", "Standar GLP", "Spektrofotometri UV-VIS"],
+      "images": ["/exp-7.jpg", "/exp-8.jpg", "/exp-9.jpg"]
     },
     {
       "id": "exp-6",

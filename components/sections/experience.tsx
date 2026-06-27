@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Briefcase, MapPin, Calendar } from 'lucide-react';
+import { ImageSlider } from '../effects/image-slider';
 
 interface Experience {
   id: string;
@@ -14,6 +15,7 @@ interface Experience {
   location: string;
   description: string;
   skills: string[];
+  images?: string[];
 }
 
 export function Experience({ experiences }: { experiences: Experience[] }) {
@@ -67,9 +69,8 @@ export function Experience({ experiences }: { experiences: Experience[] }) {
                 className="relative pl-12 md:pl-24 opacity-0"
               >
                 <div className="absolute left-2 md:left-6 top-6 w-4 h-4 rounded-full bg-accent ring-4 ring-bg-primary shadow-lg" />
-                <div className="absolute left-4 md:left-8 top-6 w-0.5 h-px bg-accent hidden md:block" style={{ left: '2rem' }} />
 
-                <div className="group p-6 md:p-8 rounded-2xl glass hover:scale-[1.02] transition-all shine">
+                <div className="group p-6 md:p-8 rounded-2xl glass hover:scale-[1.01] transition-all shine">
                   <div className="flex flex-wrap items-start justify-between gap-4 mb-3">
                     <div>
                       <h3 className="font-display text-xl md:text-2xl font-bold mb-1 group-hover:text-accent transition-colors">
@@ -108,6 +109,10 @@ export function Experience({ experiences }: { experiences: Experience[] }) {
                         </span>
                       ))}
                     </div>
+                  )}
+
+                  {exp.images && exp.images.length > 0 && (
+                    <ImageSlider images={exp.images} alt={exp.role} />
                   )}
                 </div>
               </div>

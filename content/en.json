@@ -12,7 +12,7 @@
     "whatsapp": "6283875715839",
     "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal",
     "github": "",
-    "instagram": "",
+    "instagram": "https://www.instagram.com/raniandrnni/",
     "cvUrl": "/cv-rani-andriani-tunggal.pdf",
     "avatarInitials": "RT",
     "avatarColor": "#16a34a",
@@ -60,7 +60,8 @@
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis. Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE). Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation.",
-      "skills": ["Gradient PCR", "PAGE", "Agarose Gel Electrophoresis", "Tissue Culture", "Sample Preparation"]
+      "skills": ["Gradient PCR", "PAGE", "Agarose Gel Electrophoresis", "Tissue Culture", "Sample Preparation"],
+      "images": ["/exp-1.jpg", "/exp-2.jpg", "/exp-3.jpg"]
     },
     {
       "id": "exp-4",
@@ -71,7 +72,8 @@
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents. Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation. Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
-      "skills": ["Gravimetric Analysis", "UV-VIS Spectrophotometry", "Xylanase Assay", "Reagent Preparation", "GLP Compliance"]
+      "skills": ["Gravimetric Analysis", "UV-VIS Spectrophotometry", "Xylanase Assay", "Reagent Preparation", "GLP Compliance"],
+      "images": ["/exp-4.jpg", "/exp-5.jpg", "/exp-6.jpg"]
     },
     {
       "id": "exp-5",
@@ -82,7 +84,8 @@
       "duration": "3 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry. Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting.",
-      "skills": ["FTIR Spectroscopy", "TLC", "Phytochemical Analysis", "Proximate Analysis", "GLP Standards", "UV-VIS Spectrophotometry"]
+      "skills": ["FTIR Spectroscopy", "TLC", "Phytochemical Analysis", "Proximate Analysis", "GLP Standards", "UV-VIS Spectrophotometry"],
+      "images": ["/exp-7.jpg", "/exp-8.jpg", "/exp-9.jpg"]
     },
     {
       "id": "exp-6",

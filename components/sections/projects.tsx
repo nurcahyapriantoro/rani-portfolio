@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Leaf, Sparkles, Users as UsersIcon } from 'lucide-react';
+import { Sparkles, Users as UsersIcon, ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import { generateCircleParams } from '@/lib/seeded-random';
 
 export function Projects() {
@@ -51,24 +52,29 @@ export function Projects() {
           <div className="relative">
             <div className="aspect-square rounded-3xl glass gradient-border overflow-hidden relative group">
               <div
-                className="absolute inset-0 opacity-30"
+                className="absolute inset-0 opacity-30 z-10 mix-blend-overlay"
                 style={{
                   backgroundImage: `radial-gradient(circle at 30% 30%, var(--accent-glow) 0%, transparent 50%), radial-gradient(circle at 70% 70%, var(--accent-glow) 0%, transparent 50%)`
                 }}
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Leaf className="w-32 h-32 text-accent animate-float" />
-              </div>
 
-              <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 400">
+              <Image
+                src="/project-pilot.jpg"
+                alt="Independent Pilot Program - Horticultural Therapy at Rumah Azaki"
+                fill
+                sizes="(max-width: 768px) 100vw, 600px"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority
+              />
+
+              <svg className="absolute inset-0 w-full h-full opacity-25 pointer-events-none z-20" viewBox="0 0 400 400">
                 {circles.map((c, i) => (
                   <circle
                     key={i}
                     cx={c.cx}
                     cy={c.cy}
                     r={c.r}
-                    fill="currentColor"
-                    className="text-accent"
+                    fill="#4ade80"
                   >
                     <animate
                       attributeName="opacity"
@@ -80,12 +86,19 @@ export function Projects() {
                 ))}
               </svg>
 
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-bg-secondary/80 backdrop-blur-md">
-                <p className="text-xs font-mono uppercase tracking-widest text-accent mb-1">
-                  {t('published')}
-                </p>
-                <p className="text-sm font-medium">AGROKREATIF Journal · Jun 2025</p>
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent z-20">
+                <div className="flex items-center gap-2 mb-1">
+                  <ImageIcon className="w-3.5 h-3.5 text-accent" />
+                  <p className="text-xs font-mono uppercase tracking-widest text-accent">
+                    {t('published')}
+                  </p>
+                </div>
+                <p className="text-sm font-medium text-white">AGROKREATIF Journal · Jun 2025</p>
               </div>
+            </div>
+
+            <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-accent flex items-center justify-center text-bg-primary font-bold text-sm shadow-lg animate-float">
+              80% Impact
             </div>
           </div>
         </div>
