@@ -88,15 +88,23 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <LanguageSwitcher currentLocale={locale} />
           <button
-            onClick={toggleTheme}
+            onClick={(e) => {
+              const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+              toggleTheme(rect.left + rect.width / 2, rect.top + rect.height / 2);
+            }}
             aria-label="Toggle theme"
-            className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-10 h-10 rounded-xl glass flex items-center justify-center hover:scale-110 transition-transform relative overflow-hidden"
           >
-            {theme === 'light' ? (
-              <Moon className="w-4 h-4 text-text-primary" />
-            ) : (
-              <Sun className="w-4 h-4 text-accent" />
-            )}
+            <span
+              key={theme}
+              className="absolute inset-0 flex items-center justify-center animate-[theme-switch_400ms_cubic-bezier(0.4,0,0.2,1)]"
+            >
+              {theme === 'light' ? (
+                <Moon className="w-4 h-4 text-text-primary" />
+              ) : (
+                <Sun className="w-4 h-4 text-accent" />
+              )}
+            </span>
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
