@@ -40,42 +40,42 @@ export function About({ stats }: { stats: Stats }) {
   ];
 
   return (
-    <section id="about" ref={ref} className="py-24 md:py-32 relative opacity-0">
+    <section id="about" ref={ref} className="py-14 md:py-20 relative opacity-0">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-px w-12 bg-accent" />
-          <span className="text-sm font-mono uppercase tracking-widest text-accent">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-px w-10 bg-accent" />
+          <span className="text-xs font-mono uppercase tracking-widest text-accent">
             {t('label')}
           </span>
         </div>
 
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-12 max-w-3xl whitespace-pre-line">
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 max-w-2xl whitespace-pre-line leading-tight">
           {t('title')}
         </h2>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <p className="text-lg text-text-secondary leading-relaxed">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start">
+          <p className="text-sm md:text-base text-text-secondary leading-relaxed">
             {t('description')}
           </p>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2.5 md:gap-3">
             {statsItems.map((stat, i) => (
               <div
                 key={i}
-                className="group relative p-6 rounded-2xl glass hover:scale-105 transition-all duration-300 shine"
+                className="group relative p-3 md:p-4 rounded-xl glass hover:scale-105 transition-all duration-300 shine"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-soft to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent-soft to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative">
-                  <stat.icon className="w-6 h-6 text-accent mb-3" />
-                  <div className="text-3xl md:text-4xl font-display font-bold gradient-text mb-1">
+                  <stat.icon className="w-4 h-4 md:w-5 md:h-5 text-accent mb-2" />
+                  <div className="text-xl md:text-2xl lg:text-3xl font-display font-bold gradient-text mb-0.5">
                     {typeof stat.value === 'string' ? (
                       stat.value
                     ) : (
                       <Counter end={stat.value} suffix={stat.suffix} />
                     )}
                   </div>
-                  <div className="text-xs uppercase tracking-widest text-text-muted">
+                  <div className="text-[10px] md:text-xs uppercase tracking-wider text-text-muted">
                     {stat.label}
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export function About({ stats }: { stats: Stats }) {
         </div>
       </div>
 
-      <div className="section-divider mt-24" />
+      <div className="section-divider mt-12 md:mt-20" />
     </section>
   );
 }

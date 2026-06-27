@@ -31,11 +31,11 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
       aria-label={`Switch language to ${targetLabel}`}
       title={`Switch to ${targetLabel}`}
       className={cn(
-        'h-10 px-3 rounded-xl glass flex items-center justify-center gap-1.5 hover:scale-110 transition-all font-mono text-xs font-bold uppercase',
+        'h-8 px-2.5 rounded-lg glass flex items-center justify-center gap-1 hover:scale-110 transition-all font-mono text-[10px] font-bold uppercase',
         pending && 'opacity-60 cursor-wait'
       )}
     >
-      <Languages className="w-4 h-4" />
+      <Languages className="w-3 h-3" />
       <span className="text-text-muted">{currentLocale}</span>
       <span className="text-text-muted">→</span>
       <span className="text-accent">{targetLabel}</span>

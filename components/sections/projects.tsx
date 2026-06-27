@@ -10,39 +10,39 @@ export function Projects() {
   const circles = generateCircleParams(20);
 
   return (
-    <section className="py-24 md:py-32 relative">
+    <section className="py-14 md:py-20 relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-px w-12 bg-accent" />
-          <span className="text-sm font-mono uppercase tracking-widest text-accent">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-px w-10 bg-accent" />
+          <span className="text-xs font-mono uppercase tracking-widest text-accent">
             {t('label')}
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
           <div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
               {t('title')}
             </h2>
-            <p className="text-text-muted text-lg mb-6 italic">
+            <p className="text-xs md:text-sm text-text-muted mb-4 italic">
               {t('subtitle')}
             </p>
-            <p className="text-text-secondary leading-relaxed mb-8">
+            <p className="text-xs md:text-sm text-text-secondary leading-relaxed mb-5">
               {t('description')}
             </p>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl glass">
-                <Sparkles className="w-5 h-5 text-accent mb-2" />
-                <p className="text-xs uppercase tracking-wider text-text-muted mb-1">{t('impact')}</p>
-                <p className="text-sm text-text-secondary font-medium leading-snug">
+            <div className="grid grid-cols-2 gap-2.5 md:gap-3">
+              <div className="p-3 rounded-xl glass">
+                <Sparkles className="w-4 h-4 text-accent mb-1.5" />
+                <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">{t('impact')}</p>
+                <p className="text-xs text-text-secondary font-medium leading-snug">
                   {t('impact_text')}
                 </p>
               </div>
-              <div className="p-4 rounded-xl glass">
-                <UsersIcon className="w-5 h-5 text-accent mb-2" />
-                <p className="text-xs uppercase tracking-wider text-text-muted mb-1">{t('team')}</p>
-                <p className="text-sm text-text-secondary font-medium leading-snug">
+              <div className="p-3 rounded-xl glass">
+                <UsersIcon className="w-4 h-4 text-accent mb-1.5" />
+                <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">{t('team')}</p>
+                <p className="text-xs text-text-secondary font-medium leading-snug">
                   6 researchers from IPB University
                 </p>
               </div>
@@ -50,7 +50,7 @@ export function Projects() {
           </div>
 
           <div className="relative">
-            <div className="aspect-square rounded-3xl glass gradient-border overflow-hidden relative group">
+            <div className="aspect-[4/3] md:aspect-square rounded-2xl glass gradient-border overflow-hidden relative group">
               <div
                 className="absolute inset-0 opacity-30 z-10 mix-blend-overlay"
                 style={{
@@ -86,25 +86,25 @@ export function Projects() {
                 ))}
               </svg>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent z-20">
-                <div className="flex items-center gap-2 mb-1">
-                  <ImageIcon className="w-3.5 h-3.5 text-accent" />
-                  <p className="text-xs font-mono uppercase tracking-widest text-accent">
+              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/80 to-transparent z-20">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <ImageIcon className="w-3 h-3 text-accent" />
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-accent">
                     {t('published')}
                   </p>
                 </div>
-                <p className="text-sm font-medium text-white">AGROKREATIF Journal · Jun 2025</p>
+                <p className="text-xs md:text-sm font-medium text-white">AGROKREATIF Journal · Jun 2025</p>
               </div>
             </div>
 
-            <div className="absolute -top-3 -right-3 w-20 h-20 rounded-full bg-accent flex items-center justify-center text-bg-primary font-bold text-sm shadow-lg animate-float">
+            <div className="absolute -top-2 -right-2 w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent flex items-center justify-center text-bg-primary font-bold text-[10px] md:text-xs shadow-lg animate-float text-center leading-tight px-1">
               80% Impact
             </div>
           </div>
         </div>
       </div>
 
-      <div className="section-divider mt-24" />
+      <div className="section-divider mt-12 md:mt-20" />
     </section>
   );
 }
