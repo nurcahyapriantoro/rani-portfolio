@@ -4,108 +4,125 @@
     "nickname": "Rani",
     "pronouns": "She/Her",
     "title": "Final-Year Biochemistry Student",
-    "subtitle": "Biomolecular Division · IPB University",
+    "subtitle": "IPB University · 3.77/4.00 GPA",
     "tagline": "Crafting molecules, building impact.",
     "location": "Bogor, West Java, Indonesia",
-    "email": "raniandrianitunggal@gmail.com",
-    "phone": "+62-812-3456-7890",
-    "whatsapp": "6281234567890",
-    "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal/",
+    "email": "raniandriani@apps.ipb.ac.id",
+    "phone": "+62-838-7571-5839",
+    "whatsapp": "6283875715839",
+    "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal",
     "github": "",
     "instagram": "",
     "cvUrl": "/cv-rani-andriani-tunggal.pdf",
     "avatarInitials": "RT",
-    "avatarColor": "#16a34a"
+    "avatarColor": "#16a34a",
+    "photoUrl": "/profile.jpg"
   },
   "stats": {
-    "gpa": "3.85",
-    "experienceCount": 6,
+    "gpa": "3.77",
+    "experienceCount": 7,
     "awardsCount": 5,
     "publicationsCount": 1
+  },
+  "bio": {
+    "short": "Final-year Biochemistry student at IPB University with hands-on experience in laboratory testing, analytical evaluation, and data documentation.",
+    "long": "Final-year Biochemistry student at IPB University with hands-on experience in laboratory testing, analytical evaluation, and data documentation. Skilled in operating analytical instruments, maintaining accurate records, and working in accordance with Good Laboratory Practice (GLP). Detail-oriented, highly organized, and eager to contribute to quality assessment and sensory evaluation. Proficient in Microsoft Excel and enthusiastic about learning in laboratory and production-line environments."
   },
   "experiences": [
     {
       "id": "exp-1",
-      "role": "Laboratory Assistant of Nucleic Acid and Protein Engineering",
-      "company": "IPB University",
-      "type": "Contract",
+      "role": "Biomolecular Characterization Laboratory Assistant",
+      "company": "Biochemistry Department - IPB University",
+      "type": "Laboratory Assistant",
       "period": "Aug 2025 - Dec 2025",
       "duration": "5 mos",
-      "location": "Bogor Regency, West Java, Indonesia",
-      "description": "Guide and supervise students during practical sessions on gene isolation and cloning of the amylase coding gene from Bacillus licheniformis, covering primer design through colony analysis using PCR and gel electrophoresis. Evaluate and record students' performance and grades.",
-      "skills": ["DNA Isolation", "PCR", "Gel Electrophoresis", "Primer Design"]
+      "location": "Bogor, West Java, Indonesia",
+      "description": "Guided and supervised 12 students during laboratory practical sessions on carbohydrate, protein, lipid, and nucleic acid analysis, including starch and lipid hydrolysis, protein and nucleic acid denaturation, and biomolecule characterization. Operated and assisted in the use of laboratory instruments, including a UV–Vis spectrophotometer, PCR machine, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
+      "skills": ["UV-Vis Spectrophotometry", "PCR", "Gel Electrophoresis", "Biomolecular Analysis", "Teaching"]
     },
     {
       "id": "exp-2",
-      "role": "Laboratory Assistant of Biomolecular Characterization",
-      "company": "IPB University",
-      "type": "Contract",
+      "role": "Nucleic Acid and Protein Engineering Laboratory Assistant",
+      "company": "Biochemistry Department - IPB University",
+      "type": "Laboratory Assistant",
       "period": "Aug 2025 - Dec 2025",
       "duration": "5 mos",
-      "location": "Bogor Regency, West Java, Indonesia",
-      "description": "Guide and supervise students during practical sessions on the analysis of carbohydrates, proteins, lipids, and nucleic acids. Evaluate and record students' performance and grades in accordance with course requirements.",
-      "skills": ["UV/Vis Spectroscopy", "Thin-Layer Chromatography (TLC)", "Biomolecular Analysis"]
+      "location": "Bogor, West Java, Indonesia",
+      "description": "Guided and supervised 11 students during gene isolation and cloning sessions of the amylase-coding gene from Bacillus licheniformis, covering genomic DNA extraction, PCR-based cloning, agarose gel electrophoresis, and plasmid DNA digestion. Operated laboratory instruments including a PCR machine, NanoDrop spectrophotometer, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
+      "skills": ["DNA Extraction", "PCR Cloning", "Agarose Gel Electrophoresis", "NanoDrop Spectrophotometry", "Plasmid Digestion"]
     },
     {
       "id": "exp-3",
-      "role": "Biomolecule Laboratory Assistant",
+      "role": "Biomolecule Laboratory Assistant - Internship",
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Internship",
       "period": "Jul 2025 - Aug 2025",
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Isolated and analyzed DNA from over 10 plant leaf samples. Performed sequence analysis and constructed phylogenetic trees using MEGA software. Prepared and observed tissue cultures in research on self-DNA of oil palm.",
-      "skills": ["DNA Isolation", "PCR", "MEGA Software", "Phylogenetics", "Tissue Culture"]
+      "description": "Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis. Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE). Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation.",
+      "skills": ["Gradient PCR", "PAGE", "Agarose Gel Electrophoresis", "Tissue Culture", "Sample Preparation"]
     },
     {
       "id": "exp-4",
-      "role": "Biomolecule Laboratory Assistant",
+      "role": "Biomolecule Laboratory Assistant - Internship",
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Internship",
       "period": "Dec 2024 - Jan 2025",
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Measured moisture content using the gravimetric method and phosphate levels using UV–VIS spectrophotometry on over 30 plant samples. Analyzed protein and xylanase activity in more than 10 service samples. Prepared laboratory buffers and chemical solvents.",
-      "skills": ["UV/Vis Spectroscopy", "Molecular Docking", "Gravimetric Analysis"]
+      "description": "Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents. Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation. Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
+      "skills": ["Gravimetric Analysis", "UV-VIS Spectrophotometry", "Xylanase Assay", "Reagent Preparation", "GLP Compliance"]
     },
     {
       "id": "exp-5",
-      "role": "Staff of Business and Partnership",
-      "company": "BEM FMIPA IPB",
-      "type": "Seasonal",
-      "period": "Jan 2024 - Dec 2024",
-      "duration": "1 yr",
+      "role": "Laboratory Assistant - Internship",
+      "company": "Tropical Biopharmaca Research Center",
+      "type": "Internship",
+      "period": "Jun 2024 - Aug 2024",
+      "duration": "3 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems. Achieved over 20 G-astip customers and successfully engaged 3 students in the Tutor BEM FMIPA program.",
-      "skills": ["Business Planning", "Partnership", "Leadership", "Event Management"]
+      "description": "Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry. Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting.",
+      "skills": ["FTIR Spectroscopy", "TLC", "Phytochemical Analysis", "Proximate Analysis", "GLP Standards", "UV-VIS Spectrophotometry"]
     },
     {
       "id": "exp-6",
-      "role": "Secretary of Funding and Sponsorship",
-      "company": "CREBs IPB · UBIQUINON 2024",
-      "type": "Part-time",
-      "period": "Mar 2024 - Sep 2024",
-      "duration": "7 mos",
-      "location": "Bogor Regency, West Java, Indonesia",
-      "description": "Managed funding proposals and sponsorship outreach for the UBIQUINON 2024 event. Coordinated with sponsors and stakeholders to secure financial support.",
-      "skills": ["Sponsorship", "Correspondence", "Event Coordination"]
+      "role": "Business and Partnership Staff",
+      "company": "Student Executive Board FMIPA - IPB University",
+      "type": "Organizational",
+      "period": "Jan 2024 - Dec 2024",
+      "duration": "1 yr",
+      "location": "Bogor, West Java, Indonesia",
+      "description": "Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems for both programs. Achieved over 20 G-astip customers and successfully engaged 5 students in the Tutor BEM FMIPA. Achieved a profit of Rp8.000.000,- in 10 months of management from an initial capital of Rp400.000,-.",
+      "skills": ["Business Planning", "Partnership", "Profit Management", "Leadership", "Event Management"]
+    },
+    {
+      "id": "exp-7",
+      "role": "Secretary of the Administrative Affairs Bureau",
+      "company": "IPB Sustainable Science Research Student Association",
+      "type": "Organizational",
+      "period": "Apr 2023 - Apr 2024",
+      "duration": "1 yr",
+      "location": "Bogor, West Java, Indonesia",
+      "description": "Documented meeting minutes and prepared evaluation reports for the Bureau of Administrative Affairs. Monitored and reviewed the budget plan (RKAT) and meeting records under the Directorate of Talent, Partnership, and External Communication.",
+      "skills": ["Administration", "Documentation", "Budget Review", "Meeting Coordination", "Report Writing"]
     }
   ],
   "skills": [
-    { "name": "DNA Isolation", "category": "molecular", "level": 95 },
-    { "name": "Plasmid Transformation", "category": "molecular", "level": 88 },
-    { "name": "PCR", "category": "molecular", "level": 92 },
-    { "name": "Gel Electrophoresis", "category": "molecular", "level": 90 },
-    { "name": "UV/Vis Spectroscopy", "category": "analysis", "level": 90 },
-    { "name": "TLC", "category": "analysis", "level": 85 },
-    { "name": "Molecular Docking", "category": "analysis", "level": 80 },
-    { "name": "Phylogenetic Analysis (MEGA)", "category": "analysis", "level": 82 },
-    { "name": "Tissue Culture", "category": "laboratory", "level": 80 },
-    { "name": "Buffer Preparation", "category": "laboratory", "level": 88 },
-    { "name": "Leadership", "category": "soft", "level": 90 },
-    { "name": "Teamwork", "category": "soft", "level": 95 },
-    { "name": "Problem Solving", "category": "soft", "level": 88 },
-    { "name": "Public Speaking", "category": "soft", "level": 85 }
+    { "name": "DNA Extraction", "category": "molecular", "level": 95 },
+    { "name": "PCR (Gradient & Cloning)", "category": "molecular", "level": 92 },
+    { "name": "Gel Electrophoresis (Agarose & PAGE)", "category": "molecular", "level": 90 },
+    { "name": "UV-Vis Spectrophotometry", "category": "analysis", "level": 95 },
+    { "name": "NanoDrop Spectrophotometry", "category": "analysis", "level": 85 },
+    { "name": "FTIR Spectroscopy", "category": "analysis", "level": 82 },
+    { "name": "TLC", "category": "analysis", "level": 88 },
+    { "name": "Proximate & Phytochemical Analysis", "category": "analysis", "level": 80 },
+    { "name": "Reagent & Buffer Preparation", "category": "laboratory", "level": 92 },
+    { "name": "Sample Preparation & Authentication", "category": "laboratory", "level": 88 },
+    { "name": "Equipment Handling & Sterilization", "category": "laboratory", "level": 88 },
+    { "name": "Highly Disciplined & Meticulous", "category": "soft", "level": 95 },
+    { "name": "Strong Communication", "category": "soft", "level": 90 },
+    { "name": "Fast Learner & Adaptability", "category": "soft", "level": 92 },
+    { "name": "Shift-Work Readiness", "category": "soft", "level": 88 }
   ],
   "publications": [
     {
@@ -123,9 +140,9 @@
     {
       "id": "award-1",
       "rank": "1st Place",
-      "title": "Scientific Essay Writing NEXT-G 2025",
+      "title": "Scientific Essay Competition NEXT-G 2025",
       "issuer": "NEXT-G",
-      "date": "Nov 2025",
+      "date": "2025",
       "associatedWith": "IPB University"
     },
     {
@@ -133,23 +150,23 @@
       "rank": "2nd Place",
       "title": "Scientific Writing Competition 13th Airlangga Ideas Competition 2025",
       "issuer": "Universitas Airlangga",
-      "date": "Nov 2025",
+      "date": "2025",
       "associatedWith": "IPB University"
     },
     {
       "id": "award-3",
       "rank": "3rd Place",
-      "title": "Business of the Year - Program Mahasiswa Wirausaha 2024 (Batiknese)",
-      "issuer": "PMW 2024",
-      "date": "Dec 2024",
+      "title": "Business of The Year - Student Entrepreneurship Program (Batiknese)",
+      "issuer": "PMW IPB",
+      "date": "2024",
       "associatedWith": "IPB University"
     },
     {
       "id": "award-4",
-      "rank": "Finalist",
-      "title": "37th National Student Scientific Week (PIMNAS|PKM-PM) 2024",
+      "rank": "National Finalist",
+      "title": "37th National Student Scientific Week (PIMNAS | PKM-PM) 2024",
       "issuer": "Kemdiktisaintek",
-      "date": "Sep 2024",
+      "date": "2024",
       "associatedWith": "IPB University"
     },
     {
@@ -157,7 +174,7 @@
       "rank": "Funding Recipient",
       "title": "National Student Creativity Program in Social Humanities Research (PKM-RSH) 2023",
       "issuer": "Belmawa Kemdiktisaintek",
-      "date": "Jun 2023",
+      "date": "2023",
       "associatedWith": "IPB University"
     }
   ],

@@ -21,6 +21,7 @@ interface Profile {
   cvUrl: string;
   avatarInitials: string;
   avatarColor: string;
+  photoUrl?: string;
 }
 
 export default function ProfileEditor({ locale, profile }: { locale: string; profile: Profile }) {
@@ -62,6 +63,7 @@ export default function ProfileEditor({ locale, profile }: { locale: string; pro
         <Field label="GitHub URL" value={data.github} onChange={(v) => handleChange('github', v)} />
         <Field label="Instagram URL" value={data.instagram} onChange={(v) => handleChange('instagram', v)} />
         <Field label="CV File Path" value={data.cvUrl} onChange={(v) => handleChange('cvUrl', v)} />
+        <Field label="Photo URL (e.g. /profile.jpg)" value={data.photoUrl || ''} onChange={(v) => handleChange('photoUrl', v)} />
       </div>
 
       <input type="hidden" name="payload" value={JSON.stringify(data)} />

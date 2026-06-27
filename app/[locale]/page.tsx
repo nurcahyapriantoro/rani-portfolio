@@ -34,7 +34,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <Hero />
+      <Hero profile={profile} />
       <About stats={stats} />
       <Education />
       <Experience experiences={experiences} />

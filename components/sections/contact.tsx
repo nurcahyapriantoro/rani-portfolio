@@ -13,6 +13,7 @@ interface Profile {
   github?: string;
   instagram?: string;
   fullName: string;
+  cvUrl?: string;
 }
 
 export function Contact({ profile }: { profile: Profile }) {

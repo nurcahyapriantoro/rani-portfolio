@@ -4,108 +4,125 @@
     "nickname": "Rani",
     "pronouns": "She/Her",
     "title": "Mahasiswa Biokimia Tingkat Akhir",
-    "subtitle": "Divisi Biomolekuler · IPB University",
+    "subtitle": "IPB University · IPK 3.77/4.00",
     "tagline": "Mengkaji molekul, membangun dampak.",
     "location": "Bogor, Jawa Barat, Indonesia",
-    "email": "raniandrianitunggal@gmail.com",
-    "phone": "+62-812-3456-7890",
-    "whatsapp": "6281234567890",
-    "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal/",
+    "email": "raniandriani@apps.ipb.ac.id",
+    "phone": "+62-838-7571-5839",
+    "whatsapp": "6283875715839",
+    "linkedin": "https://www.linkedin.com/in/rani-andriani-tunggal",
     "github": "",
     "instagram": "",
     "cvUrl": "/cv-rani-andriani-tunggal.pdf",
     "avatarInitials": "RT",
-    "avatarColor": "#16a34a"
+    "avatarColor": "#16a34a",
+    "photoUrl": "/profile.jpg"
   },
   "stats": {
-    "gpa": "3.85",
-    "experienceCount": 6,
+    "gpa": "3.77",
+    "experienceCount": 7,
     "awardsCount": 5,
     "publicationsCount": 1
+  },
+  "bio": {
+    "short": "Mahasiswa Biokimia tingkat akhir IPB University dengan pengalaman langsung dalam pengujian laboratorium, evaluasi analitis, dan dokumentasi data.",
+    "long": "Mahasiswa Biokimia tingkat akhir IPB University dengan pengalaman langsung dalam pengujian laboratorium, evaluasi analitis, dan dokumentasi data. Terampil dalam mengoperasikan instrumen analitis, memelihara catatan akurat, dan bekerja sesuai dengan Good Laboratory Practice (GLP). Teliti, sangat terorganisir, dan antusias untuk berkontribusi pada quality assessment dan sensory evaluation. Mahir menggunakan Microsoft Excel dan antusias untuk belajar di lingkungan laboratorium dan lini produksi."
   },
   "experiences": [
     {
       "id": "exp-1",
-      "role": "Asisten Laboratorium Nucleic Acid and Protein Engineering",
-      "company": "IPB University",
-      "type": "Kontrak",
+      "role": "Asisten Laboratorium Karakterisasi Biomolekuler",
+      "company": "Departemen Biokimia - IPB University",
+      "type": "Asisten Laboratorium",
       "period": "Agu 2025 - Des 2025",
       "duration": "5 bln",
-      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
-      "description": "Membimbing dan mengawasi mahasiswa dalam sesi praktikum isolasi gen dan kloning gen pengkode amilase dari Bacillus licheniformis, mencakup desain primer hingga analisis koloni menggunakan PCR dan elektroforesis gel. Mengevaluasi dan mencatat performa serta nilai mahasiswa.",
-      "skills": ["Isolasi DNA", "PCR", "Elektroforesis Gel", "Desain Primer"]
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Membimbing dan mengawasi 12 mahasiswa selama sesi praktikum analisis karbohidrat, protein, lipid, dan asam nukleat, termasuk hidrolisis pati dan lipid, denaturasi protein dan asam nukleat, serta karakterisasi biomolekul. Mengoperasikan dan membantu penggunaan instrumen laboratorium termasuk spektrofotometer UV–Vis, mesin PCR, dan sistem elektroforesis gel agarose. Melakukan penilaian mahasiswa sesuai kontrak mata kuliah.",
+      "skills": ["Spektrofotometri UV-Vis", "PCR", "Elektroforesis Gel", "Analisis Biomolekuler", "Mengajar"]
     },
     {
       "id": "exp-2",
-      "role": "Asisten Laboratorium Karakterisasi Biomolekuler",
-      "company": "IPB University",
-      "type": "Kontrak",
+      "role": "Asisten Laboratorium Nucleic Acid and Protein Engineering",
+      "company": "Departemen Biokimia - IPB University",
+      "type": "Asisten Laboratorium",
       "period": "Agu 2025 - Des 2025",
       "duration": "5 bln",
-      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
-      "description": "Membimbing dan mengawasi mahasiswa dalam sesi praktikum analisis karbohidrat, protein, lipid, dan asam nukleat. Mengevaluasi dan mencatat performa serta nilai mahasiswa sesuai dengan требования mata kuliah.",
-      "skills": ["Spektrofotometri UV/Vis", "Kromatografi Lapis Tipis (KLT)", "Analisis Biomolekuler"]
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Membimbing dan mengawasi 11 mahasiswa selama sesi isolasi gen dan kloning gen pengkode amilase dari Bacillus licheniformis, mencakup ekstraksi DNA genom, kloning berbasis PCR, elektroforesis gel agarose, dan digesti DNA plasmid. Mengoperasikan instrumen laboratorium termasuk mesin PCR, spektrofotometer NanoDrop, dan sistem elektroforesis gel agarose. Melakukan penilaian mahasiswa sesuai kontrak mata kuliah.",
+      "skills": ["Ekstraksi DNA", "Kloning PCR", "Elektroforesis Gel Agarose", "Spektrofotometri NanoDrop", "Digesti Plasmid"]
     },
     {
       "id": "exp-3",
-      "role": "Asisten Laboratorium Biomolekul",
+      "role": "Asisten Laboratorium Biomolekul - Magang",
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Magang",
       "period": "Jul 2025 - Agu 2025",
       "duration": "2 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
-      "description": "Mengisolasi dan menganalisis DNA dari lebih dari 10 sampel daun tanaman. Melakukan analisis sekuens dan konstruksi pohon filogenetik menggunakan perangkat lunak MEGA. Menyiapkan dan mengamati kultur jaringan dalam riset self-DNA kelapa sawit.",
-      "skills": ["Isolasi DNA", "PCR", "Perangkat Lunak MEGA", "Filogenetika", "Kultur Jaringan"]
+      "description": "Membantu analisis 30+ sampel DNA daun salak menggunakan gradient PCR dan elektroforesis gel agarose. Membantu analisis 41 sampel DNA daun kelapa sawit menggunakan PCR dan elektroforesis gel poliakrilamida (PAGE). Mendukung riset kultur jaringan self-DNA kelapa sawit dengan berkontribusi pada persiapan 100+ sampel bibit, termasuk sterilisasi dan pengamatan.",
+      "skills": ["Gradient PCR", "PAGE", "Elektroforesis Gel Agarose", "Kultur Jaringan", "Preparasi Sampel"]
     },
     {
       "id": "exp-4",
-      "role": "Asisten Laboratorium Biomolekul",
+      "role": "Asisten Laboratorium Biomolekul - Magang",
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Magang",
       "period": "Des 2024 - Jan 2025",
       "duration": "2 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
-      "description": "Mengukur kadar air menggunakan metode gravimetri dan kadar fosfat menggunakan spektrofotometri UV-VIS pada lebih dari 30 sampel tanaman. Menganalisis aktivitas protein dan xilanase pada lebih dari 10 sampel layanan. Menyiapkan buffer laboratorium dan pelarut kimia.",
-      "skills": ["Spektrofotometri UV/Vis", "Molecular Docking", "Analisis Gravimetri"]
+      "description": "Melakukan analisis kadar air dan fosfat pada 30+ sampel tanaman menggunakan gravimetri dan spektrofotometri UV-VIS, serta mempersiapkan peralatan laboratorium, buffer, dan reagen kimia esensial. Melakukan uji aktivitas protein dan xilanase pada 30+ sampel layanan, memastikan generasi data yang akurat. Memelihara penyimpanan bahan baku dan penanganan limbah laboratorium sesuai protokol keselamatan dan lingkungan.",
+      "skills": ["Analisis Gravimetri", "Spektrofotometri UV-VIS", "Uji Xilanase", "Preparasi Reagen", "Kepatuhan GLP"]
     },
     {
       "id": "exp-5",
-      "role": "Staf Bisnis dan Kemitraan",
-      "company": "BEM FMIPA IPB",
-      "type": "Musiman",
-      "period": "Jan 2024 - Des 2024",
-      "duration": "1 thn",
+      "role": "Asisten Laboratorium - Magang",
+      "company": "Tropical Biopharmaca Research Center",
+      "type": "Magang",
+      "period": "Jun 2024 - Agu 2024",
+      "duration": "3 bln",
       "location": "Bogor, Jawa Barat, Indonesia",
-      "description": "Merencanakan konsep program kerja utama, G-astip dan Tutor BEM FMIPA, dengan mengatur skema bagi hasil dan sistem implementasi. Mencapai lebih dari 20 pelanggan G-astip dan berhasil melibatkan 3 mahasiswa dalam program Tutor BEM FMIPA.",
-      "skills": ["Perencanaan Bisnis", "Kemitraan", "Kepemimpinan", "Manajemen Acara"]
+      "description": "Melakukan analisis proksimat dan fitokimia dengan penerapan ketat standar Good Laboratory Practice (GLP) untuk memastikan akurasi data dan keselamatan laboratorium, termasuk penentuan kadar air/abu dan kuantifikasi antioksidan, flavonoid, dan fenolik menggunakan spektrofotometri UV–VIS. Melakukan identifikasi dan karakterisasi 10+ sampel menggunakan FTIR dan spektroskopi TLC untuk sidik jari kimia.",
+      "skills": ["Spektroskopi FTIR", "TLC", "Analisis Fitokimia", "Analisis Proksimat", "Standar GLP", "Spektrofotometri UV-VIS"]
     },
     {
       "id": "exp-6",
-      "role": "Sekretaris Pendanaan dan Sponsorship",
-      "company": "CREBs IPB · UBIQUINON 2024",
-      "type": "Paruh Waktu",
-      "period": "Mar 2024 - Sep 2024",
-      "duration": "7 bln",
-      "location": "Kabupaten Bogor, Jawa Barat, Indonesia",
-      "description": "Mengelola proposal pendanaan dan penjangkauan sponsorship untuk acara UBIQUINON 2024. Berkoordinasi dengan sponsor dan pemangku kepentingan untuk mengamankan dukungan finansial.",
-      "skills": ["Sponsorship", "Korespondensi", "Koordinasi Acara"]
+      "role": "Staf Bisnis dan Kemitraan",
+      "company": "BEM FMIPA - IPB University",
+      "type": "Organisasi",
+      "period": "Jan 2024 - Des 2024",
+      "duration": "1 thn",
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Merencanakan konsep program kerja utama, G-astip dan Tutor BEM FMIPA, dengan mengatur skema bagi hasil dan sistem implementasi. Mencapai lebih dari 20 pelanggan G-astip dan berhasil melibatkan 5 mahasiswa dalam Tutor BEM FMIPA. Meraih keuntungan Rp8.000.000,- dalam 10 bulan manajemen dari modal awal Rp400.000,-.",
+      "skills": ["Perencanaan Bisnis", "Kemitraan", "Manajemen Profit", "Kepemimpinan", "Manajemen Acara"]
+    },
+    {
+      "id": "exp-7",
+      "role": "Sekretaris Biro Administrasi",
+      "company": "IPB Sustainable Science Research Student Association",
+      "type": "Organisasi",
+      "period": "Apr 2023 - Apr 2024",
+      "duration": "1 thn",
+      "location": "Bogor, Jawa Barat, Indonesia",
+      "description": "Mendokumentasikan notulen rapat dan menyusun laporan evaluasi untuk Biro Administrasi. Memantau dan meninjau rencana anggaran (RKAT) dan catatan rapat di bawah Direktorat Talent, Partnership, dan External Communication.",
+      "skills": ["Administrasi", "Dokumentasi", "Review Anggaran", "Koordinasi Rapat", "Penulisan Laporan"]
     }
   ],
   "skills": [
-    { "name": "Isolasi DNA", "category": "molecular", "level": 95 },
-    { "name": "Transformasi Plasmid", "category": "molecular", "level": 88 },
-    { "name": "PCR", "category": "molecular", "level": 92 },
-    { "name": "Elektroforesis Gel", "category": "molecular", "level": 90 },
-    { "name": "Spektrofotometri UV/Vis", "category": "analysis", "level": 90 },
-    { "name": "KLT", "category": "analysis", "level": 85 },
-    { "name": "Molecular Docking", "category": "analysis", "level": 80 },
-    { "name": "Analisis Filogenetik (MEGA)", "category": "analysis", "level": 82 },
-    { "name": "Kultur Jaringan", "category": "laboratory", "level": 80 },
-    { "name": "Preparasi Buffer", "category": "laboratory", "level": 88 },
-    { "name": "Kepemimpinan", "category": "soft", "level": 90 },
-    { "name": "Kerja Tim", "category": "soft", "level": 95 },
-    { "name": "Pemecahan Masalah", "category": "soft", "level": 88 },
-    { "name": "Public Speaking", "category": "soft", "level": 85 }
+    { "name": "Ekstraksi DNA", "category": "molecular", "level": 95 },
+    { "name": "PCR (Gradient & Cloning)", "category": "molecular", "level": 92 },
+    { "name": "Elektroforesis Gel (Agarose & PAGE)", "category": "molecular", "level": 90 },
+    { "name": "Spektrofotometri UV-Vis", "category": "analysis", "level": 95 },
+    { "name": "Spektrofotometri NanoDrop", "category": "analysis", "level": 85 },
+    { "name": "Spektroskopi FTIR", "category": "analysis", "level": 82 },
+    { "name": "TLC", "category": "analysis", "level": 88 },
+    { "name": "Analisis Proksimat & Fitokimia", "category": "analysis", "level": 80 },
+    { "name": "Preparasi Reagen & Buffer", "category": "laboratory", "level": 92 },
+    { "name": "Preparasi & Autentikasi Sampel", "category": "laboratory", "level": 88 },
+    { "name": "Penanganan & Sterilisasi Alat", "category": "laboratory", "level": 88 },
+    { "name": "Sangat Disiplin & Teliti", "category": "soft", "level": 95 },
+    { "name": "Komunikasi Kuat", "category": "soft", "level": 90 },
+    { "name": "Cepat Belajar & Adaptif", "category": "soft", "level": 92 },
+    { "name": "Kesiapan Kerja Shift", "category": "soft", "level": 88 }
   ],
   "publications": [
     {
@@ -123,9 +140,9 @@
     {
       "id": "award-1",
       "rank": "Juara 1",
-      "title": "Lomba Penulisan Esai Ilmiah NEXT-G 2025",
+      "title": "Lomba Esai Ilmiah NEXT-G 2025",
       "issuer": "NEXT-G",
-      "date": "Nov 2025",
+      "date": "2025",
       "associatedWith": "IPB University"
     },
     {
@@ -133,23 +150,23 @@
       "rank": "Juara 2",
       "title": "Lomba Penulisan Ilmiah Airlangga Ideas Competition ke-13 2025",
       "issuer": "Universitas Airlangga",
-      "date": "Nov 2025",
+      "date": "2025",
       "associatedWith": "IPB University"
     },
     {
       "id": "award-3",
       "rank": "Juara 3",
-      "title": "Business of the Year - Program Mahasiswa Wirausaha 2024 (Batiknese)",
-      "issuer": "PMW 2024",
-      "date": "Des 2024",
+      "title": "Business of The Year - Program Mahasiswa Wirausaha (Batiknese)",
+      "issuer": "PMW IPB",
+      "date": "2024",
       "associatedWith": "IPB University"
     },
     {
       "id": "award-4",
       "rank": "Finalis Nasional",
-      "title": "Pekan Ilmiah Mahasiswa Nasional ke-37 (PIMNAS|PKM-PM) 2024",
+      "title": "Pekan Ilmiah Mahasiswa Nasional ke-37 (PIMNAS | PKM-PM) 2024",
       "issuer": "Kemdiktisaintek",
-      "date": "Sep 2024",
+      "date": "2024",
       "associatedWith": "IPB University"
     },
     {
@@ -157,7 +174,7 @@
       "rank": "Penerima Dana",
       "title": "Program Kreativitas Mahasiswa Riset Sosial Humaniora (PKM-RSH) 2023",
       "issuer": "Belmawa Kemdiktisaintek",
-      "date": "Jun 2023",
+      "date": "2023",
       "associatedWith": "IPB University"
     }
   ],

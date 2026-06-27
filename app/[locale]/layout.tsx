@@ -28,6 +28,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rani.vercel.app'),
   title: 'Rani Andriani Tunggal — Biochemistry Student',
   description:
     'Final-Year Biochemistry Student at IPB University specializing in Biomolecular Division. Portfolio, research, and experiences.',
