@@ -164,10 +164,17 @@ rani-portfolio/
 ├── lib/
 │   ├── routing.ts              # next-intl routing config
 │   ├── navigation.ts           # Localized Link, useRouter, etc
-│   ├── content-store.ts        # Generic JSON read/write + atomic writes + cache
+│   ├── storage/                # Pluggable storage layer
+│   │   ├── types.ts            # ContentStorage + UploadStorage interfaces
+│   │   ├── fs-content.ts       # Filesystem backend (localhost)
+│   │   ├── fs-upload.ts        # Local upload (localhost)
+│   │   ├── kv-content.ts       # Vercel KV backend (production)
+│   │   ├── blob-upload.ts      # Vercel Blob backend (production)
+│   │   ├── github-content.ts   # GitHub Contents API backend (Vercel)
+│   │   ├── github-upload.ts    # GitHub-backed image uploads (jsdelivr CDN)
+│   │   └── index.ts            # Factory (auto-picks best backend by env vars)
 │   ├── content.ts              # Typed section getters
 │   ├── schemas.ts              # Zod schemas for every section
-│   ├── upload.ts               # Image upload helper
 │   ├── auth.ts                 # bcrypt + cookie helpers
 │   ├── actions.ts              # Server Actions (Zod-validated, bilingual)
 │   └── utils.ts
@@ -175,6 +182,29 @@ rani-portfolio/
 ├── i18n.ts                     # next-intl config
 └── next.config.ts
 ```
+
+---
+
+## 💾 Storage Backends (Vercel-Compatible)
+
+The admin panel persists content via a pluggable storage layer. Pick **one** backend per environment:
+
+| Backend | Required env vars | Best for |
+|---|---|---|
+| **GitHub Contents API** (default for Vercel) | `GH_TOKEN` | Zero-setup persistence via repo commits. Images served via jsDelivr CDN. |
+| **Vercel KV + Blob** (production-grade) | `KV_REST_API_URL` + `KV_REST_API_TOKEN` + `BLOB_READ_WRITE_TOKEN` | High-throughput, low-latency. Needs Vercel dashboard setup. |
+| **Filesystem** (localhost dev) | None | Auto-fallback. JSON files in `content/{locale}.json` + uploads in `public/uploads/`. |
+
+**Priority order** (auto-selected by factory): KV/Blob → GitHub → Filesystem.
+
+**For GitHub backend**, the token needs `repo` scope (use `gh auth token` to get one). Auto-detects repo from `VERCEL_GIT_REPO_*` env vars (set by Vercel) or `GH_REPO_OWNER`/`GH_REPO_NAME`/`GH_REPO_BRANCH`.
+
+**To set env vars on Vercel:**
+```bash
+vercel env add GH_TOKEN production --token $VERCEL_TOKEN --value "<your-token>"
+```
+
+Or via dashboard: https://vercel.com/dashboard → project → Settings → Environment Variables.
 
 ---
 
