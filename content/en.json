@@ -5,7 +5,7 @@
     "pronouns": "She/Her",
     "title": "Final-Year Biochemistry Student",
     "subtitle": "IPB University · 3.77/4.00 GPA",
-    "tagline": "Crafting molecules, building impact.",
+    "tagline": "__TEST_TAGLINE_1783777604627__",
     "location": "Bogor, West Java, Indonesia",
     "email": "raniandriani@apps.ipb.ac.id",
     "phone": "+62-838-7571-5839",
@@ -43,7 +43,11 @@
       "endYear": "2026",
       "location": "Bogor, West Java, Indonesia",
       "description": "Final-year student focusing on biomolecular analysis, plant biochemistry, and Good Laboratory Practice.",
-      "achievements": ["Cumlaude track", "Active laboratory assistant", "Published researcher"],
+      "achievements": [
+        "Cumlaude track",
+        "Active laboratory assistant",
+        "Published researcher"
+      ],
       "logoUrl": "",
       "gpa": "3.77"
     }
@@ -61,7 +65,11 @@
       "publishedAt": "Jun 2025",
       "venue": "AGROKREATIF Journal",
       "url": "https://journal.ipb.ac.id/index.php/agrokreatif",
-      "tags": ["research", "social-impact", "horticultural-therapy"]
+      "tags": [
+        "research",
+        "social-impact",
+        "horticultural-therapy"
+      ]
     }
   ],
   "footer": {
@@ -69,9 +77,21 @@
     "tagline": "Crafted with care using Next.js, GSAP, and Three.js.",
     "builtWith": "Built with Next.js · Hosted on Vercel",
     "socials": [
-      { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/rani-andriani-tunggal", "icon": "linkedin" },
-      { "platform": "Instagram", "url": "https://www.instagram.com/raniandrnni/", "icon": "instagram" },
-      { "platform": "WhatsApp", "url": "https://wa.me/6283875715839", "icon": "whatsapp" }
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/rani-andriani-tunggal",
+        "icon": "linkedin"
+      },
+      {
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/raniandrnni/",
+        "icon": "instagram"
+      },
+      {
+        "platform": "WhatsApp",
+        "url": "https://wa.me/6283875715839",
+        "icon": "whatsapp"
+      }
     ]
   },
   "experiences": [
@@ -87,7 +107,13 @@
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Guided and supervised 12 students during laboratory practical sessions on carbohydrate, protein, lipid, and nucleic acid analysis, including starch and lipid hydrolysis, protein and nucleic acid denaturation, and biomolecule characterization. Operated and assisted in the use of laboratory instruments, including a UV–Vis spectrophotometer, PCR machine, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
-      "skills": ["UV-Vis Spectrophotometry", "PCR", "Gel Electrophoresis", "Biomolecular Analysis", "Teaching"],
+      "skills": [
+        "UV-Vis Spectrophotometry",
+        "PCR",
+        "Gel Electrophoresis",
+        "Biomolecular Analysis",
+        "Teaching"
+      ],
       "achievements": [],
       "companyUrl": "",
       "images": []
@@ -104,7 +130,13 @@
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Guided and supervised 11 students during gene isolation and cloning sessions of the amylase-coding gene from Bacillus licheniformis, covering genomic DNA extraction, PCR-based cloning, agarose gel electrophoresis, and plasmid DNA digestion. Operated laboratory instruments including a PCR machine, NanoDrop spectrophotometer, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
-      "skills": ["DNA Extraction", "PCR Cloning", "Agarose Gel Electrophoresis", "NanoDrop Spectrophotometry", "Plasmid Digestion"],
+      "skills": [
+        "DNA Extraction",
+        "PCR Cloning",
+        "Agarose Gel Electrophoresis",
+        "NanoDrop Spectrophotometry",
+        "Plasmid Digestion"
+      ],
       "achievements": [],
       "companyUrl": "",
       "images": []
@@ -121,10 +153,20 @@
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis. Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE). Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation.",
-      "skills": ["Gradient PCR", "PAGE", "Agarose Gel Electrophoresis", "Tissue Culture", "Sample Preparation"],
+      "skills": [
+        "Gradient PCR",
+        "PAGE",
+        "Agarose Gel Electrophoresis",
+        "Tissue Culture",
+        "Sample Preparation"
+      ],
       "achievements": [],
       "companyUrl": "",
-      "images": ["/exp-1.jpg", "/exp-2.jpg", "/exp-3.jpg"]
+      "images": [
+        "/exp-1.jpg",
+        "/exp-2.jpg",
+        "/exp-3.jpg"
+      ]
     },
     {
       "id": "exp-4",
@@ -138,10 +180,20 @@
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents. Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation. Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
-      "skills": ["Gravimetric Analysis", "UV-VIS Spectrophotometry", "Xylanase Assay", "Reagent Preparation", "GLP Compliance"],
+      "skills": [
+        "Gravimetric Analysis",
+        "UV-VIS Spectrophotometry",
+        "Xylanase Assay",
+        "Reagent Preparation",
+        "GLP Compliance"
+      ],
       "achievements": [],
       "companyUrl": "",
-      "images": ["/exp-4.jpg", "/exp-5.jpg", "/exp-6.jpg"]
+      "images": [
+        "/exp-4.jpg",
+        "/exp-5.jpg",
+        "/exp-6.jpg"
+      ]
     },
     {
       "id": "exp-5",
@@ -155,10 +207,21 @@
       "duration": "3 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry. Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting.",
-      "skills": ["FTIR Spectroscopy", "TLC", "Phytochemical Analysis", "Proximate Analysis", "GLP Standards", "UV-VIS Spectrophotometry"],
+      "skills": [
+        "FTIR Spectroscopy",
+        "TLC",
+        "Phytochemical Analysis",
+        "Proximate Analysis",
+        "GLP Standards",
+        "UV-VIS Spectrophotometry"
+      ],
       "achievements": [],
       "companyUrl": "",
-      "images": ["/exp-7.jpg", "/exp-8.jpg", "/exp-9.jpg"]
+      "images": [
+        "/exp-7.jpg",
+        "/exp-8.jpg",
+        "/exp-9.jpg"
+      ]
     },
     {
       "id": "exp-6",
@@ -172,7 +235,13 @@
       "duration": "1 yr",
       "location": "Bogor, West Java, Indonesia",
       "description": "Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems for both programs. Achieved over 20 G-astip customers and successfully engaged 5 students in the Tutor BEM FMIPA. Achieved a profit of Rp8.000.000,- in 10 months of management from an initial capital of Rp400.000,-.",
-      "skills": ["Business Planning", "Partnership", "Profit Management", "Leadership", "Event Management"],
+      "skills": [
+        "Business Planning",
+        "Partnership",
+        "Profit Management",
+        "Leadership",
+        "Event Management"
+      ],
       "achievements": [],
       "companyUrl": "",
       "images": []
@@ -189,34 +258,107 @@
       "duration": "1 yr",
       "location": "Bogor, West Java, Indonesia",
       "description": "Documented meeting minutes and prepared evaluation reports for the Bureau of Administrative Affairs. Monitored and reviewed the budget plan (RKAT) and meeting records under the Directorate of Talent, Partnership, and External Communication.",
-      "skills": ["Administration", "Documentation", "Budget Review", "Meeting Coordination", "Report Writing"],
+      "skills": [
+        "Administration",
+        "Documentation",
+        "Budget Review",
+        "Meeting Coordination",
+        "Report Writing"
+      ],
       "achievements": [],
       "companyUrl": "",
       "images": []
     }
   ],
   "skills": [
-    { "name": "DNA Extraction", "category": "molecular", "level": 95 },
-    { "name": "PCR (Gradient & Cloning)", "category": "molecular", "level": 92 },
-    { "name": "Gel Electrophoresis (Agarose & PAGE)", "category": "molecular", "level": 90 },
-    { "name": "UV-Vis Spectrophotometry", "category": "analysis", "level": 95 },
-    { "name": "NanoDrop Spectrophotometry", "category": "analysis", "level": 85 },
-    { "name": "FTIR Spectroscopy", "category": "analysis", "level": 82 },
-    { "name": "TLC", "category": "analysis", "level": 88 },
-    { "name": "Proximate & Phytochemical Analysis", "category": "analysis", "level": 80 },
-    { "name": "Reagent & Buffer Preparation", "category": "laboratory", "level": 92 },
-    { "name": "Sample Preparation & Authentication", "category": "laboratory", "level": 88 },
-    { "name": "Equipment Handling & Sterilization", "category": "laboratory", "level": 88 },
-    { "name": "Highly Disciplined & Meticulous", "category": "soft", "level": 95 },
-    { "name": "Strong Communication", "category": "soft", "level": 90 },
-    { "name": "Fast Learner & Adaptability", "category": "soft", "level": 92 },
-    { "name": "Shift-Work Readiness", "category": "soft", "level": 88 }
+    {
+      "name": "DNA Extraction",
+      "category": "molecular",
+      "level": 95
+    },
+    {
+      "name": "PCR (Gradient & Cloning)",
+      "category": "molecular",
+      "level": 92
+    },
+    {
+      "name": "Gel Electrophoresis (Agarose & PAGE)",
+      "category": "molecular",
+      "level": 90
+    },
+    {
+      "name": "UV-Vis Spectrophotometry",
+      "category": "analysis",
+      "level": 95
+    },
+    {
+      "name": "NanoDrop Spectrophotometry",
+      "category": "analysis",
+      "level": 85
+    },
+    {
+      "name": "FTIR Spectroscopy",
+      "category": "analysis",
+      "level": 82
+    },
+    {
+      "name": "TLC",
+      "category": "analysis",
+      "level": 88
+    },
+    {
+      "name": "Proximate & Phytochemical Analysis",
+      "category": "analysis",
+      "level": 80
+    },
+    {
+      "name": "Reagent & Buffer Preparation",
+      "category": "laboratory",
+      "level": 92
+    },
+    {
+      "name": "Sample Preparation & Authentication",
+      "category": "laboratory",
+      "level": 88
+    },
+    {
+      "name": "Equipment Handling & Sterilization",
+      "category": "laboratory",
+      "level": 88
+    },
+    {
+      "name": "Highly Disciplined & Meticulous",
+      "category": "soft",
+      "level": 95
+    },
+    {
+      "name": "Strong Communication",
+      "category": "soft",
+      "level": 90
+    },
+    {
+      "name": "Fast Learner & Adaptability",
+      "category": "soft",
+      "level": 92
+    },
+    {
+      "name": "Shift-Work Readiness",
+      "category": "soft",
+      "level": 88
+    }
   ],
   "publications": [
     {
       "id": "pub-1",
       "title": "Pengembangan Bina Diri dan Keterampilan Sosial Penyandang Disabilitas Intelektual dan Mental Melalui Program Independent Pilot",
-      "authors": ["Rani Andriani Tunggal", "Heni Atika Putri", "J. Salsabila", "Nurcahya Priantoro", "Santa Veronika Sidauruk", "Syaefudin Suminto"],
+      "authors": [
+        "Rani Andriani Tunggal",
+        "Heni Atika Putri",
+        "J. Salsabila",
+        "Nurcahya Priantoro",
+        "Santa Veronika Sidauruk",
+        "Syaefudin Suminto"
+      ],
       "venue": "AGROKREATIF: Jurnal Ilmiah Pengabdian kepada Masyarakat",
       "date": "Jun 16, 2025",
       "type": "journal",
