@@ -268,27 +268,6 @@
       "achievements": [],
       "companyUrl": "",
       "images": []
-    },
-    {
-      "id": "exp-test-1783802626521",
-      "role": "TEST POSISI - Hapus saya",
-      "company": "PERUSAHAAN TEST",
-      "type": "Test",
-      "period": "2026",
-      "startDate": "2026-01",
-      "endDate": "2026-12",
-      "isCurrent": false,
-      "duration": "1 yr",
-      "location": "Test",
-      "description": "This is a test entry created by automated test suite",
-      "skills": [
-        "Test"
-      ],
-      "achievements": [
-        "Verified add flow works"
-      ],
-      "companyUrl": "",
-      "images": []
     }
   ],
   "skills": [
