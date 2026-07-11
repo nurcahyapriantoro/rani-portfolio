@@ -268,6 +268,25 @@
       "achievements": [],
       "companyUrl": "",
       "images": []
+    },
+    {
+      "id": "exp-test-1783802807633",
+      "role": "TEST POSITION - Delete me",
+      "company": "TEST COMPANY",
+      "type": "Test",
+      "period": "2026",
+      "startDate": "2026-01",
+      "endDate": "2026-12",
+      "isCurrent": false,
+      "duration": "1 yr",
+      "location": "Test",
+      "description": "Automated test",
+      "skills": [
+        "Test"
+      ],
+      "achievements": [],
+      "companyUrl": "",
+      "images": []
     }
   ],
   "skills": [
