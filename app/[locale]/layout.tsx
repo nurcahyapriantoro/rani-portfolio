@@ -45,16 +45,21 @@ const themeInitScript = `
 `;
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://rani.vercel.app'),
+  metadataBase: new URL('https://raniandriani.vercel.app'),
   title: 'Rani Andriani Tunggal — Biochemistry Student',
   description:
     'Final-Year Biochemistry Student at IPB University specializing in Biomolecular Division. Portfolio, research, and experiences.',
   keywords: ['Biochemistry', 'IPB University', 'Biomolecular', 'Portfolio', 'Research'],
   authors: [{ name: 'Rani Andriani Tunggal' }],
+  alternates: {
+    canonical: '/'
+  },
   openGraph: {
     title: 'Rani Andriani Tunggal',
     description: 'Final-Year Biochemistry Student at IPB University · Biomolecular Division',
     type: 'website',
+    url: 'https://raniandriani.vercel.app',
+    siteName: 'Rani Andriani Tunggal Portfolio',
     images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'Rani Andriani Tunggal' }]
   },
   twitter: {

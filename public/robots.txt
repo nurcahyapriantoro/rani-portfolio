@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://rani.vercel.app/sitemap.xml
+Sitemap: https://raniandriani.vercel.app/sitemap.xml

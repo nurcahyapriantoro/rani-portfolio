@@ -57,6 +57,11 @@ Built with **Next.js 16** (App Router), **Three.js**, **GSAP**, **Lenis**, **Swi
 
 ---
 
+## 🌐 Live Site
+
+- 🔗 **Production**: https://raniandriani.vercel.app
+- 🔗 **Admin Login**: https://raniandriani.vercel.app/en/admin/login
+
 ## 🚀 Quick Start
 
 ```bash
