@@ -1,106 +1,211 @@
 'use client';
 
-import { useActionState, useState } from 'react';
-import { Plus, Trash2, Save } from 'lucide-react';
+import { Copy, Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { BilingualEditor } from '@/components/admin/bilingual-editor';
+import { DragList } from '@/components/admin/ui/drag-list';
+import { Field } from '@/components/admin/ui/field';
+import { TextArea } from '@/components/admin/ui/textarea';
+import { TagInput } from '@/components/admin/ui/tag-input';
 import { updatePublicationsAction } from '@/lib/actions';
+import type { PublicationInput } from '@/lib/schemas';
 
-interface Publication {
-  id: string;
-  title: string;
-  authors: string[];
-  venue: string;
-  date: string;
-  type: string;
-  abstract: string;
-  url: string;
+export default function PublicationsEditor({
+  locale,
+  enPublications,
+  idPublications
+}: {
+  locale: string;
+  enPublications: PublicationInput[];
+  idPublications: PublicationInput[];
+}) {
+  return (
+    <BilingualEditor<PublicationInput[]>
+      title="Manage Publications"
+      description="Research papers and journal articles. Drag to reorder."
+      enData={enPublications}
+      idData={idPublications}
+      onSave={async (en, id) => updatePublicationsAction(en, id)}
+      renderForm={(list, update, loc) => (
+        <PublicationsForm list={list} update={update} locale={loc} />
+      )}
+    />
+  );
 }
 
-export default function PublicationsEditor({ locale, publications }: { locale: string; publications: Publication[] }) {
-  const [list, setList] = useState<Publication[]>(publications);
-  const [state, formAction, pending] = useActionState(
-    async (_prev: { success?: boolean } | null, fd: FormData) => {
-      const payload = JSON.parse(fd.get('payload') as string);
-      return await updatePublicationsAction(locale as 'en' | 'id', payload);
-    },
-    null
-  );
-
-  const update = (i: number, field: keyof Publication, value: unknown) => {
-    setList((prev) => prev.map((item, idx) => (idx === i ? { ...item, [field]: value } : item)));
-  };
-
-  const remove = (i: number) => setList((prev) => prev.filter((_, idx) => idx !== i));
-
+function PublicationsForm({
+  list,
+  update,
+  locale
+}: {
+  list: PublicationInput[];
+  update: (updater: (prev: PublicationInput[]) => PublicationInput[]) => void;
+  locale: 'en' | 'id';
+}) {
   const add = () =>
-    setList((prev) => [
+    update((prev) => [
       ...prev,
-      { id: `pub-${Date.now()}`, title: '', authors: [], venue: '', date: '', type: 'journal', abstract: '', url: '' }
+      {
+        id: `pub-${Date.now()}`,
+        title: '',
+        authors: [],
+        venue: '',
+        date: '',
+        type: 'journal',
+        abstract: '',
+        url: '',
+        tags: []
+      }
     ]);
 
+  const duplicate = (i: number) =>
+    update((prev) => {
+      const copy = { ...prev[i], id: `pub-${Date.now()}` };
+      const next = [...prev];
+      next.splice(i + 1, 0, copy);
+      return next;
+    });
+
+  const remove = (i: number) => update((prev) => prev.filter((_, idx) => idx !== i));
+
+  const patch = (i: number, p: Partial<PublicationInput>) =>
+    update((prev) => prev.map((it, idx) => (idx === i ? { ...it, ...p } : it)));
+
   return (
-    <form action={formAction} className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-display text-3xl font-bold mb-2">Manage Publications</h1>
-          <p className="text-text-muted text-sm">Research papers and journal articles</p>
-        </div>
-        <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass hover:scale-105 transition-all">
-          <Plus className="w-4 h-4" /> Add
+        <p className="text-xs text-text-muted">
+          {list.length} {list.length === 1 ? 'publication' : 'publications'} ·{' '}
+          <span className="uppercase tracking-wider">{locale}</span>
+        </p>
+        <button
+          type="button"
+          onClick={add}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass text-xs hover:scale-105 transition-all"
+        >
+          <Plus className="w-3.5 h-3.5" /> Add Publication
         </button>
       </div>
 
-      <div className="space-y-4">
-        {list.map((pub, i) => (
-          <div key={pub.id} className="p-6 rounded-2xl glass space-y-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-text-muted">Publication #{i + 1}</span>
-              <button type="button" onClick={() => remove(i)} className="text-red-500 hover:bg-red-500/10 p-2 rounded-lg transition-colors" aria-label="Remove">
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-
-            <Input label="Title" value={pub.title} onChange={(v) => update(i, 'title', v)} fullWidth />
-            <div className="grid md:grid-cols-3 gap-3">
-              <Input label="Venue" value={pub.venue} onChange={(v) => update(i, 'venue', v)} />
-              <Input label="Date" value={pub.date} onChange={(v) => update(i, 'date', v)} />
-              <Input label="Type" value={pub.type} onChange={(v) => update(i, 'type', v)} />
-            </div>
-            <Input label="Authors (comma-separated)" value={pub.authors.join(', ')} onChange={(v) => update(i, 'authors', v.split(',').map((s) => s.trim()).filter(Boolean))} fullWidth />
-            <Input label="URL" value={pub.url} onChange={(v) => update(i, 'url', v)} fullWidth />
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">Abstract</label>
-              <textarea
-                value={pub.abstract}
-                onChange={(e) => update(i, 'abstract', e.target.value)}
-                rows={4}
-                className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all resize-none"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <input type="hidden" name="payload" value={JSON.stringify(list)} />
-
-      {state?.success && (
-        <div className="px-4 py-3 rounded-xl bg-accent-soft border border-accent text-accent text-sm">
-          ✓ Publications saved successfully
+      {list.length === 0 ? (
+        <div className="text-center py-12 text-text-muted text-sm glass rounded-2xl">
+          No publications yet.
         </div>
+      ) : (
+        <DragList
+          items={list}
+          onChange={(next) => update(() => next)}
+          renderItem={(pub, i, handle) => (
+            <PublicationCard
+              key={pub.id}
+              pub={pub}
+              index={i}
+              handle={handle}
+              onPatch={(p) => patch(i, p)}
+              onDuplicate={() => duplicate(i)}
+              onRemove={() => remove(i)}
+            />
+          )}
+        />
       )}
-
-      <button type="submit" disabled={pending} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-bg-primary font-semibold hover:bg-accent-hover transition-all disabled:opacity-50">
-        <Save className="w-4 h-4" />
-        {pending ? 'Saving...' : 'Save All'}
-      </button>
-    </form>
+    </div>
   );
 }
 
-function Input({ label, value, onChange, fullWidth = false }: { label: string; value: string; onChange: (v: string) => void; fullWidth?: boolean }) {
+function PublicationCard({
+  pub,
+  index,
+  handle,
+  onPatch,
+  onDuplicate,
+  onRemove
+}: {
+  pub: PublicationInput;
+  index: number;
+  handle: React.ReactNode;
+  onPatch: (p: Partial<PublicationInput>) => void;
+  onDuplicate: () => void;
+  onRemove: () => void;
+}) {
+  const [open, setOpen] = useState(true);
   return (
-    <div className={fullWidth ? 'md:col-span-2 lg:col-span-3' : ''}>
-      <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">{label}</label>
-      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all" />
+    <div className="p-5 rounded-2xl glass border border-border">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center">
+          {handle}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="text-xs font-mono uppercase tracking-widest text-text-muted hover:text-accent"
+          >
+            {open ? '▾' : '▸'} Publication #{index + 1}
+            {pub.title && <span className="ml-2 normal-case tracking-normal line-clamp-1">· {pub.title}</span>}
+          </button>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onDuplicate}
+            className="p-1.5 rounded-lg text-text-muted hover:bg-bg-tertiary hover:text-accent"
+            aria-label="Duplicate"
+            title="Duplicate"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={onRemove}
+            className="p-1.5 rounded-lg text-red-500 hover:bg-red-500/10"
+            aria-label="Remove"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="space-y-4">
+          <Field
+            label="Title"
+            value={pub.title}
+            onChange={(v) => onPatch({ title: v })}
+            fullWidth
+            required
+          />
+          <div className="grid md:grid-cols-3 gap-3">
+            <Field label="Venue" value={pub.venue} onChange={(v) => onPatch({ venue: v })} />
+            <Field label="Date" value={pub.date} onChange={(v) => onPatch({ date: v })} />
+            <Field label="Type" value={pub.type} onChange={(v) => onPatch({ type: v })} placeholder="journal / conference" />
+          </div>
+          <TagInput
+            label="Authors (press Enter)"
+            values={pub.authors}
+            onChange={(v) => onPatch({ authors: v })}
+            fullWidth
+          />
+          <TagInput
+            label="Tags (press Enter)"
+            values={pub.tags ?? []}
+            onChange={(v) => onPatch({ tags: v })}
+            fullWidth
+          />
+          <Field
+            label="URL"
+            value={pub.url}
+            onChange={(v) => onPatch({ url: v })}
+            type="url"
+            fullWidth
+            placeholder="https://..."
+          />
+          <TextArea
+            label="Abstract"
+            value={pub.abstract}
+            onChange={(v) => onPatch({ abstract: v })}
+            rows={4}
+            fullWidth
+          />
+        </div>
+      )}
     </div>
   );
 }

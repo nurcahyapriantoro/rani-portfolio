@@ -1,118 +1,192 @@
 'use client';
 
-import { useActionState, useState } from 'react';
-import { Save } from 'lucide-react';
+import { useState } from 'react';
+import { Upload } from 'lucide-react';
+import { BilingualEditor } from '@/components/admin/bilingual-editor';
+import { Field } from '@/components/admin/ui/field';
 import { updateProfileAction } from '@/lib/actions';
+import type { ProfileInput } from '@/lib/schemas';
 
-interface Profile {
-  fullName: string;
-  nickname: string;
-  pronouns: string;
-  title: string;
-  subtitle: string;
-  tagline: string;
-  location: string;
-  email: string;
-  phone: string;
-  whatsapp: string;
-  linkedin: string;
-  github: string;
-  instagram: string;
-  cvUrl: string;
-  avatarInitials: string;
-  avatarColor: string;
-  photoUrl?: string;
+export default function ProfileEditor({
+  locale,
+  enProfile,
+  idProfile
+}: {
+  locale: string;
+  enProfile: ProfileInput;
+  idProfile: ProfileInput;
+}) {
+  return (
+    <BilingualEditor<ProfileInput>
+      title="Edit Profile"
+      description="Personal information shown across the portfolio. Switch tabs to manage EN/ID translations, then save both at once."
+      enData={enProfile}
+      idData={idProfile}
+      onSave={async (en, id) => updateProfileAction(en, id)}
+      renderForm={(data, update, loc) => (
+        <ProfileForm data={data} update={update} locale={loc} />
+      )}
+    />
+  );
 }
 
-export default function ProfileEditor({ locale, profile }: { locale: string; profile: Profile }) {
-  const [data, setData] = useState<Profile>(profile);
-  const [state, formAction, pending] = useActionState(
-    async (_prev: { success?: boolean; error?: string } | null, fd: FormData) => {
-      const payload = JSON.parse(fd.get('payload') as string);
-      return await updateProfileAction(locale as 'en' | 'id', payload);
-    },
-    null
-  );
+function ProfileForm({
+  data,
+  update,
+  locale
+}: {
+  data: ProfileInput;
+  update: (updater: (prev: ProfileInput) => ProfileInput) => void;
+  locale: 'en' | 'id';
+}) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const handleChange = (field: keyof Profile, value: string) => {
-    setData((prev) => ({ ...prev, [field]: value }));
+  const set = <K extends keyof ProfileInput>(field: K, value: ProfileInput[K]) =>
+    update((prev) => ({ ...prev, [field]: value }));
+
+  const upload = async (file: File) => {
+    setUploadError(null);
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('files', file);
+      fd.append('section', 'profile');
+      fd.append('hint', file.name);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const result = await res.json();
+      if (!res.ok || !result.ok) {
+        setUploadError(result.error ?? 'Upload failed');
+        return;
+      }
+      const url = result.files[0].url as string;
+      set('photoUrl', url);
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
-    <form action={formAction} className="space-y-6">
-      <div>
-        <h1 className="font-display text-3xl font-bold mb-2">Edit Profile</h1>
-        <p className="text-text-muted text-sm">
-          Update your personal information and contact details
-        </p>
-      </div>
-
+    <div className="space-y-6">
       <div className="grid md:grid-cols-2 gap-4">
-        <Field label="Full Name" value={data.fullName} onChange={(v) => handleChange('fullName', v)} />
-        <Field label="Nickname" value={data.nickname} onChange={(v) => handleChange('nickname', v)} />
-        <Field label="Pronouns" value={data.pronouns} onChange={(v) => handleChange('pronouns', v)} />
-        <Field label="Avatar Initials" value={data.avatarInitials} onChange={(v) => handleChange('avatarInitials', v)} maxLength={3} />
-        <Field label="Title" value={data.title} onChange={(v) => handleChange('title', v)} fullWidth />
-        <Field label="Subtitle" value={data.subtitle} onChange={(v) => handleChange('subtitle', v)} fullWidth />
-        <Field label="Tagline" value={data.tagline} onChange={(v) => handleChange('tagline', v)} fullWidth />
-        <Field label="Location" value={data.location} onChange={(v) => handleChange('location', v)} />
-        <Field label="Email" value={data.email} onChange={(v) => handleChange('email', v)} type="email" />
-        <Field label="Phone" value={data.phone} onChange={(v) => handleChange('phone', v)} />
-        <Field label="WhatsApp Number (with country code, no +)" value={data.whatsapp} onChange={(v) => handleChange('whatsapp', v)} />
-        <Field label="LinkedIn URL" value={data.linkedin} onChange={(v) => handleChange('linkedin', v)} />
-        <Field label="GitHub URL" value={data.github} onChange={(v) => handleChange('github', v)} />
-        <Field label="Instagram URL" value={data.instagram} onChange={(v) => handleChange('instagram', v)} />
-        <Field label="CV File Path" value={data.cvUrl} onChange={(v) => handleChange('cvUrl', v)} />
-        <Field label="Photo URL (e.g. /profile.jpg)" value={data.photoUrl || ''} onChange={(v) => handleChange('photoUrl', v)} />
+        <Field
+          label="Full Name"
+          value={data.fullName}
+          onChange={(v) => set('fullName', v)}
+          fullWidth
+          required
+        />
+        <Field label="Nickname" value={data.nickname} onChange={(v) => set('nickname', v)} />
+        <Field label="Pronouns" value={data.pronouns} onChange={(v) => set('pronouns', v)} placeholder="She/Her" />
+        <Field
+          label="Avatar Initials"
+          value={data.avatarInitials}
+          onChange={(v) => set('avatarInitials', v)}
+          maxLength={3}
+          hint="Shown when photo is unavailable"
+        />
+        <Field label="Title" value={data.title} onChange={(v) => set('title', v)} fullWidth />
+        <Field label="Subtitle" value={data.subtitle} onChange={(v) => set('subtitle', v)} fullWidth />
+        <Field label="Tagline" value={data.tagline} onChange={(v) => set('tagline', v)} fullWidth />
+        <Field label="Location" value={data.location} onChange={(v) => set('location', v)} fullWidth />
+        <Field
+          label="Email"
+          value={data.email}
+          onChange={(v) => set('email', v)}
+          type="email"
+        />
+        <Field label="Phone" value={data.phone} onChange={(v) => set('phone', v)} />
+        <Field
+          label="WhatsApp Number"
+          value={data.whatsapp}
+          onChange={(v) => set('whatsapp', v)}
+          hint="With country code, no + (e.g. 6281234567890)"
+        />
+        <Field
+          label="LinkedIn URL"
+          value={data.linkedin}
+          onChange={(v) => set('linkedin', v)}
+          type="url"
+        />
+        <Field
+          label="GitHub URL"
+          value={data.github ?? ''}
+          onChange={(v) => set('github', v)}
+          type="url"
+        />
+        <Field
+          label="Instagram URL"
+          value={data.instagram}
+          onChange={(v) => set('instagram', v)}
+          type="url"
+        />
+        <Field
+          label="CV File Path"
+          value={data.cvUrl}
+          onChange={(v) => set('cvUrl', v)}
+          hint="Path under public/, e.g. /cv.pdf"
+        />
+        <Field
+          label="Avatar Color"
+          value={data.avatarColor}
+          onChange={(v) => set('avatarColor', v)}
+          placeholder="#16a34a"
+        />
       </div>
 
-      <input type="hidden" name="payload" value={JSON.stringify(data)} />
-
-      {state?.success && (
-        <div className="px-4 py-3 rounded-xl bg-accent-soft border border-accent text-accent text-sm">
-          ✓ Profile saved successfully
+      <div>
+        <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
+          Profile Photo
+        </label>
+        <div className="flex items-start gap-4">
+          <div className="w-24 h-24 rounded-xl overflow-hidden border border-border bg-bg-tertiary shrink-0 flex items-center justify-center">
+            {data.photoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={data.photoUrl} alt={data.fullName} className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-xs text-text-muted">No image</span>
+            )}
+          </div>
+          <div className="flex-1 space-y-2">
+            <div className="flex items-center gap-2">
+              <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg glass text-xs hover:scale-105 transition-all cursor-pointer">
+                <Upload className="w-3.5 h-3.5" />
+                {uploading ? 'Uploading...' : 'Upload'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={uploading}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) upload(file);
+                    e.target.value = '';
+                  }}
+                />
+              </label>
+              {data.photoUrl && (
+                <button
+                  type="button"
+                  onClick={() => set('photoUrl', '')}
+                  className="px-3 py-2 rounded-lg text-xs text-red-500 hover:bg-red-500/10 transition-colors"
+                >
+                  Remove
+                </button>
+              )}
+            </div>
+            <Field
+              label=""
+              value={data.photoUrl ?? ''}
+              onChange={(v) => set('photoUrl', v)}
+              placeholder="/uploads/profile/photo.jpg"
+              hint={`Or paste a path / URL (locale: ${locale.toUpperCase()})`}
+            />
+            {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
+          </div>
         </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={pending}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-bg-primary font-semibold hover:bg-accent-hover transition-all disabled:opacity-50"
-      >
-        <Save className="w-4 h-4" />
-        {pending ? 'Saving...' : 'Save Profile'}
-      </button>
-    </form>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  type = 'text',
-  fullWidth = false,
-  maxLength
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  fullWidth?: boolean;
-  maxLength?: number;
-}) {
-  return (
-    <div className={fullWidth ? 'md:col-span-2' : ''}>
-      <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-        {label}
-      </label>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        maxLength={maxLength}
-        className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all"
-      />
+      </div>
     </div>
   );
 }

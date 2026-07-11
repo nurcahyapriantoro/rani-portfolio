@@ -24,9 +24,55 @@
     "awardsCount": 5,
     "publicationsCount": 1
   },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "scrollLabel": "Scroll to explore"
+  },
   "bio": {
     "short": "Final-year Biochemistry student at IPB University with hands-on experience in laboratory testing, analytical evaluation, and data documentation.",
     "long": "Final-year Biochemistry student at IPB University with hands-on experience in laboratory testing, analytical evaluation, and data documentation. Skilled in operating analytical instruments, maintaining accurate records, and working in accordance with Good Laboratory Practice (GLP). Detail-oriented, highly organized, and eager to contribute to quality assessment and sensory evaluation. Proficient in Microsoft Excel and enthusiastic about learning in laboratory and production-line environments."
+  },
+  "education": [
+    {
+      "id": "edu-1",
+      "school": "IPB University",
+      "degree": "Bachelor of Science - BS, Biochemistry",
+      "field": "Biochemistry",
+      "period": "2022 – 2026",
+      "startYear": "2022",
+      "endYear": "2026",
+      "location": "Bogor, West Java, Indonesia",
+      "description": "Final-year student focusing on biomolecular analysis, plant biochemistry, and Good Laboratory Practice.",
+      "achievements": ["Cumlaude track", "Active laboratory assistant", "Published researcher"],
+      "logoUrl": "",
+      "gpa": "3.77"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Independent Pilot Program",
+      "subtitle": "Horticultural Therapy Research",
+      "description": "Designed and implemented a horticultural therapy program at Rumah Azaki — a social welfare institution in Bogor — to develop self-care skills and social competencies for individuals with intellectual and mental disabilities. Demonstrated up to 80% improvement in planting activities for intellectually disabled participants.",
+      "imageUrl": "/project-pilot.jpg",
+      "impact": "80%",
+      "impactLabel": "Improvement",
+      "team": "6 researchers from IPB University",
+      "publishedAt": "Jun 2025",
+      "venue": "AGROKREATIF Journal",
+      "url": "https://journal.ipb.ac.id/index.php/agrokreatif",
+      "tags": ["research", "social-impact", "horticultural-therapy"]
+    }
+  ],
+  "footer": {
+    "copyright": "© 2026 Rani Andriani Tunggal. All rights reserved.",
+    "tagline": "Crafted with care using Next.js, GSAP, and Three.js.",
+    "builtWith": "Built with Next.js · Hosted on Vercel",
+    "socials": [
+      { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/rani-andriani-tunggal", "icon": "linkedin" },
+      { "platform": "Instagram", "url": "https://www.instagram.com/raniandrnni/", "icon": "instagram" },
+      { "platform": "WhatsApp", "url": "https://wa.me/6283875715839", "icon": "whatsapp" }
+    ]
   },
   "experiences": [
     {
@@ -35,10 +81,16 @@
       "company": "Biochemistry Department - IPB University",
       "type": "Laboratory Assistant",
       "period": "Aug 2025 - Dec 2025",
+      "startDate": "2025-08",
+      "endDate": "2025-12",
+      "isCurrent": false,
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Guided and supervised 12 students during laboratory practical sessions on carbohydrate, protein, lipid, and nucleic acid analysis, including starch and lipid hydrolysis, protein and nucleic acid denaturation, and biomolecule characterization. Operated and assisted in the use of laboratory instruments, including a UV–Vis spectrophotometer, PCR machine, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
-      "skills": ["UV-Vis Spectrophotometry", "PCR", "Gel Electrophoresis", "Biomolecular Analysis", "Teaching"]
+      "skills": ["UV-Vis Spectrophotometry", "PCR", "Gel Electrophoresis", "Biomolecular Analysis", "Teaching"],
+      "achievements": [],
+      "companyUrl": "",
+      "images": []
     },
     {
       "id": "exp-2",
@@ -46,10 +98,16 @@
       "company": "Biochemistry Department - IPB University",
       "type": "Laboratory Assistant",
       "period": "Aug 2025 - Dec 2025",
+      "startDate": "2025-08",
+      "endDate": "2025-12",
+      "isCurrent": false,
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Guided and supervised 11 students during gene isolation and cloning sessions of the amylase-coding gene from Bacillus licheniformis, covering genomic DNA extraction, PCR-based cloning, agarose gel electrophoresis, and plasmid DNA digestion. Operated laboratory instruments including a PCR machine, NanoDrop spectrophotometer, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
-      "skills": ["DNA Extraction", "PCR Cloning", "Agarose Gel Electrophoresis", "NanoDrop Spectrophotometry", "Plasmid Digestion"]
+      "skills": ["DNA Extraction", "PCR Cloning", "Agarose Gel Electrophoresis", "NanoDrop Spectrophotometry", "Plasmid Digestion"],
+      "achievements": [],
+      "companyUrl": "",
+      "images": []
     },
     {
       "id": "exp-3",
@@ -57,10 +115,15 @@
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Internship",
       "period": "Jul 2025 - Aug 2025",
+      "startDate": "2025-07",
+      "endDate": "2025-08",
+      "isCurrent": false,
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis. Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE). Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation.",
       "skills": ["Gradient PCR", "PAGE", "Agarose Gel Electrophoresis", "Tissue Culture", "Sample Preparation"],
+      "achievements": [],
+      "companyUrl": "",
       "images": ["/exp-1.jpg", "/exp-2.jpg", "/exp-3.jpg"]
     },
     {
@@ -69,10 +132,15 @@
       "company": "Indonesian Oil Palm Research Institute (IOPRI)",
       "type": "Internship",
       "period": "Dec 2024 - Jan 2025",
+      "startDate": "2024-12",
+      "endDate": "2025-01",
+      "isCurrent": false,
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents. Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation. Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
       "skills": ["Gravimetric Analysis", "UV-VIS Spectrophotometry", "Xylanase Assay", "Reagent Preparation", "GLP Compliance"],
+      "achievements": [],
+      "companyUrl": "",
       "images": ["/exp-4.jpg", "/exp-5.jpg", "/exp-6.jpg"]
     },
     {
@@ -81,10 +149,15 @@
       "company": "Tropical Biopharmaca Research Center",
       "type": "Internship",
       "period": "Jun 2024 - Aug 2024",
+      "startDate": "2024-06",
+      "endDate": "2024-08",
+      "isCurrent": false,
       "duration": "3 mos",
       "location": "Bogor, West Java, Indonesia",
       "description": "Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry. Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting.",
       "skills": ["FTIR Spectroscopy", "TLC", "Phytochemical Analysis", "Proximate Analysis", "GLP Standards", "UV-VIS Spectrophotometry"],
+      "achievements": [],
+      "companyUrl": "",
       "images": ["/exp-7.jpg", "/exp-8.jpg", "/exp-9.jpg"]
     },
     {
@@ -93,10 +166,16 @@
       "company": "Student Executive Board FMIPA - IPB University",
       "type": "Organizational",
       "period": "Jan 2024 - Dec 2024",
+      "startDate": "2024-01",
+      "endDate": "2024-12",
+      "isCurrent": false,
       "duration": "1 yr",
       "location": "Bogor, West Java, Indonesia",
       "description": "Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems for both programs. Achieved over 20 G-astip customers and successfully engaged 5 students in the Tutor BEM FMIPA. Achieved a profit of Rp8.000.000,- in 10 months of management from an initial capital of Rp400.000,-.",
-      "skills": ["Business Planning", "Partnership", "Profit Management", "Leadership", "Event Management"]
+      "skills": ["Business Planning", "Partnership", "Profit Management", "Leadership", "Event Management"],
+      "achievements": [],
+      "companyUrl": "",
+      "images": []
     },
     {
       "id": "exp-7",
@@ -104,10 +183,16 @@
       "company": "IPB Sustainable Science Research Student Association",
       "type": "Organizational",
       "period": "Apr 2023 - Apr 2024",
+      "startDate": "2023-04",
+      "endDate": "2024-04",
+      "isCurrent": false,
       "duration": "1 yr",
       "location": "Bogor, West Java, Indonesia",
       "description": "Documented meeting minutes and prepared evaluation reports for the Bureau of Administrative Affairs. Monitored and reviewed the budget plan (RKAT) and meeting records under the Directorate of Talent, Partnership, and External Communication.",
-      "skills": ["Administration", "Documentation", "Budget Review", "Meeting Coordination", "Report Writing"]
+      "skills": ["Administration", "Documentation", "Budget Review", "Meeting Coordination", "Report Writing"],
+      "achievements": [],
+      "companyUrl": "",
+      "images": []
     }
   ],
   "skills": [
@@ -136,7 +221,8 @@
       "date": "Jun 16, 2025",
       "type": "journal",
       "abstract": "Rumah Azaki, a social welfare institution in Bogor Regency, faces challenges in facilitating individuals with disabilities to develop self-care skills and social competencies. The Independent Pilot program was designed to address these issues through a horticultural therapy approach, demonstrating up to 80% improvement in planting activities for intellectually disabled participants.",
-      "url": "https://journal.ipb.ac.id/index.php/agrokreatif"
+      "url": "https://journal.ipb.ac.id/index.php/agrokreatif",
+      "tags": []
     }
   ],
   "awards": [
@@ -186,7 +272,10 @@
       "id": "cert-1",
       "title": "7 Habits of Highly Effective People",
       "issuer": "FranklinCovey",
-      "date": "Aug 2022"
+      "date": "Aug 2022",
+      "url": "",
+      "credentialId": "",
+      "description": ""
     }
   ],
   "volunteering": [
@@ -196,7 +285,9 @@
       "organization": "Jaber Zillenial Kota Bogor",
       "period": "May 2023",
       "duration": "1 mo",
-      "category": "Social Services"
+      "category": "Social Services",
+      "description": "",
+      "location": "Bogor, West Java, Indonesia"
     }
   ]
 }

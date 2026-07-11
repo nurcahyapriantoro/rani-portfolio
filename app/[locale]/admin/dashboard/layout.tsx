@@ -10,10 +10,13 @@ import {
   Trophy,
   Mail,
   LogOut,
-  ExternalLink
+  ExternalLink,
+  Award,
+  Heart,
+  FolderKanban,
+  FileText
 } from 'lucide-react';
 import { logoutAction } from '@/lib/actions';
-import { routing } from '@/lib/routing';
 
 export default async function AdminDashboardLayout({
   children,
@@ -28,10 +31,17 @@ export default async function AdminDashboardLayout({
   const sections = [
     { href: `/${locale}/admin/dashboard`, label: 'Overview', icon: LayoutDashboard },
     { href: `/${locale}/admin/dashboard/profile`, label: 'Profile', icon: User },
+    { href: `/${locale}/admin/dashboard/hero`, label: 'Hero', icon: GraduationCap },
+    { href: `/${locale}/admin/dashboard/bio`, label: 'Bio', icon: FileText },
+    { href: `/${locale}/admin/dashboard/education`, label: 'Education', icon: GraduationCap },
     { href: `/${locale}/admin/dashboard/experiences`, label: 'Experiences', icon: Briefcase },
     { href: `/${locale}/admin/dashboard/skills`, label: 'Skills', icon: Wrench },
+    { href: `/${locale}/admin/dashboard/projects`, label: 'Projects', icon: FolderKanban },
     { href: `/${locale}/admin/dashboard/publications`, label: 'Publications', icon: BookOpen },
-    { href: `/${locale}/admin/dashboard/awards`, label: 'Awards', icon: Trophy }
+    { href: `/${locale}/admin/dashboard/awards`, label: 'Awards', icon: Trophy },
+    { href: `/${locale}/admin/dashboard/certifications`, label: 'Certifications', icon: Award },
+    { href: `/${locale}/admin/dashboard/volunteering`, label: 'Volunteering', icon: Heart },
+    { href: `/${locale}/admin/dashboard/footer`, label: 'Footer', icon: FileText }
   ];
 
   return (
@@ -47,7 +57,7 @@ export default async function AdminDashboardLayout({
           </div>
         </Link>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-1 overflow-y-auto">
           {sections.map((section) => (
             <Link
               key={section.href}

@@ -12,38 +12,73 @@ import { Footer } from '@/components/sections/footer';
 import {
   getProfile,
   getStats,
+  getBio,
   getExperiences,
   getSkills,
   getPublications,
-  getAwards
+  getAwards,
+  getEducations,
+  getProjects,
+  getHero,
+  getFooter,
+  getCertifications,
+  getVolunteering,
+  type Locale
 } from '@/lib/content';
-import type { Locale } from '@/lib/content';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [profile, stats, experiences, skills, publications, awards] = await Promise.all([
+  const [
+    profile,
+    stats,
+    bio,
+    experiences,
+    skills,
+    publications,
+    awards,
+    educations,
+    projects,
+    hero,
+    footer,
+    certifications,
+    volunteering
+  ] = await Promise.all([
     getProfile(locale as Locale),
     getStats(locale as Locale),
+    getBio(locale as Locale),
     getExperiences(locale as Locale),
     getSkills(locale as Locale),
     getPublications(locale as Locale),
-    getAwards(locale as Locale)
+    getAwards(locale as Locale),
+    getEducations(locale as Locale),
+    getProjects(locale as Locale),
+    getHero(locale as Locale),
+    getFooter(locale as Locale),
+    getCertifications(locale as Locale),
+    getVolunteering(locale as Locale)
   ]);
+
+  const autoStats = {
+    gpa: stats.gpa,
+    experienceCount: experiences.length,
+    awardsCount: awards.length,
+    publicationsCount: publications.length
+  };
 
   return (
     <>
-      <Hero profile={profile} />
-      <About stats={stats} />
-      <Education />
+      <Hero profile={profile} hero={hero} gpa={stats.gpa} />
+      <About bio={bio} stats={autoStats} />
+      <Education educations={educations} />
       <Experience experiences={experiences} />
       <Skills skills={skills} />
-      <Projects />
+      <Projects projects={projects} certifications={certifications} volunteering={volunteering} />
       <Publications publications={publications} />
       <Awards awards={awards} />
       <Contact profile={profile} />
-      <Footer />
+      <Footer profile={profile} footer={footer} />
     </>
   );
 }

@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
-import { Counter } from '../effects/counter';
 import { GraduationCap, Briefcase, Trophy, BookOpen } from 'lucide-react';
+import { Counter } from '../effects/counter';
+import type { BioInput } from '@/lib/schemas';
 
 interface Stats {
   gpa: string;
@@ -12,8 +12,7 @@ interface Stats {
   publicationsCount: number;
 }
 
-export function About({ stats }: { stats: Stats }) {
-  const t = useTranslations('about');
+export function About({ bio, stats }: { bio: BioInput; stats: Stats }) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -33,10 +32,10 @@ export function About({ stats }: { stats: Stats }) {
   }, []);
 
   const statsItems = [
-    { icon: GraduationCap, value: stats.gpa, label: t('stats.gpa'), suffix: '' },
-    { icon: Briefcase, value: stats.experienceCount, label: t('stats.experience'), suffix: '+' },
-    { icon: Trophy, value: stats.awardsCount, label: t('stats.awards'), suffix: '' },
-    { icon: BookOpen, value: stats.publicationsCount, label: t('stats.publications'), suffix: '' }
+    { icon: GraduationCap, value: stats.gpa, label: 'GPA', suffix: '' },
+    { icon: Briefcase, value: stats.experienceCount, label: 'Experiences', suffix: '+' },
+    { icon: Trophy, value: stats.awardsCount, label: 'Awards', suffix: '' },
+    { icon: BookOpen, value: stats.publicationsCount, label: 'Publications', suffix: '' }
   ];
 
   return (
@@ -44,18 +43,17 @@ export function About({ stats }: { stats: Stats }) {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px w-10 bg-accent" />
-          <span className="text-xs font-mono uppercase tracking-widest text-accent">
-            {t('label')}
-          </span>
+          <span className="text-xs font-mono uppercase tracking-widest text-accent">About</span>
         </div>
 
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 max-w-2xl whitespace-pre-line leading-tight">
-          {t('title')}
+          Crafting Molecules,
+          Building Impact
         </h2>
 
         <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start">
-          <p className="text-sm md:text-base text-text-secondary leading-relaxed">
-            {t('description')}
+          <p className="text-sm md:text-base text-text-secondary leading-relaxed whitespace-pre-line">
+            {bio.long}
           </p>
 
           <div className="grid grid-cols-2 gap-2.5 md:gap-3">
@@ -67,7 +65,7 @@ export function About({ stats }: { stats: Stats }) {
               >
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-accent-soft to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="relative">
-                  <stat.icon className="w-4 h-4 md:w-5 md:h-5 text-accent mb-2" />
+                  <stat.icon className="w-4 h-4 md:w-5 h-5 text-accent mb-2" />
                   <div className="text-xl md:text-2xl lg:text-3xl font-display font-bold gradient-text mb-0.5">
                     {typeof stat.value === 'string' ? (
                       stat.value

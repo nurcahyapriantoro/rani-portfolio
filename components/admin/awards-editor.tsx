@@ -1,92 +1,175 @@
 'use client';
 
-import { useActionState, useState } from 'react';
-import { Plus, Trash2, Save } from 'lucide-react';
+import { Copy, Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { BilingualEditor } from '@/components/admin/bilingual-editor';
+import { DragList } from '@/components/admin/ui/drag-list';
+import { Field } from '@/components/admin/ui/field';
 import { updateAwardsAction } from '@/lib/actions';
+import type { AwardInput } from '@/lib/schemas';
 
-interface Award {
-  id: string;
-  rank: string;
-  title: string;
-  issuer: string;
-  date: string;
-  associatedWith: string;
+export default function AwardsEditor({
+  locale,
+  enAwards,
+  idAwards
+}: {
+  locale: string;
+  enAwards: AwardInput[];
+  idAwards: AwardInput[];
+}) {
+  return (
+    <BilingualEditor<AwardInput[]>
+      title="Manage Awards"
+      description="Honors and recognitions. Drag to reorder."
+      enData={enAwards}
+      idData={idAwards}
+      onSave={async (en, id) => updateAwardsAction(en, id)}
+      renderForm={(list, update, loc) => <AwardsForm list={list} update={update} locale={loc} />}
+    />
+  );
 }
 
-export default function AwardsEditor({ locale, awards }: { locale: string; awards: Award[] }) {
-  const [list, setList] = useState<Award[]>(awards);
-  const [state, formAction, pending] = useActionState(
-    async (_prev: { success?: boolean } | null, fd: FormData) => {
-      const payload = JSON.parse(fd.get('payload') as string);
-      return await updateAwardsAction(locale as 'en' | 'id', payload);
-    },
-    null
-  );
-
-  const update = (i: number, field: keyof Award, value: string) => {
-    setList((prev) => prev.map((item, idx) => (idx === i ? { ...item, [field]: value } : item)));
-  };
-
-  const remove = (i: number) => setList((prev) => prev.filter((_, idx) => idx !== i));
-
+function AwardsForm({
+  list,
+  update,
+  locale
+}: {
+  list: AwardInput[];
+  update: (updater: (prev: AwardInput[]) => AwardInput[]) => void;
+  locale: 'en' | 'id';
+}) {
   const add = () =>
-    setList((prev) => [
+    update((prev) => [
       ...prev,
-      { id: `award-${Date.now()}`, rank: '', title: '', issuer: '', date: '', associatedWith: '' }
+      {
+        id: `award-${Date.now()}`,
+        rank: '',
+        title: '',
+        issuer: '',
+        date: '',
+        associatedWith: ''
+      }
     ]);
 
+  const duplicate = (i: number) =>
+    update((prev) => {
+      const copy = { ...prev[i], id: `award-${Date.now()}` };
+      const next = [...prev];
+      next.splice(i + 1, 0, copy);
+      return next;
+    });
+
+  const remove = (i: number) => update((prev) => prev.filter((_, idx) => idx !== i));
+
+  const patch = (i: number, p: Partial<AwardInput>) =>
+    update((prev) => prev.map((it, idx) => (idx === i ? { ...it, ...p } : it)));
+
   return (
-    <form action={formAction} className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-display text-3xl font-bold mb-2">Manage Awards</h1>
-          <p className="text-text-muted text-sm">Honors and recognitions</p>
-        </div>
-        <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass hover:scale-105 transition-all">
-          <Plus className="w-4 h-4" /> Add
+        <p className="text-xs text-text-muted">
+          {list.length} {list.length === 1 ? 'award' : 'awards'} ·{' '}
+          <span className="uppercase tracking-wider">{locale}</span>
+        </p>
+        <button
+          type="button"
+          onClick={add}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass text-xs hover:scale-105 transition-all"
+        >
+          <Plus className="w-3.5 h-3.5" /> Add Award
         </button>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {list.map((award, i) => (
-          <div key={award.id} className="p-6 rounded-2xl glass space-y-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-text-muted">Award #{i + 1}</span>
-              <button type="button" onClick={() => remove(i)} className="text-red-500 hover:bg-red-500/10 p-2 rounded-lg transition-colors" aria-label="Remove">
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-
-            <Input label="Rank" value={award.rank} onChange={(v) => update(i, 'rank', v)} placeholder="1st Place / Finalist / etc" />
-            <Input label="Title" value={award.title} onChange={(v) => update(i, 'title', v)} />
-            <Input label="Issuer" value={award.issuer} onChange={(v) => update(i, 'issuer', v)} />
-            <Input label="Date" value={award.date} onChange={(v) => update(i, 'date', v)} />
-            <Input label="Associated With" value={award.associatedWith} onChange={(v) => update(i, 'associatedWith', v)} />
-          </div>
-        ))}
-      </div>
-
-      <input type="hidden" name="payload" value={JSON.stringify(list)} />
-
-      {state?.success && (
-        <div className="px-4 py-3 rounded-xl bg-accent-soft border border-accent text-accent text-sm">
-          ✓ Awards saved successfully
+      {list.length === 0 ? (
+        <div className="text-center py-12 text-text-muted text-sm glass rounded-2xl">
+          No awards yet.
         </div>
+      ) : (
+        <DragList
+          items={list}
+          onChange={(next) => update(() => next)}
+          renderItem={(award, i, handle) => (
+            <AwardCard
+              key={award.id}
+              award={award}
+              index={i}
+              handle={handle}
+              onPatch={(p) => patch(i, p)}
+              onDuplicate={() => duplicate(i)}
+              onRemove={() => remove(i)}
+            />
+          )}
+        />
       )}
-
-      <button type="submit" disabled={pending} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-bg-primary font-semibold hover:bg-accent-hover transition-all disabled:opacity-50">
-        <Save className="w-4 h-4" />
-        {pending ? 'Saving...' : 'Save All'}
-      </button>
-    </form>
+    </div>
   );
 }
 
-function Input({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
+function AwardCard({
+  award,
+  index,
+  handle,
+  onPatch,
+  onDuplicate,
+  onRemove
+}: {
+  award: AwardInput;
+  index: number;
+  handle: React.ReactNode;
+  onPatch: (p: Partial<AwardInput>) => void;
+  onDuplicate: () => void;
+  onRemove: () => void;
+}) {
+  const [open, setOpen] = useState(true);
   return (
-    <div>
-      <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">{label}</label>
-      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all" />
+    <div className="p-5 rounded-2xl glass border border-border">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center">
+          {handle}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="text-xs font-mono uppercase tracking-widest text-text-muted hover:text-accent"
+          >
+            {open ? '▾' : '▸'} Award #{index + 1}
+            {award.title && <span className="ml-2 normal-case tracking-normal">· {award.title}</span>}
+          </button>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onDuplicate}
+            className="p-1.5 rounded-lg text-text-muted hover:bg-bg-tertiary hover:text-accent"
+            aria-label="Duplicate"
+            title="Duplicate"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={onRemove}
+            className="p-1.5 rounded-lg text-red-500 hover:bg-red-500/10"
+            aria-label="Remove"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="space-y-3">
+          <Field
+            label="Rank"
+            value={award.rank}
+            onChange={(v) => onPatch({ rank: v })}
+            placeholder="1st Place / Finalist / etc"
+          />
+          <Field label="Title" value={award.title} onChange={(v) => onPatch({ title: v })} />
+          <Field label="Issuer" value={award.issuer} onChange={(v) => onPatch({ issuer: v })} />
+          <Field label="Date" value={award.date} onChange={(v) => onPatch({ date: v })} placeholder="2025" />
+          <Field label="Associated With" value={award.associatedWith} onChange={(v) => onPatch({ associatedWith: v })} />
+        </div>
+      )}
     </div>
   );
 }

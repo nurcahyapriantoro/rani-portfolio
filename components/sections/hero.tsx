@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
 import { ArrowDown, Mail, Download, Sparkles, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { DNASceneClient } from '../three/dna-scene-client';
+import type { ProfileInput, HeroInput } from '@/lib/schemas';
 
 interface HeroProfile {
   fullName: string;
@@ -16,8 +16,7 @@ interface HeroProfile {
   cvUrl: string;
 }
 
-export function Hero({ profile }: { profile: HeroProfile }) {
-  const t = useTranslations('hero');
+export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: HeroInput; gpa?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ export function Hero({ profile }: { profile: HeroProfile }) {
   }, []);
 
   const nameChars = profile.fullName.split('');
+  const greeting = hero?.greeting || "Hello, I'm";
+  const scrollLabel = hero?.scrollLabel || 'Scroll to explore';
 
   return (
     <section
@@ -79,15 +80,17 @@ export function Hero({ profile }: { profile: HeroProfile }) {
                   </div>
                 )}
               </div>
-              <div className="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-accent text-bg-primary text-[10px] font-bold shadow-lg">
-                3.77 GPA
-              </div>
+              {gpa && (
+                <div className="absolute -bottom-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-accent text-bg-primary text-[10px] font-bold shadow-lg">
+                  {gpa} GPA
+                </div>
+              )}
             </div>
 
             <div className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass mb-4 animate-fade-up opacity-0 text-xs" style={{ animationFillMode: 'forwards' }}>
                 <Sparkles className="w-3 h-3 text-accent" />
-                <span className="font-medium">{t('greeting')}</span>
+                <span className="font-medium">{greeting}</span>
               </div>
 
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-[1.05] tracking-tight">
@@ -128,7 +131,7 @@ export function Hero({ profile }: { profile: HeroProfile }) {
                   style={{ boxShadow: 'var(--shadow)' }}
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  {t('cta_contact')}
+                  Get in touch
                 </a>
                 <a
                   href={profile.cvUrl}
@@ -136,7 +139,7 @@ export function Hero({ profile }: { profile: HeroProfile }) {
                   className="group inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl glass text-sm font-semibold hover:scale-105 transition-all shine"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  {t('cta_cv')}
+                  Download CV
                 </a>
               </div>
             </div>
@@ -147,7 +150,7 @@ export function Hero({ profile }: { profile: HeroProfile }) {
           href="#about"
           className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-text-muted hover:text-accent transition-colors animate-float"
         >
-          <span className="text-[10px] uppercase tracking-widest">{t('scroll')}</span>
+          <span className="text-[10px] uppercase tracking-widest">{scrollLabel}</span>
           <ArrowDown className="w-3.5 h-3.5" />
         </a>
       </div>

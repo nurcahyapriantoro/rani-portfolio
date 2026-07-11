@@ -1,7 +1,18 @@
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '@/lib/navigation';
-import { User, Briefcase, Wrench, BookOpen, Trophy, GraduationCap } from 'lucide-react';
-import { readContent } from '@/lib/content';
+import {
+  User,
+  Briefcase,
+  Wrench,
+  BookOpen,
+  Trophy,
+  GraduationCap,
+  Award,
+  Heart,
+  FolderKanban,
+  FileText
+} from 'lucide-react';
+import { readContent } from '@/lib/content-store';
 
 export default async function AdminOverviewPage({
   params
@@ -11,21 +22,32 @@ export default async function AdminOverviewPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const content = await readContent(locale as 'en' | 'id');
+  const content = (await readContent(locale as 'en' | 'id')) as Record<string, unknown>;
+  const arr = (key: string): unknown[] =>
+    Array.isArray(content[key]) ? (content[key] as unknown[]) : [];
 
   const stats = [
-    { label: 'Experiences', value: content.experiences.length, icon: Briefcase, color: 'text-blue-500' },
-    { label: 'Skills', value: content.skills.length, icon: Wrench, color: 'text-purple-500' },
-    { label: 'Publications', value: content.publications.length, icon: BookOpen, color: 'text-pink-500' },
-    { label: 'Awards', value: content.awards.length, icon: Trophy, color: 'text-yellow-500' }
+    { label: 'Experiences', value: arr('experiences').length, icon: Briefcase, color: 'text-blue-500' },
+    { label: 'Skills', value: arr('skills').length, icon: Wrench, color: 'text-purple-500' },
+    { label: 'Publications', value: arr('publications').length, icon: BookOpen, color: 'text-pink-500' },
+    { label: 'Awards', value: arr('awards').length, icon: Trophy, color: 'text-yellow-500' },
+    { label: 'Certifications', value: arr('certifications').length, icon: Award, color: 'text-emerald-500' },
+    { label: 'Volunteering', value: arr('volunteering').length, icon: Heart, color: 'text-rose-500' }
   ];
 
   const quickLinks = [
     { href: `/${locale}/admin/dashboard/profile`, label: 'Edit Profile', icon: User },
+    { href: `/${locale}/admin/dashboard/hero`, label: 'Edit Hero', icon: GraduationCap },
+    { href: `/${locale}/admin/dashboard/bio`, label: 'Edit Bio', icon: FileText },
+    { href: `/${locale}/admin/dashboard/education`, label: 'Manage Education', icon: GraduationCap },
     { href: `/${locale}/admin/dashboard/experiences`, label: 'Manage Experiences', icon: Briefcase },
     { href: `/${locale}/admin/dashboard/skills`, label: 'Manage Skills', icon: Wrench },
+    { href: `/${locale}/admin/dashboard/projects`, label: 'Manage Projects', icon: FolderKanban },
     { href: `/${locale}/admin/dashboard/publications`, label: 'Manage Publications', icon: BookOpen },
-    { href: `/${locale}/admin/dashboard/awards`, label: 'Manage Awards', icon: Trophy }
+    { href: `/${locale}/admin/dashboard/awards`, label: 'Manage Awards', icon: Trophy },
+    { href: `/${locale}/admin/dashboard/certifications`, label: 'Manage Certifications', icon: Award },
+    { href: `/${locale}/admin/dashboard/volunteering`, label: 'Manage Volunteering', icon: Heart },
+    { href: `/${locale}/admin/dashboard/footer`, label: 'Edit Footer', icon: FileText }
   ];
 
   return (
@@ -36,7 +58,7 @@ export default async function AdminOverviewPage({
         <code className="px-2 py-1 rounded bg-bg-tertiary text-xs">content/{locale}.json</code>
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
         {stats.map((stat) => (
           <div key={stat.label} className="p-6 rounded-2xl glass">
             <stat.icon className={`w-5 h-5 ${stat.color} mb-3`} />

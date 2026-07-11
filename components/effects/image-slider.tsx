@@ -8,9 +8,17 @@ import { cn } from '@/lib/utils';
 interface ImageSliderProps {
   images: string[];
   alt: string;
+  maxWidth?: 'xs' | 'sm' | 'md' | 'full';
 }
 
-export function ImageSlider({ images, alt }: ImageSliderProps) {
+const MAX_WIDTH_CLASS: Record<NonNullable<ImageSliderProps['maxWidth']>, string> = {
+  xs: 'max-w-xs',
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  full: ''
+};
+
+export function ImageSlider({ images, alt, maxWidth = 'full' }: ImageSliderProps) {
   const [index, setIndex] = useState(0);
 
   if (!images || images.length === 0) return null;
@@ -19,7 +27,7 @@ export function ImageSlider({ images, alt }: ImageSliderProps) {
   const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
 
   return (
-    <div className="relative mt-3 rounded-xl overflow-hidden bg-bg-tertiary group/slider">
+    <div className={cn('relative mt-3 rounded-xl overflow-hidden bg-bg-tertiary group/slider mx-auto', MAX_WIDTH_CLASS[maxWidth])}>
       <div className="relative aspect-[4/3] sm:aspect-video w-full">
         <Image
           src={images[index]}

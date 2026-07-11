@@ -1,57 +1,84 @@
-import fs from 'fs/promises';
-import path from 'path';
+import 'server-only';
+import { readContent, type Locale } from './content-store';
+import type {
+  ProfileInput,
+  StatsInput,
+  BioInput,
+  ExperienceInput,
+  SkillInput,
+  PublicationInput,
+  AwardInput,
+  EducationInput,
+  ProjectInput,
+  CertificationInput,
+  VolunteeringInput,
+  HeroInput,
+  FooterInput
+} from './schemas';
 
-export type Locale = 'en' | 'id';
+export type { Locale };
 
-const CONTENT_DIR = path.join(process.cwd(), 'content');
-
-export async function readContent(locale: Locale) {
-  const filePath = path.join(CONTENT_DIR, `${locale}.json`);
-  const raw = await fs.readFile(filePath, 'utf-8');
-  return JSON.parse(raw);
-}
-
-export async function writeContent(locale: Locale, data: unknown) {
-  const filePath = path.join(CONTENT_DIR, `${locale}.json`);
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
-}
-
-export async function getProfile(locale: Locale) {
+export async function getProfile(locale: Locale): Promise<ProfileInput> {
   const data = await readContent(locale);
-  return data.profile;
+  return data.profile as ProfileInput;
 }
 
-export async function getStats(locale: Locale) {
+export async function getStats(locale: Locale): Promise<StatsInput> {
   const data = await readContent(locale);
-  return data.stats;
+  return data.stats as StatsInput;
 }
 
-export async function getExperiences(locale: Locale) {
+export async function getBio(locale: Locale): Promise<BioInput> {
   const data = await readContent(locale);
-  return data.experiences;
+  return (data.bio as BioInput) ?? { short: '', long: '' };
 }
 
-export async function getSkills(locale: Locale) {
+export async function getExperiences(locale: Locale): Promise<ExperienceInput[]> {
   const data = await readContent(locale);
-  return data.skills;
+  return (data.experiences as ExperienceInput[]) ?? [];
 }
 
-export async function getPublications(locale: Locale) {
+export async function getSkills(locale: Locale): Promise<SkillInput[]> {
   const data = await readContent(locale);
-  return data.publications;
+  return (data.skills as SkillInput[]) ?? [];
 }
 
-export async function getAwards(locale: Locale) {
+export async function getPublications(locale: Locale): Promise<PublicationInput[]> {
   const data = await readContent(locale);
-  return data.awards;
+  return (data.publications as PublicationInput[]) ?? [];
 }
 
-export async function getCertifications(locale: Locale) {
+export async function getAwards(locale: Locale): Promise<AwardInput[]> {
   const data = await readContent(locale);
-  return data.certifications;
+  return (data.awards as AwardInput[]) ?? [];
 }
 
-export async function getVolunteering(locale: Locale) {
+export async function getCertifications(locale: Locale): Promise<CertificationInput[]> {
   const data = await readContent(locale);
-  return data.volunteering;
+  return (data.certifications as CertificationInput[]) ?? [];
+}
+
+export async function getVolunteering(locale: Locale): Promise<VolunteeringInput[]> {
+  const data = await readContent(locale);
+  return (data.volunteering as VolunteeringInput[]) ?? [];
+}
+
+export async function getEducations(locale: Locale): Promise<EducationInput[]> {
+  const data = await readContent(locale);
+  return (data.education as EducationInput[]) ?? [];
+}
+
+export async function getProjects(locale: Locale): Promise<ProjectInput[]> {
+  const data = await readContent(locale);
+  return (data.projects as ProjectInput[]) ?? [];
+}
+
+export async function getHero(locale: Locale): Promise<HeroInput> {
+  const data = await readContent(locale);
+  return (data.hero as HeroInput) ?? { greeting: '', scrollLabel: '' };
+}
+
+export async function getFooter(locale: Locale): Promise<FooterInput> {
+  const data = await readContent(locale);
+  return (data.footer as FooterInput) ?? { copyright: '', tagline: '', builtWith: '', socials: [] };
 }

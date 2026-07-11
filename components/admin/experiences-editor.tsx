@@ -1,41 +1,50 @@
 'use client';
 
-import { useActionState, useState } from 'react';
-import { Plus, Trash2, Save } from 'lucide-react';
+import { useState } from 'react';
+import { Copy, Plus, Trash2 } from 'lucide-react';
+import { BilingualEditor } from '@/components/admin/bilingual-editor';
+import { DragList } from '@/components/admin/ui/drag-list';
+import { Field } from '@/components/admin/ui/field';
+import { TextArea } from '@/components/admin/ui/textarea';
+import { TagInput } from '@/components/admin/ui/tag-input';
+import { ImageListPicker } from '@/components/admin/ui/image-list-picker';
 import { updateExperiencesAction } from '@/lib/actions';
+import type { ExperienceInput } from '@/lib/schemas';
 
-interface Experience {
-  id: string;
-  role: string;
-  company: string;
-  type: string;
-  period: string;
-  duration: string;
-  location: string;
-  description: string;
-  skills: string[];
+export default function ExperiencesEditor({
+  locale,
+  enExperiences,
+  idExperiences
+}: {
+  locale: string;
+  enExperiences: ExperienceInput[];
+  idExperiences: ExperienceInput[];
+}) {
+  return (
+    <BilingualEditor<ExperienceInput[]>
+      title="Manage Experiences"
+      description="Add, edit, reorder, or remove work experiences. Drag handles or arrow buttons to reorder."
+      enData={enExperiences}
+      idData={idExperiences}
+      onSave={async (en, id) => updateExperiencesAction(en, id)}
+      renderForm={(list, update, loc) => (
+        <ExperiencesForm list={list} update={update} locale={loc} />
+      )}
+    />
+  );
 }
 
-export default function ExperiencesEditor({ locale, experiences }: { locale: string; experiences: Experience[] }) {
-  const [list, setList] = useState<Experience[]>(experiences);
-  const [state, formAction, pending] = useActionState(
-    async (_prev: { success?: boolean } | null, fd: FormData) => {
-      const payload = JSON.parse(fd.get('payload') as string);
-      return await updateExperiencesAction(locale as 'en' | 'id', payload);
-    },
-    null
-  );
-
-  const update = (i: number, field: keyof Experience, value: unknown) => {
-    setList((prev) => prev.map((item, idx) => (idx === i ? { ...item, [field]: value } : item)));
-  };
-
-  const remove = (i: number) => {
-    setList((prev) => prev.filter((_, idx) => idx !== i));
-  };
-
+function ExperiencesForm({
+  list,
+  update,
+  locale
+}: {
+  list: ExperienceInput[];
+  update: (updater: (prev: ExperienceInput[]) => ExperienceInput[]) => void;
+  locale: 'en' | 'id';
+}) {
   const add = () => {
-    setList((prev) => [
+    update((prev) => [
       ...prev,
       {
         id: `exp-${Date.now()}`,
@@ -43,123 +52,231 @@ export default function ExperiencesEditor({ locale, experiences }: { locale: str
         company: '',
         type: '',
         period: '',
+        startDate: '',
+        endDate: '',
+        isCurrent: false,
         duration: '',
         location: '',
         description: '',
-        skills: []
+        skills: [],
+        achievements: [],
+        companyUrl: '',
+        images: []
       }
     ]);
   };
 
+  const duplicate = (i: number) => {
+    update((prev) => {
+      const copy = { ...prev[i], id: `exp-${Date.now()}` };
+      const next = [...prev];
+      next.splice(i + 1, 0, copy);
+      return next;
+    });
+  };
+
+  const remove = (i: number) => update((prev) => prev.filter((_, idx) => idx !== i));
+
+  const patch = (i: number, patchObj: Partial<ExperienceInput>) =>
+    update((prev) => prev.map((it, idx) => (idx === i ? { ...it, ...patchObj } : it)));
+
   return (
-    <form action={formAction} className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-display text-3xl font-bold mb-2">Manage Experiences</h1>
-          <p className="text-text-muted text-sm">Add, edit, or remove work experiences</p>
-        </div>
+        <p className="text-xs text-text-muted">
+          {list.length} {list.length === 1 ? 'experience' : 'experiences'} ·{' '}
+          <span className="uppercase tracking-wider">{locale}</span>
+        </p>
         <button
           type="button"
           onClick={add}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass hover:scale-105 transition-all"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass text-xs hover:scale-105 transition-all"
         >
-          <Plus className="w-4 h-4" />
-          Add
+          <Plus className="w-3.5 h-3.5" /> Add Experience
         </button>
       </div>
 
-      <div className="space-y-4">
-        {list.map((exp, i) => (
-          <div key={exp.id} className="p-6 rounded-2xl glass space-y-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-text-muted">
-                Experience #{i + 1}
-              </span>
-              <button
-                type="button"
-                onClick={() => remove(i)}
-                className="text-red-500 hover:bg-red-500/10 p-2 rounded-lg transition-colors"
-                aria-label="Remove"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-3">
-              <Input label="Role" value={exp.role} onChange={(v) => update(i, 'role', v)} />
-              <Input label="Company" value={exp.company} onChange={(v) => update(i, 'company', v)} />
-              <Input label="Type" value={exp.type} onChange={(v) => update(i, 'type', v)} placeholder="Contract / Internship / etc" />
-              <Input label="Period" value={exp.period} onChange={(v) => update(i, 'period', v)} placeholder="Jan 2024 - Dec 2024" />
-              <Input label="Duration" value={exp.duration} onChange={(v) => update(i, 'duration', v)} placeholder="1 yr" />
-              <Input label="Location" value={exp.location} onChange={(v) => update(i, 'location', v)} />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">Description</label>
-              <textarea
-                value={exp.description}
-                onChange={(e) => update(i, 'description', e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all resize-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-                Skills (comma-separated)
-              </label>
-              <input
-                type="text"
-                value={exp.skills.join(', ')}
-                onChange={(e) => update(i, 'skills', e.target.value.split(',').map((s) => s.trim()).filter(Boolean))}
-                className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <input type="hidden" name="payload" value={JSON.stringify(list)} />
-
-      {state?.success && (
-        <div className="px-4 py-3 rounded-xl bg-accent-soft border border-accent text-accent text-sm">
-          ✓ Experiences saved successfully
+      {list.length === 0 ? (
+        <div className="text-center py-12 text-text-muted text-sm glass rounded-2xl">
+          No experiences yet. Click "Add Experience" to get started.
         </div>
+      ) : (
+        <DragList
+          items={list}
+          onChange={(next) => update(() => next)}
+          renderItem={(exp, i, handle) => (
+            <ExperienceCard
+              key={exp.id}
+              exp={exp}
+              index={i}
+              handle={handle}
+              onPatch={(p) => patch(i, p)}
+              onDuplicate={() => duplicate(i)}
+              onRemove={() => remove(i)}
+            />
+          )}
+        />
       )}
-
-      <button
-        type="submit"
-        disabled={pending}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-bg-primary font-semibold hover:bg-accent-hover transition-all disabled:opacity-50"
-      >
-        <Save className="w-4 h-4" />
-        {pending ? 'Saving...' : 'Save All'}
-      </button>
-    </form>
+    </div>
   );
 }
 
-function Input({
-  label,
-  value,
-  onChange,
-  placeholder
+function ExperienceCard({
+  exp,
+  index,
+  handle,
+  onPatch,
+  onDuplicate,
+  onRemove
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
+  exp: ExperienceInput;
+  index: number;
+  handle: React.ReactNode;
+  onPatch: (p: Partial<ExperienceInput>) => void;
+  onDuplicate: () => void;
+  onRemove: () => void;
 }) {
+  const [open, setOpen] = useState(true);
   return (
-    <div>
-      <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">{label}</label>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-4 py-2.5 rounded-xl bg-bg-tertiary border border-border focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft transition-all"
-      />
+    <div className="p-5 rounded-2xl glass border border-border">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center">
+          {handle}
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="text-xs font-mono uppercase tracking-widest text-text-muted hover:text-accent"
+          >
+            {open ? '▾' : '▸'} Experience #{index + 1}
+            {exp.role && <span className="ml-2 normal-case tracking-normal">· {exp.role}</span>}
+          </button>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onDuplicate}
+            className="p-1.5 rounded-lg text-text-muted hover:bg-bg-tertiary hover:text-accent transition-colors"
+            aria-label="Duplicate"
+            title="Duplicate"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={onRemove}
+            className="p-1.5 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors"
+            aria-label="Remove"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-3">
+            <Field
+              label="Role"
+              value={exp.role}
+              onChange={(v) => onPatch({ role: v })}
+              required
+              fullWidth
+            />
+            <Field
+              label="Company"
+              value={exp.company}
+              onChange={(v) => onPatch({ company: v })}
+              required
+            />
+            <Field
+              label="Company URL (optional)"
+              value={exp.companyUrl ?? ''}
+              onChange={(v) => onPatch({ companyUrl: v })}
+              type="url"
+              placeholder="https://..."
+            />
+            <Field
+              label="Type"
+              value={exp.type}
+              onChange={(v) => onPatch({ type: v })}
+              placeholder="Contract / Internship / etc"
+            />
+            <Field
+              label="Period (display)"
+              value={exp.period}
+              onChange={(v) => onPatch({ period: v })}
+              placeholder="Jan 2024 - Dec 2024"
+            />
+            <Field
+              label="Duration"
+              value={exp.duration}
+              onChange={(v) => onPatch({ duration: v })}
+              placeholder="1 yr"
+            />
+            <Field
+              label="Start Date"
+              value={exp.startDate ?? ''}
+              onChange={(v) => onPatch({ startDate: v })}
+              type="month"
+            />
+            <Field
+              label="End Date"
+              value={exp.isCurrent ? '' : (exp.endDate ?? '')}
+              onChange={(v) => onPatch({ endDate: v })}
+              type="month"
+              hint={exp.isCurrent ? 'Disabled: currently ongoing' : ''}
+            />
+            <Field
+              label="Location"
+              value={exp.location}
+              onChange={(v) => onPatch({ location: v })}
+              fullWidth
+            />
+          </div>
+
+          <label className="flex items-center gap-2 text-sm cursor-pointer">
+            <input
+              type="checkbox"
+              checked={exp.isCurrent}
+              onChange={(e) => onPatch({ isCurrent: e.target.checked })}
+              className="w-4 h-4 accent-accent"
+            />
+            <span>I currently work here</span>
+          </label>
+
+          <TextArea
+            label="Description"
+            value={exp.description}
+            onChange={(v) => onPatch({ description: v })}
+            rows={3}
+            fullWidth
+          />
+
+          <TagInput
+            label="Skills (press Enter to add)"
+            values={exp.skills}
+            onChange={(v) => onPatch({ skills: v })}
+            fullWidth
+          />
+
+          <TagInput
+            label="Achievements / Highlights (press Enter to add)"
+            values={exp.achievements ?? []}
+            onChange={(v) => onPatch({ achievements: v })}
+            placeholder="e.g. Increased lab efficiency by 30%"
+            fullWidth
+            hint="These appear as bullet points under the description"
+          />
+
+          <ImageListPicker
+            label="Images"
+            values={exp.images ?? []}
+            onChange={(v) => onPatch({ images: v })}
+            section="experiences"
+            hint="Upload images or paste URLs. Drag to reorder."
+          />
+        </div>
+      )}
     </div>
   );
 }

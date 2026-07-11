@@ -2,8 +2,27 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { readContent, writeContent, type Locale } from '@/lib/content';
+import {
+  updateSection,
+  updateBilingualSection,
+  type Locale
+} from '@/lib/content-store';
 import { setSessionCookie, clearSessionCookie, getStoredPasswordHash, verifyPassword } from '@/lib/auth';
+import {
+  profileSchema,
+  statsSchema,
+  bioSchema,
+  experiencesSchema,
+  skillsSchema,
+  publicationsSchema,
+  awardsSchema,
+  educationsSchema,
+  projectsSchema,
+  certificationsSchema,
+  volunteeringsSchema,
+  heroSchema,
+  footerSchema
+} from '@/lib/schemas';
 
 export async function loginAction(formData: FormData) {
   const password = formData.get('password') as string;
@@ -28,50 +47,115 @@ export async function logoutAction() {
   redirect('/en/admin/login');
 }
 
-export async function updateProfileAction(locale: Locale, data: unknown) {
-  const content = await readContent(locale);
-  content.profile = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+function revalidateAll() {
+  revalidatePath('/', 'layout');
+  revalidatePath('/en', 'page');
+  revalidatePath('/id', 'page');
+  revalidatePath('/[locale]', 'page');
 }
 
-export async function updateStatsAction(locale: Locale, data: unknown) {
-  const content = await readContent(locale);
-  content.stats = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+export async function updateProfileAction(enData: unknown, idData: unknown) {
+  const en = profileSchema.parse(enData);
+  const id = profileSchema.parse(idData);
+  await updateBilingualSection(en, id, 'profile');
+  revalidateAll();
+  return { success: true as const };
 }
 
-export async function updateExperiencesAction(locale: Locale, data: unknown[]) {
-  const content = await readContent(locale);
-  content.experiences = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+export async function updateStatsAction(data: unknown) {
+  const parsed = statsSchema.parse(data);
+  await updateSection('en', 'stats', parsed);
+  await updateSection('id', 'stats', parsed);
+  revalidateAll();
+  return { success: true as const };
 }
 
-export async function updateSkillsAction(locale: Locale, data: unknown[]) {
-  const content = await readContent(locale);
-  content.skills = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+export async function updateBioAction(enData: unknown, idData: unknown) {
+  const en = bioSchema.parse(enData);
+  const id = bioSchema.parse(idData);
+  await updateBilingualSection(en, id, 'bio');
+  revalidateAll();
+  return { success: true as const };
 }
 
-export async function updatePublicationsAction(locale: Locale, data: unknown[]) {
-  const content = await readContent(locale);
-  content.publications = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+export async function updateExperiencesAction(enData: unknown, idData: unknown) {
+  const en = experiencesSchema.parse(enData);
+  const id = experiencesSchema.parse(idData);
+  await updateBilingualSection(en, id, 'experiences');
+  revalidateAll();
+  return { success: true as const };
 }
 
-export async function updateAwardsAction(locale: Locale, data: unknown[]) {
-  const content = await readContent(locale);
-  content.awards = data;
-  await writeContent(locale, content);
-  revalidatePath(`/${locale}`);
-  return { success: true };
+export async function updateSkillsAction(enData: unknown, idData: unknown) {
+  const en = skillsSchema.parse(enData);
+  const id = skillsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'skills');
+  revalidateAll();
+  return { success: true as const };
 }
+
+export async function updatePublicationsAction(enData: unknown, idData: unknown) {
+  const en = publicationsSchema.parse(enData);
+  const id = publicationsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'publications');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateAwardsAction(enData: unknown, idData: unknown) {
+  const en = awardsSchema.parse(enData);
+  const id = awardsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'awards');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateEducationsAction(enData: unknown, idData: unknown) {
+  const en = educationsSchema.parse(enData);
+  const id = educationsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'education');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateProjectsAction(enData: unknown, idData: unknown) {
+  const en = projectsSchema.parse(enData);
+  const id = projectsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'projects');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateCertificationsAction(enData: unknown, idData: unknown) {
+  const en = certificationsSchema.parse(enData);
+  const id = certificationsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'certifications');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateVolunteeringAction(enData: unknown, idData: unknown) {
+  const en = volunteeringsSchema.parse(enData);
+  const id = volunteeringsSchema.parse(idData);
+  await updateBilingualSection(en, id, 'volunteering');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateHeroAction(enData: unknown, idData: unknown) {
+  const en = heroSchema.parse(enData);
+  const id = heroSchema.parse(idData);
+  await updateBilingualSection(en, id, 'hero');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export async function updateFooterAction(enData: unknown, idData: unknown) {
+  const en = footerSchema.parse(enData);
+  const id = footerSchema.parse(idData);
+  await updateBilingualSection(en, id, 'footer');
+  revalidateAll();
+  return { success: true as const };
+}
+
+export { };

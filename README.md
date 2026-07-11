@@ -32,15 +32,28 @@ Built with **Next.js 16** (App Router), **Three.js**, **GSAP**, **Lenis**, **Swi
 
 ### Admin Panel (`/admin`)
 - 🔒 **Password-protected** — bcrypt + httpOnly cookie
-- 📊 **Dashboard** — Overview with stats
+- 📊 **Dashboard** — Overview with stats for every section
+- 🌐 **Bilingual Editing** — Tab EN/ID inside every editor; save once writes both locales
+- 🧱 **Drag-to-Reorder** — Built with `@dnd-kit`, with ↑↓ fallback and keyboard support
+- 🖼️ **Image Upload** — Direct upload to `public/uploads/<section>/` via `/api/upload` (or paste URL)
+- ✅ **Zod Validation** — Server-side schema validation on every write
+- 💾 **Atomic Writes** — Temp-file + rename to prevent corruption
+- ↩️ **Bilingual Rollback** — If one locale write fails, the other is restored
 - ✏️ **CRUD Editors** for:
-  - Profile (name, contacts, social links)
-  - Experiences (add/edit/delete/reorder)
-  - Skills (with category & level)
-  - Publications (with abstract)
-  - Awards (with rank & issuer)
+  - Profile (name, contacts, photo upload, social links)
+  - Hero (greeting, scroll label)
+  - Bio (short + long description)
+  - Education (array of schools w/ achievements + GPA)
+  - Experiences (start/end dates, achievements, isCurrent badge, company URL, images)
+  - Skills (drag-reorder, category, level)
+  - Projects (array w/ image, impact, team, tags, URL)
+  - Publications (drag-reorder, authors as tags, abstract)
+  - Awards (drag-reorder, rank, issuer)
+  - Certifications (drag-reorder, URL, credential ID)
+  - Volunteering (drag-reorder, period, category)
+  - Footer (copyright, tagline, socials)
+- 🔄 **Auto-Revalidate** — Changes appear immediately on the landing page
 - 💾 **JSON File Backend** — Server Actions write directly to `content/{locale}.json`
-- 🔄 **Auto Revalidate** — Changes appear immediately on landing page
 
 ---
 
@@ -105,7 +118,9 @@ After deploy, in Vercel dashboard → **Settings** → **Domains** → Add your 
 | Card Tilt | Vanilla-tilt.js |
 | Icons | Lucide React |
 | Auth | bcryptjs + httpOnly cookies |
-| Backend | Server Actions + JSON file storage |
+| Drag-to-Reorder | @dnd-kit/core, @dnd-kit/sortable |
+| Validation | Zod |
+| Backend | Server Actions + JSON file storage (atomic) |
 
 ---
 
@@ -121,10 +136,18 @@ rani-portfolio/
 │   │       ├── login/
 │   │       └── dashboard/
 │   │           ├── profile/
+│   │           ├── hero/
+│   │           ├── bio/
+│   │           ├── education/
 │   │           ├── experiences/
 │   │           ├── skills/
+│   │           ├── projects/
 │   │           ├── publications/
-│   │           └── awards/
+│   │           ├── awards/
+│   │           ├── certifications/
+│   │           ├── volunteering/
+│   │           └── footer/
+│   ├── api/upload/route.ts       # Image upload endpoint
 │   ├── globals.css             # Tailwind + theme variables
 ├── components/
 │   ├── sections/               # All landing page sections
@@ -141,9 +164,12 @@ rani-portfolio/
 ├── lib/
 │   ├── routing.ts              # next-intl routing config
 │   ├── navigation.ts           # Localized Link, useRouter, etc
-│   ├── content.ts              # JSON read/write helpers
+│   ├── content-store.ts        # Generic JSON read/write + atomic writes + cache
+│   ├── content.ts              # Typed section getters
+│   ├── schemas.ts              # Zod schemas for every section
+│   ├── upload.ts               # Image upload helper
 │   ├── auth.ts                 # bcrypt + cookie helpers
-│   ├── actions.ts              # Server Actions
+│   ├── actions.ts              # Server Actions (Zod-validated, bilingual)
 │   └── utils.ts
 ├── proxy.ts                    # i18n + admin auth middleware
 ├── i18n.ts                     # next-intl config
