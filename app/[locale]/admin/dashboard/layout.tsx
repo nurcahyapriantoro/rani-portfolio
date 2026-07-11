@@ -19,29 +19,24 @@ import {
 import { logoutAction } from '@/lib/actions';
 
 export default async function AdminDashboardLayout({
-  children,
-  params
+  children
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-
   const sections = [
-    { href: `/${locale}/admin/dashboard`, label: 'Overview', icon: LayoutDashboard },
-    { href: `/${locale}/admin/dashboard/profile`, label: 'Profile', icon: User },
-    { href: `/${locale}/admin/dashboard/hero`, label: 'Hero', icon: GraduationCap },
-    { href: `/${locale}/admin/dashboard/bio`, label: 'Bio', icon: FileText },
-    { href: `/${locale}/admin/dashboard/education`, label: 'Education', icon: GraduationCap },
-    { href: `/${locale}/admin/dashboard/experiences`, label: 'Experiences', icon: Briefcase },
-    { href: `/${locale}/admin/dashboard/skills`, label: 'Skills', icon: Wrench },
-    { href: `/${locale}/admin/dashboard/projects`, label: 'Projects', icon: FolderKanban },
-    { href: `/${locale}/admin/dashboard/publications`, label: 'Publications', icon: BookOpen },
-    { href: `/${locale}/admin/dashboard/awards`, label: 'Awards', icon: Trophy },
-    { href: `/${locale}/admin/dashboard/certifications`, label: 'Certifications', icon: Award },
-    { href: `/${locale}/admin/dashboard/volunteering`, label: 'Volunteering', icon: Heart },
-    { href: `/${locale}/admin/dashboard/footer`, label: 'Footer', icon: FileText }
+    { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
+    { href: '/admin/dashboard/profile', label: 'Profile', icon: User },
+    { href: '/admin/dashboard/hero', label: 'Hero', icon: GraduationCap },
+    { href: '/admin/dashboard/bio', label: 'Bio', icon: FileText },
+    { href: '/admin/dashboard/education', label: 'Education', icon: GraduationCap },
+    { href: '/admin/dashboard/experiences', label: 'Experiences', icon: Briefcase },
+    { href: '/admin/dashboard/skills', label: 'Skills', icon: Wrench },
+    { href: '/admin/dashboard/projects', label: 'Projects', icon: FolderKanban },
+    { href: '/admin/dashboard/publications', label: 'Publications', icon: BookOpen },
+    { href: '/admin/dashboard/awards', label: 'Awards', icon: Trophy },
+    { href: '/admin/dashboard/certifications', label: 'Certifications', icon: Award },
+    { href: '/admin/dashboard/volunteering', label: 'Volunteering', icon: Heart },
+    { href: '/admin/dashboard/footer', label: 'Footer', icon: FileText }
   ];
 
   return (

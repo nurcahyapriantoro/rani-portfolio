@@ -38,18 +38,18 @@ export default async function AdminOverviewPage({
   ];
 
   const quickLinks = [
-    { href: `/${locale}/admin/dashboard/profile`, label: 'Edit Profile', icon: User },
-    { href: `/${locale}/admin/dashboard/hero`, label: 'Edit Hero', icon: GraduationCap },
-    { href: `/${locale}/admin/dashboard/bio`, label: 'Edit Bio', icon: FileText },
-    { href: `/${locale}/admin/dashboard/education`, label: 'Manage Education', icon: GraduationCap },
-    { href: `/${locale}/admin/dashboard/experiences`, label: 'Manage Experiences', icon: Briefcase },
-    { href: `/${locale}/admin/dashboard/skills`, label: 'Manage Skills', icon: Wrench },
-    { href: `/${locale}/admin/dashboard/projects`, label: 'Manage Projects', icon: FolderKanban },
-    { href: `/${locale}/admin/dashboard/publications`, label: 'Manage Publications', icon: BookOpen },
-    { href: `/${locale}/admin/dashboard/awards`, label: 'Manage Awards', icon: Trophy },
-    { href: `/${locale}/admin/dashboard/certifications`, label: 'Manage Certifications', icon: Award },
-    { href: `/${locale}/admin/dashboard/volunteering`, label: 'Manage Volunteering', icon: Heart },
-    { href: `/${locale}/admin/dashboard/footer`, label: 'Edit Footer', icon: FileText }
+    { href: '/admin/dashboard/profile', label: 'Edit Profile', icon: User },
+    { href: '/admin/dashboard/hero', label: 'Edit Hero', icon: GraduationCap },
+    { href: '/admin/dashboard/bio', label: 'Edit Bio', icon: FileText },
+    { href: '/admin/dashboard/education', label: 'Manage Education', icon: GraduationCap },
+    { href: '/admin/dashboard/experiences', label: 'Manage Experiences', icon: Briefcase },
+    { href: '/admin/dashboard/skills', label: 'Manage Skills', icon: Wrench },
+    { href: '/admin/dashboard/projects', label: 'Manage Projects', icon: FolderKanban },
+    { href: '/admin/dashboard/publications', label: 'Manage Publications', icon: BookOpen },
+    { href: '/admin/dashboard/awards', label: 'Manage Awards', icon: Trophy },
+    { href: '/admin/dashboard/certifications', label: 'Manage Certifications', icon: Award },
+    { href: '/admin/dashboard/volunteering', label: 'Manage Volunteering', icon: Heart },
+    { href: '/admin/dashboard/footer', label: 'Edit Footer', icon: FileText }
   ];
 
   const storage = getStorageInfo();
