@@ -47,4 +47,7 @@ next-env.d.ts
 dev-server.log
 dev-server.err.log
 
+# production env (contains real secrets)
+.env.production
+
 .vercel
