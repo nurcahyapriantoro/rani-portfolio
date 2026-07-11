@@ -1,5 +1,5 @@
 import 'server-only';
-import { readContent, type Locale } from './content-store';
+import { readContent, type Locale } from './storage';
 import type {
   ProfileInput,
   StatsInput,

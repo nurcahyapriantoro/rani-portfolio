@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { saveUpload } from '@/lib/upload';
+import { getUploadStorage } from '@/lib/storage';
 import { cookies } from 'next/headers';
 
 export const runtime = 'nodejs';
@@ -37,10 +37,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: 'No files' }, { status: 400 });
   }
 
+  const storage = getUploadStorage();
   const results: Array<{ url: string; filename: string }> = [];
   for (const file of files) {
     const hint = (formData.get('hint') as string) ?? file.name;
-    const result = await saveUpload(file, section, hint);
+    const result = await storage.saveUpload(file, section, hint);
     if (!result.ok) {
       return NextResponse.json({ ok: false, error: result.error, files: results }, { status: 400 });
     }

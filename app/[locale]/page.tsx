@@ -1,4 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
+
+export const dynamic = 'force-dynamic';
+
 import { Hero } from '@/components/sections/hero';
 import { About } from '@/components/sections/about';
 import { Education } from '@/components/sections/education';
