@@ -146,6 +146,29 @@
   },
   "experiences": [
     {
+      "id": "exp-1783974482361",
+      "role": "Laboratory Assistant",
+      "company": "Universitas Terbuka Bogor, IPB University",
+      "type": "Daily Worker",
+      "period": "",
+      "startDate": "2025-11",
+      "endDate": "2025-11",
+      "isCurrent": false,
+      "duration": "1 day",
+      "location": "IPB University",
+      "description": "- Mentored and supervised 7 students during biochemistry laboratory practical sessions\nPerformed demonstrations on agarose gel electrophoresis and laboratory instrument operation\n- Assisted practical sessions involving paper chromatography, UV–Vis spectrophotometry, titration, biochemical assays, and genomic DNA analysis\n- Ensured laboratory activities were conducted in accordance with laboratory safety and standard operating procedures (SOPs)\n- Maintained accurate documentation and monitored the submission of laboratory reports",
+      "skills": [
+        "Laboratory Techniques",
+        "Instrument Operation",
+        "Communication"
+      ],
+      "achievements": [],
+      "companyUrl": "",
+      "images": [
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783975216870-whatsapp-image-2026-07-14-at-3-32-53-am--8fa30173.jpg"
+      ]
+    },
+    {
       "id": "exp-1",
       "role": "Biomolecular Characterization Laboratory Assistant",
       "company": "Biochemistry Department - IPB University",
@@ -327,6 +350,30 @@
       "companyUrl": "",
       "images": [
         "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783973230626-whatsapp-image-2026-07-14-at-3-06-15-am--c61c1715.jpg"
+      ]
+    },
+    {
+      "id": "exp-1783974136626",
+      "role": "Mentor KIP Kuliah Mengabdi ",
+      "company": "Galaksi IPB",
+      "type": "Contract",
+      "period": "",
+      "startDate": "2023-01",
+      "endDate": "2024-01",
+      "isCurrent": false,
+      "duration": "1 yr",
+      "location": "IPB University",
+      "description": "- Mentored a group of 10 KIP-K scholarship students (Batch 60) under the KIP Kuliah Mengabdi program at IPB University\n- Guided mentees in navigating the KIP-K system and preparing for community service projects at their former or nearby schools in Bogor\n- Supported the implementation of outreach activities to promote the KIP-K scholarship and inspired high school students to pursue higher education through equal opportunity pathways",
+      "skills": [
+        "Mentoring & Coaching",
+        "Leadership",
+        "Communication"
+      ],
+      "achievements": [],
+      "companyUrl": "",
+      "images": [
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783974322429-screenshot-2026-07-14-032454-png-d331f812.png",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783974304974-1760454868541-jpg-8dccf6b3.jpg"
       ]
     }
   ],
