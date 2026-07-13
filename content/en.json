@@ -276,6 +276,11 @@
   ],
   "skills": [
     {
+      "name": "Bioinformatics",
+      "category": "molecular",
+      "level": 85
+    },
+    {
       "name": "DNA Extraction",
       "category": "molecular",
       "level": 95
@@ -283,7 +288,7 @@
     {
       "name": "PCR (Gradient & Cloning)",
       "category": "molecular",
-      "level": 92
+      "level": 90
     },
     {
       "name": "Gel Electrophoresis (Agarose & PAGE)",
@@ -308,47 +313,57 @@
     {
       "name": "TLC",
       "category": "analysis",
-      "level": 88
+      "level": 90
     },
     {
       "name": "Proximate & Phytochemical Analysis",
       "category": "analysis",
-      "level": 80
+      "level": 90
     },
     {
       "name": "Reagent & Buffer Preparation",
       "category": "laboratory",
-      "level": 92
+      "level": 90
     },
     {
       "name": "Sample Preparation & Authentication",
       "category": "laboratory",
-      "level": 88
+      "level": 95
     },
     {
       "name": "Equipment Handling & Sterilization",
       "category": "laboratory",
-      "level": 88
+      "level": 90
+    },
+    {
+      "name": "HPLC",
+      "category": "analysis",
+      "level": 80
+    },
+    {
+      "name": "GC-MS",
+      "category": "molecular",
+      "level": 80
     },
     {
       "name": "Highly Disciplined & Meticulous",
       "category": "soft",
-      "level": 95
+      "level": 100
     },
     {
       "name": "Strong Communication",
       "category": "soft",
-      "level": 90
+      "level": 100
     },
     {
       "name": "Fast Learner & Adaptability",
       "category": "soft",
-      "level": 92
+      "level": 100
     },
     {
       "name": "Shift-Work Readiness",
       "category": "soft",
-      "level": 88
+      "level": 100
     }
   ],
   "publications": [
