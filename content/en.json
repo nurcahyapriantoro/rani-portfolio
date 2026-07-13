@@ -58,7 +58,7 @@
       "title": "Independent Pilot Program",
       "subtitle": "Horticultural Therapy Research",
       "description": "Designed and implemented a horticultural therapy program at Rumah Azaki — a social welfare institution in Bogor — to develop self-care skills and social competencies for individuals with intellectual and mental disabilities. Demonstrated up to 80% improvement in planting activities for intellectually disabled participants.",
-      "imageUrl": "",
+      "imageUrl": "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/projects/1783973877790-1761561668133-jpg-fa10103a.jpg",
       "impact": "80%",
       "impactLabel": "Improvement",
       "team": "6 researchers from IPB University",
@@ -79,6 +79,42 @@
       "imageUrl": "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/projects/1783972128218-whatsapp-image-2026-07-14-at-2-38-21-am--66fb3146.jpg",
       "impact": "",
       "impactLabel": "",
+      "team": "",
+      "publishedAt": "",
+      "venue": "",
+      "url": "",
+      "tags": [
+        "event management",
+        "logistics coordination",
+        "team collaboration"
+      ]
+    },
+    {
+      "id": "proj-1783973273344",
+      "title": "Ubiquinon 2024 ",
+      "subtitle": "Secretary of Funding and Sponsorship",
+      "description": "Served as the Secretary of the Fundraising and Sponsorship Division for Ubiquinon 2024, a national scientific innovation competition organized by the Biochemistry Student Association (CREBs) of IPB University. Responsible for preparing sponsorship proposals, documenting meeting minutes, managing administrative needs of the division, and organizing Zoom meetings to support effective coordination and communication.",
+      "imageUrl": "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/projects/1783974057948-1761556844561-jpg-5e4690b3.jpg",
+      "impact": "",
+      "impactLabel": "Impact",
+      "team": "",
+      "publishedAt": "",
+      "venue": "",
+      "url": "",
+      "tags": [
+        "scientific event",
+        "proposal writing",
+        "project coordination"
+      ]
+    },
+    {
+      "id": "proj-1783973275867",
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "imageUrl": "",
+      "impact": "",
+      "impactLabel": "Impact",
       "team": "",
       "publishedAt": "",
       "venue": "",
