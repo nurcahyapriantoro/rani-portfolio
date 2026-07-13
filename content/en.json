@@ -276,11 +276,6 @@
   ],
   "skills": [
     {
-      "name": "Bioinformatics",
-      "category": "molecular",
-      "level": 85
-    },
-    {
       "name": "DNA Extraction",
       "category": "molecular",
       "level": 95
@@ -296,19 +291,29 @@
       "level": 90
     },
     {
+      "name": "Bioinformatics",
+      "category": "molecular",
+      "level": 85
+    },
+    {
       "name": "UV-Vis Spectrophotometry",
       "category": "analysis",
       "level": 95
     },
     {
-      "name": "NanoDrop Spectrophotometry",
-      "category": "analysis",
-      "level": 85
+      "name": "Sample Preparation & Authentication",
+      "category": "laboratory",
+      "level": 95
     },
     {
-      "name": "FTIR Spectroscopy",
+      "name": "Equipment Handling & Sterilization",
+      "category": "laboratory",
+      "level": 90
+    },
+    {
+      "name": "NanoDrop Spectrophotometry",
       "category": "analysis",
-      "level": 82
+      "level": 90
     },
     {
       "name": "TLC",
@@ -326,14 +331,9 @@
       "level": 90
     },
     {
-      "name": "Sample Preparation & Authentication",
-      "category": "laboratory",
-      "level": 95
-    },
-    {
-      "name": "Equipment Handling & Sterilization",
-      "category": "laboratory",
-      "level": 90
+      "name": "FTIR Spectroscopy",
+      "category": "analysis",
+      "level": 85
     },
     {
       "name": "HPLC",
