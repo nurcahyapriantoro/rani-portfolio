@@ -169,8 +169,10 @@
       "achievements": [],
       "companyUrl": "",
       "images": [
-        "/exp-1.jpg",
-        "/exp-2.jpg"
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968451274-1760459715468-jpg-7242ce0f.jpg",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968358073-whatsapp-image-2026-07-14-at-1-44-05-am--4819d418.jpg",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968353998-whatsapp-image-2026-07-14-at-1-44-05-am--03fcbfea.jpg",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968356089-whatsapp-image-2026-07-14-at-1-44-05-am--811d8689.jpg"
       ]
     },
     {
@@ -184,7 +186,7 @@
       "isCurrent": false,
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents. Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation. Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
+      "description": "- Performed moisture and phosphate analyses on 30+ plant samples using gravimetric and UV-VIS spectrophotometry, and prepared essential laboratory equipment, buffers, and chemical reagents\n- Conducted protein and xylanase activity assays on 30+ service samples, ensuring accurate data generation\n-Maintained compliant raw material storage and laboratory waste handling in accordance with safety and environmental protocols.",
       "skills": [
         "Gravimetric Analysis",
         "UV-VIS Spectrophotometry",
@@ -195,9 +197,7 @@
       "achievements": [],
       "companyUrl": "",
       "images": [
-        "/exp-4.jpg",
-        "/exp-5.jpg",
-        "/exp-6.jpg"
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968522879-1760456299510-jpg-b1563bea.jpg"
       ]
     },
     {
@@ -211,7 +211,7 @@
       "isCurrent": false,
       "duration": "3 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry. Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting.",
+      "description": "- Conducted proximate and phytochemical analyses while strictly implementing Good Laboratory Practice (GLP) standards to ensure data accuracy and laboratory safety, including moisture/ash determination and antioxidant, flavonoid, and phenolic quantification using UV–VIS spectrophotometry\n- Performed identification and characterization of 10+ samples using FTIR and TLC spectroscopy for chemical fingerprinting",
       "skills": [
         "FTIR Spectroscopy",
         "TLC",
@@ -223,9 +223,8 @@
       "achievements": [],
       "companyUrl": "",
       "images": [
-        "/exp-7.jpg",
-        "/exp-8.jpg",
-        "/exp-9.jpg"
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968612946-1760459294367-jpg-9c032158.jpg",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783968611774-1760459294367-jpg-8a6fdff8.jpg"
       ]
     },
     {
@@ -239,7 +238,7 @@
       "isCurrent": false,
       "duration": "1 yr",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems for both programs. Achieved over 20 G-astip customers and successfully engaged 5 students in the Tutor BEM FMIPA. Achieved a profit of Rp8.000.000,- in 10 months of management from an initial capital of Rp400.000,-.",
+      "description": "- Planned the main work program concepts, G-astip and Tutor BEM FMIPA, by organizing profit-sharing arrangements and implementation systems for both programs\n- Achieved over 20 G-astip customers and successfully engaged 5 students in the Tutor BEM FMIPA\n- Achieved a profit of Rp8.000.000,- in 10 months of management from an initial capital of Rp400.000,-.",
       "skills": [
         "Business Planning",
         "Partnership",
