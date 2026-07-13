@@ -106,7 +106,7 @@
       "isCurrent": false,
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Guided and supervised 12 students during laboratory practical sessions on carbohydrate, protein, lipid, and nucleic acid analysis, including starch and lipid hydrolysis, protein and nucleic acid denaturation, and biomolecule characterization. Operated and assisted in the use of laboratory instruments, including a UV–Vis spectrophotometer, PCR machine, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
+      "description": "- Guided and supervised 12 students during laboratory practical sessions on carbohydrate, protein, lipid, and nucleic acid analysis, including starch and lipid hydrolysis, protein and nucleic acid denaturation, and biomolecule characterization\n- Operated and assisted in the use of laboratory instruments, including a UV–Vis spectrophotometer, PCR machine, and agarose gel electrophoresis system\n- Conducted student assessments in accordance with the course contract",
       "skills": [
         "UV-Vis Spectrophotometry",
         "PCR",
@@ -116,7 +116,10 @@
       ],
       "achievements": [],
       "companyUrl": "",
-      "images": []
+      "images": [
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783949726445-screenshot-50-png-30f80b79.png",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783949738762-sertif-asprak2-png-c2ac34b9.png"
+      ]
     },
     {
       "id": "exp-2",
@@ -129,7 +132,7 @@
       "isCurrent": false,
       "duration": "5 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Guided and supervised 11 students during gene isolation and cloning sessions of the amylase-coding gene from Bacillus licheniformis, covering genomic DNA extraction, PCR-based cloning, agarose gel electrophoresis, and plasmid DNA digestion. Operated laboratory instruments including a PCR machine, NanoDrop spectrophotometer, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract.",
+      "description": "- Guided and supervised 11 students during gene isolation and cloning sessions of the amylase-coding gene from Bacillus licheniformis, covering genomic DNA extraction, PCR-based cloning, agarose gel electrophoresis, and plasmid DNA digestion\n- Operated laboratory instruments including a PCR machine, NanoDrop spectrophotometer, and agarose gel electrophoresis system. Conducted student assessments in accordance with the course contract\n- Conducted student assessments in accordance with the course contract",
       "skills": [
         "DNA Extraction",
         "PCR Cloning",
@@ -139,7 +142,10 @@
       ],
       "achievements": [],
       "companyUrl": "",
-      "images": []
+      "images": [
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783949840832-screenshot-50-png-97c2226a.png",
+        "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/experiences/1783949851959-sertif-asprak2-png-f86a205f.png"
+      ]
     },
     {
       "id": "exp-3",
@@ -152,7 +158,7 @@
       "isCurrent": false,
       "duration": "2 mos",
       "location": "Bogor, West Java, Indonesia",
-      "description": "Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis. Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE). Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation.",
+      "description": "- Assisted analysis of 30+ salak leaf DNA samples using gradient PCR and agarose gel electrophoresis\n- Assisted analysis of 41 oil palm leaf DNA samples using PCR and polyacrylamide gel electrophoresis (PAGE)\n- Supported oil palm self-DNA tissue culture research by contributing to the preparation of 100+ oil palm seedling samples, including sterilization and observation",
       "skills": [
         "Gradient PCR",
         "PAGE",
@@ -164,8 +170,7 @@
       "companyUrl": "",
       "images": [
         "/exp-1.jpg",
-        "/exp-2.jpg",
-        "/exp-3.jpg"
+        "/exp-2.jpg"
       ]
     },
     {
