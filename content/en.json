@@ -79,7 +79,7 @@
       "imageUrl": "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/projects/1783972128218-whatsapp-image-2026-07-14-at-2-38-21-am--66fb3146.jpg",
       "impact": "",
       "impactLabel": "",
-      "team": "",
+      "team": "10 members",
       "publishedAt": "",
       "venue": "",
       "url": "",
@@ -97,7 +97,7 @@
       "imageUrl": "https://cdn.jsdelivr.net/gh/nurcahyapriantoro/rani-portfolio@master/public/uploads/projects/1783974057948-1761556844561-jpg-5e4690b3.jpg",
       "impact": "",
       "impactLabel": "Impact",
-      "team": "",
+      "team": "10 members",
       "publishedAt": "",
       "venue": "",
       "url": "",
@@ -106,20 +106,6 @@
         "proposal writing",
         "project coordination"
       ]
-    },
-    {
-      "id": "proj-1783973275867",
-      "title": "",
-      "subtitle": "",
-      "description": "",
-      "imageUrl": "",
-      "impact": "",
-      "impactLabel": "Impact",
-      "team": "",
-      "publishedAt": "",
-      "venue": "",
-      "url": "",
-      "tags": []
     }
   ],
   "footer": {
