@@ -7,7 +7,7 @@ import { DragList } from '@/components/admin/ui/drag-list';
 import { Field } from '@/components/admin/ui/field';
 import { TextArea } from '@/components/admin/ui/textarea';
 import { TagInput } from '@/components/admin/ui/tag-input';
-import { ImageListPicker } from '@/components/admin/ui/image-list-picker';
+import { SingleImagePicker } from '@/components/admin/ui/single-image-picker';
 import { updateEducationsAction } from '@/lib/actions';
 import type { EducationInput } from '@/lib/schemas';
 
@@ -212,14 +212,15 @@ function EducationCard({
               onChange={(v) => onPatch({ gpa: v })}
               placeholder="3.77 / 4.00"
             />
-            <Field
-              label="Logo URL"
-              value={edu.logoUrl ?? ''}
-              onChange={(v) => onPatch({ logoUrl: v })}
-              placeholder="/uploads/education/ipb-logo.png"
-              fullWidth
-            />
           </div>
+
+          <SingleImagePicker
+            label="School Logo"
+            value={edu.logoUrl ?? ''}
+            onChange={(v) => onPatch({ logoUrl: v })}
+            section="education"
+            hint="Upload an image or paste a URL. Shown next to the school name in the Education section."
+          />
 
           <TextArea
             label="Description"

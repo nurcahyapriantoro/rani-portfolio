@@ -10,7 +10,8 @@ import {
   Award,
   Heart,
   FolderKanban,
-  FileText
+  FileText,
+  BarChart3
 } from 'lucide-react';
 import { readContent, getStorageInfo } from '@/lib/storage';
 
@@ -40,6 +41,7 @@ export default async function AdminOverviewPage({
   const quickLinks = [
     { href: '/admin/dashboard/profile', label: 'Edit Profile', icon: User },
     { href: '/admin/dashboard/hero', label: 'Edit Hero', icon: GraduationCap },
+    { href: '/admin/dashboard/stats', label: 'Edit Stats', icon: BarChart3 },
     { href: '/admin/dashboard/bio', label: 'Edit Bio', icon: FileText },
     { href: '/admin/dashboard/education', label: 'Manage Education', icon: GraduationCap },
     { href: '/admin/dashboard/experiences', label: 'Manage Experiences', icon: Briefcase },

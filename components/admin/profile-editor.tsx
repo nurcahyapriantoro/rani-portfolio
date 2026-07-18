@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Upload } from 'lucide-react';
+import { Upload, FileText } from 'lucide-react';
 import { BilingualEditor } from '@/components/admin/bilingual-editor';
 import { Field } from '@/components/admin/ui/field';
 import { updateProfileAction } from '@/lib/actions';
@@ -39,15 +39,17 @@ function ProfileForm({
   update: (updater: (prev: ProfileInput) => ProfileInput) => void;
   locale: 'en' | 'id';
 }) {
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [photoUploading, setPhotoUploading] = useState(false);
+  const [photoError, setPhotoError] = useState<string | null>(null);
+  const [cvUploading, setCvUploading] = useState(false);
+  const [cvError, setCvError] = useState<string | null>(null);
 
   const set = <K extends keyof ProfileInput>(field: K, value: ProfileInput[K]) =>
     update((prev) => ({ ...prev, [field]: value }));
 
-  const upload = async (file: File) => {
-    setUploadError(null);
-    setUploading(true);
+  const uploadPhoto = async (file: File) => {
+    setPhotoError(null);
+    setPhotoUploading(true);
     try {
       const fd = new FormData();
       fd.append('files', file);
@@ -56,15 +58,42 @@ function ProfileForm({
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
       const result = await res.json();
       if (!res.ok || !result.ok) {
-        setUploadError(result.error ?? 'Upload failed');
+        setPhotoError(result.error ?? 'Upload failed');
         return;
       }
       const url = result.files[0].url as string;
       set('photoUrl', url);
     } catch (e) {
-      setUploadError(e instanceof Error ? e.message : 'Upload failed');
+      setPhotoError(e instanceof Error ? e.message : 'Upload failed');
     } finally {
-      setUploading(false);
+      setPhotoUploading(false);
+    }
+  };
+
+  const uploadCv = async (file: File) => {
+    setCvError(null);
+    if (file.type !== 'application/pdf') {
+      setCvError('Only PDF files are allowed');
+      return;
+    }
+    setCvUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('files', file);
+      fd.append('section', 'cv');
+      fd.append('hint', file.name);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      const result = await res.json();
+      if (!res.ok || !result.ok) {
+        setCvError(result.error ?? 'Upload failed');
+        return;
+      }
+      const url = result.files[0].url as string;
+      set('cvUrl', url);
+    } catch (e) {
+      setCvError(e instanceof Error ? e.message : 'Upload failed');
+    } finally {
+      setCvUploading(false);
     }
   };
 
@@ -123,12 +152,6 @@ function ProfileForm({
           type="url"
         />
         <Field
-          label="CV File Path"
-          value={data.cvUrl}
-          onChange={(v) => set('cvUrl', v)}
-          hint="Path under public/, e.g. /cv.pdf"
-        />
-        <Field
           label="Avatar Color"
           value={data.avatarColor}
           onChange={(v) => set('avatarColor', v)}
@@ -153,15 +176,15 @@ function ProfileForm({
             <div className="flex items-center gap-2">
               <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg glass text-xs hover:scale-105 transition-all cursor-pointer">
                 <Upload className="w-3.5 h-3.5" />
-                {uploading ? 'Uploading...' : 'Upload'}
+                {photoUploading ? 'Uploading...' : 'Upload'}
                 <input
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  disabled={uploading}
+                  disabled={photoUploading}
                   onChange={(e) => {
                     const file = e.target.files?.[0];
-                    if (file) upload(file);
+                    if (file) uploadPhoto(file);
                     e.target.value = '';
                   }}
                 />
@@ -183,7 +206,73 @@ function ProfileForm({
               placeholder="/uploads/profile/photo.jpg"
               hint={`Or paste a path / URL (locale: ${locale.toUpperCase()})`}
             />
-            {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
+            {photoError && <p className="text-xs text-red-500">{photoError}</p>}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
+          CV (PDF)
+        </label>
+        <div className="flex items-start gap-4">
+          <div className="w-24 h-32 rounded-xl overflow-hidden border border-border bg-bg-tertiary shrink-0 flex items-center justify-center">
+            {data.cvUrl ? (
+              <div className="w-full h-full flex flex-col items-center justify-center text-red-500 bg-red-500/5 p-2">
+                <FileText className="w-8 h-8 mb-1" />
+                <span className="text-[9px] text-center break-all px-1 line-clamp-3">
+                  {data.cvUrl.split('/').pop()}
+                </span>
+              </div>
+            ) : (
+              <span className="text-xs text-text-muted text-center px-2">No CV uploaded</span>
+            )}
+          </div>
+          <div className="flex-1 space-y-2">
+            <div className="flex items-center gap-2">
+              <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg glass text-xs hover:scale-105 transition-all cursor-pointer">
+                <Upload className="w-3.5 h-3.5" />
+                {cvUploading ? 'Uploading...' : 'Upload PDF'}
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  className="hidden"
+                  disabled={cvUploading}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) uploadCv(file);
+                    e.target.value = '';
+                  }}
+                />
+              </label>
+              {data.cvUrl && (
+                <a
+                  href={data.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-lg text-xs glass hover:scale-105 transition-all"
+                >
+                  Preview
+                </a>
+              )}
+              {data.cvUrl && (
+                <button
+                  type="button"
+                  onClick={() => set('cvUrl', '')}
+                  className="px-3 py-2 rounded-lg text-xs text-red-500 hover:bg-red-500/10 transition-colors"
+                >
+                  Remove
+                </button>
+              )}
+            </div>
+            <Field
+              label=""
+              value={data.cvUrl}
+              onChange={(v) => set('cvUrl', v)}
+              placeholder="/cv.pdf or https://..."
+              hint={`Or paste a path / URL (locale: ${locale.toUpperCase()}). Max upload size: 20MB.`}
+            />
+            {cvError && <p className="text-xs text-red-500">{cvError}</p>}
           </div>
         </div>
       </div>

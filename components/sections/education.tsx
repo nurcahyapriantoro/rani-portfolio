@@ -51,8 +51,17 @@ export function Education({ educations }: { educations: EducationInput[] }) {
               <div className="relative flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-accent flex items-center justify-center shrink-0">
-                      <GraduationCap className="w-6 h-6 md:w-7 h-7 text-bg-primary" />
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-accent flex items-center justify-center shrink-0 overflow-hidden">
+                      {edu.logoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={edu.logoUrl}
+                          alt={`${edu.school} logo`}
+                          className="w-full h-full object-contain bg-white"
+                        />
+                      ) : (
+                        <GraduationCap className="w-6 h-6 md:w-7 h-7 text-bg-primary" />
+                      )}
                     </div>
                     <div>
                       <h3 className="font-display text-lg md:text-2xl font-bold mb-0.5">

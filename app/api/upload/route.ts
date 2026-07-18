@@ -13,6 +13,7 @@ const ALLOWED_SECTIONS = new Set([
   'awards',
   'profile',
   'education',
+  'cv',
   'misc'
 ]);
 

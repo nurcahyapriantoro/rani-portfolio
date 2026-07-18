@@ -1,5 +1,4 @@
 import { put } from '@vercel/blob';
-import path from 'path';
 import crypto from 'crypto';
 import type { UploadStorage, UploadResult, UploadError } from './types';
 
@@ -8,10 +7,16 @@ const ALLOWED_MIME = new Set([
   'image/png',
   'image/webp',
   'image/gif',
-  'image/svg+xml'
+  'image/svg+xml',
+  'application/pdf'
 ]);
 
 const MAX_BYTES = 5 * 1024 * 1024;
+const MAX_BYTES_CV = 20 * 1024 * 1024;
+
+const SECTION_MAX_BYTES: Record<string, number> = {
+  cv: MAX_BYTES_CV
+};
 
 export function sanitizeSlug(input: string): string {
   return input
@@ -33,6 +38,8 @@ export function extFromMime(mime: string): string {
       return 'gif';
     case 'image/svg+xml':
       return 'svg';
+    case 'application/pdf':
+      return 'pdf';
     default:
       return 'bin';
   }
@@ -43,8 +50,9 @@ export class BlobUploadStorage implements UploadStorage {
     if (!ALLOWED_MIME.has(file.type)) {
       return { ok: false, error: `Unsupported file type: ${file.type}` };
     }
-    if (file.size > MAX_BYTES) {
-      return { ok: false, error: `File too large (max ${MAX_BYTES / 1024 / 1024}MB)` };
+    const maxBytes = SECTION_MAX_BYTES[section] ?? MAX_BYTES;
+    if (file.size > maxBytes) {
+      return { ok: false, error: `File too large (max ${maxBytes / 1024 / 1024}MB)` };
     }
     if (file.size === 0) {
       return { ok: false, error: 'Empty file' };
