@@ -199,13 +199,6 @@ function ProfileForm({
                 </button>
               )}
             </div>
-            <Field
-              label=""
-              value={data.photoUrl ?? ''}
-              onChange={(v) => set('photoUrl', v)}
-              placeholder="/uploads/profile/photo.jpg"
-              hint={`Or paste a path / URL (locale: ${locale.toUpperCase()})`}
-            />
             {photoError && <p className="text-xs text-red-500">{photoError}</p>}
           </div>
         </div>
@@ -265,13 +258,6 @@ function ProfileForm({
                 </button>
               )}
             </div>
-            <Field
-              label=""
-              value={data.cvUrl}
-              onChange={(v) => set('cvUrl', v)}
-              placeholder="/cv.pdf or https://..."
-              hint={`Or paste a path / URL (locale: ${locale.toUpperCase()}). Max upload size: 20MB.`}
-            />
             {cvError && <p className="text-xs text-red-500">{cvError}</p>}
           </div>
         </div>

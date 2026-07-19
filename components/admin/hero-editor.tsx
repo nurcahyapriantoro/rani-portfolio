@@ -21,12 +21,6 @@ export default function HeroEditor({ locale, enHero, idHero }: { locale: string;
             onChange={(v) => update((p) => ({ ...p, greeting: v }))}
             fullWidth
           />
-          <Field
-            label="Scroll Label (small text under arrow)"
-            value={data.scrollLabel}
-            onChange={(v) => update((p) => ({ ...p, scrollLabel: v }))}
-            fullWidth
-          />
         </div>
       )}
     />

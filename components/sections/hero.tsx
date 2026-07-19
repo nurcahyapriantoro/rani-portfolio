@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { ArrowDown, Mail, Download, Sparkles, MapPin } from 'lucide-react';
+import { Mail, Sparkles, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { DNASceneClient } from '../three/dna-scene-client';
 import type { ProfileInput, HeroInput } from '@/lib/schemas';
@@ -30,7 +30,6 @@ export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: Hero
 
   const nameChars = profile.fullName.split('');
   const greeting = hero?.greeting || "Hello, I'm";
-  const scrollLabel = hero?.scrollLabel || 'Scroll to explore';
 
   return (
     <section
@@ -133,26 +132,10 @@ export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: Hero
                   <Mail className="w-3.5 h-3.5" />
                   Get in touch
                 </a>
-                <a
-                  href={profile.cvUrl}
-                  download
-                  className="group inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl glass text-sm font-semibold hover:scale-105 transition-all shine"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download CV
-                </a>
               </div>
             </div>
           </div>
         </div>
-
-        <a
-          href="#about"
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-text-muted hover:text-accent transition-colors animate-float"
-        >
-          <span className="text-[10px] uppercase tracking-widest">{scrollLabel}</span>
-          <ArrowDown className="w-3.5 h-3.5" />
-        </a>
       </div>
     </section>
   );

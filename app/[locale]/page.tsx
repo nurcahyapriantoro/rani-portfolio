@@ -63,17 +63,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     getVolunteering(locale as Locale)
   ]);
 
-  const autoStats = {
-    gpa: stats.gpa,
-    experienceCount: experiences.length,
-    awardsCount: awards.length,
-    publicationsCount: publications.length
-  };
-
   return (
     <>
       <Hero profile={profile} hero={hero} gpa={stats.gpa} />
-      <About bio={bio} stats={autoStats} />
+      <About bio={bio} stats={stats} />
       <Education educations={educations} />
       <Experience experiences={experiences} />
       <Skills skills={skills} />

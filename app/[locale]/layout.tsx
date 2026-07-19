@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { SmoothScrollProvider } from '@/components/effects/smooth-scroll';
 import { Navbar } from '@/components/ui/navbar';
 import { routing } from '@/lib/routing';
+import { getProfile } from '@/lib/content';
 import '../globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -87,7 +88,10 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
-  const messages = await getMessages();
+  const [messages, profile] = await Promise.all([
+    getMessages(),
+    getProfile(locale as 'en' | 'id')
+  ]);
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
@@ -100,7 +104,10 @@ export default async function LocaleLayout({
         <ThemeProvider defaultTheme="light" storageKey="rani-theme">
           <NextIntlClientProvider messages={messages}>
             <SmoothScrollProvider>
-              <Navbar />
+              <Navbar
+                photoUrl={profile.photoUrl || undefined}
+                avatarInitials={profile.avatarInitials || 'RT'}
+              />
               {children}
             </SmoothScrollProvider>
           </NextIntlClientProvider>

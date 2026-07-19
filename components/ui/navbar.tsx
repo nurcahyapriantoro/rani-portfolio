@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import { Link, usePathname } from '@/lib/navigation';
 import { useTheme } from '@/components/theme-provider';
 import { useSmoothScroll } from '@/components/effects/smooth-scroll';
@@ -10,7 +11,12 @@ import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
 import { cn } from '@/lib/utils';
 
-export function Navbar() {
+interface NavbarProps {
+  photoUrl?: string;
+  avatarInitials: string;
+}
+
+export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
   const t = useTranslations('nav');
   const locale = useLocale();
   const { theme, toggleTheme } = useTheme();
@@ -63,8 +69,18 @@ export function Navbar() {
           }}
           className="flex items-center gap-1.5 group shrink-0"
         >
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-bg-primary font-bold text-xs transition-transform group-hover:scale-110 group-hover:rotate-3">
-            RT
+          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-bg-primary font-bold text-xs transition-transform group-hover:scale-110 group-hover:rotate-3 overflow-hidden shrink-0">
+            {photoUrl ? (
+              <Image
+                src={photoUrl}
+                alt={avatarInitials || 'avatar'}
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              avatarInitials || 'RT'
+            )}
           </div>
           <span className="hidden sm:inline font-display font-semibold text-sm text-text-primary">
             Rani<span className="text-accent">.</span>
