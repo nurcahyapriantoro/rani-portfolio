@@ -13,19 +13,16 @@ import type { PublicationInput } from '@/lib/schemas';
 export default function PublicationsEditor({
   locale,
   enPublications,
-  idPublications
 }: {
   locale: string;
   enPublications: PublicationInput[];
-  idPublications: PublicationInput[];
 }) {
   return (
     <BilingualEditor<PublicationInput[]>
       title="Manage Publications"
       description="Research papers and journal articles. Drag to reorder."
       enData={enPublications}
-      idData={idPublications}
-      onSave={async (en, id) => updatePublicationsAction(en, id)}
+      onSave={(data) => updatePublicationsAction(data)}
       renderForm={(list, update, loc) => (
         <PublicationsForm list={list} update={update} locale={loc} />
       )}
@@ -40,7 +37,7 @@ function PublicationsForm({
 }: {
   list: PublicationInput[];
   update: (updater: (prev: PublicationInput[]) => PublicationInput[]) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const add = () =>
     update((prev) => [

@@ -8,19 +8,16 @@ import type { BioInput } from '@/lib/schemas';
 export default function BioEditor({
   locale,
   enBio,
-  idBio
 }: {
   locale: string;
   enBio: BioInput;
-  idBio: BioInput;
 }) {
   return (
     <BilingualEditor<BioInput>
       title="Edit Bio"
       description="About-section text. Short is for previews; long is the full description shown on the site."
       enData={enBio}
-      idData={idBio}
-      onSave={async (en, id) => updateBioAction(en, id)}
+      onSave={(data) => updateBioAction(data)}
       renderForm={(data, update) => (
         <div className="space-y-4">
           <TextArea

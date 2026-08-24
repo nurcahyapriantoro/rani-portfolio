@@ -12,19 +12,16 @@ const CATEGORIES = ['molecular', 'analysis', 'laboratory', 'soft'] as const;
 export default function SkillsEditor({
   locale,
   enSkills,
-  idSkills
 }: {
   locale: string;
   enSkills: SkillInput[];
-  idSkills: SkillInput[];
 }) {
   return (
     <BilingualEditor<SkillInput[]>
       title="Manage Skills"
       description="Skills with proficiency levels (0–100). Drag to reorder."
       enData={enSkills}
-      idData={idSkills}
-      onSave={async (en, id) => updateSkillsAction(en, id)}
+      onSave={(data) => updateSkillsAction(data)}
       renderForm={(list, update, loc) => (
         <SkillsForm list={list} update={update} locale={loc} />
       )}
@@ -39,7 +36,7 @@ function SkillsForm({
 }: {
   list: SkillInput[];
   update: (updater: (prev: SkillInput[]) => SkillInput[]) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const add = () =>
     update((prev) => [...prev, { name: '', category: 'molecular', level: 80 }]);

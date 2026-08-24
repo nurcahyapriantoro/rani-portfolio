@@ -46,27 +46,4 @@ export class FSContentStorage implements ContentStorage {
     await this.writeContent(locale, content);
     return { success: true };
   }
-
-  async updateBilingualSection(
-    enData: unknown,
-    idData: unknown,
-    key: string
-  ): Promise<{ success: true }> {
-    const enContent = await this.readContent('en');
-    const idContent = await this.readContent('id');
-    const enBackup = JSON.parse(JSON.stringify(enContent));
-    const idBackup = JSON.parse(JSON.stringify(idContent));
-
-    enContent[key] = enData;
-    await this.writeContent('en', enContent);
-
-    try {
-      idContent[key] = idData;
-      await this.writeContent('id', idContent);
-    } catch (err) {
-      await this.writeContent('en', enBackup);
-      throw err;
-    }
-    return { success: true };
-  }
 }

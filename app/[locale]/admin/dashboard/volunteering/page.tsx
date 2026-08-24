@@ -10,7 +10,7 @@ export default async function VolunteeringPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getVolunteering('en'), getVolunteering('id')]);
+  const en = await getVolunteering('en');
 
-  return <VolunteeringEditor locale={locale} enVolunteering={en} idVolunteering={id} />;
+  return <VolunteeringEditor locale={locale} enVolunteering={en} />;
 }

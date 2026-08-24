@@ -3,16 +3,15 @@
 import { useActionState, useEffect, useState, useTransition } from 'react';
 import { Save, Check, AlertCircle, X, Loader2 } from 'lucide-react';
 
-interface BilingualEditorProps<T> {
+interface EditorProps<T> {
   title: string;
   description?: string;
   enData: T;
-  idData: T;
-  onSave: (enData: T, idData: T) => Promise<{ success: boolean; error?: string }>;
+  onSave: (enData: T) => Promise<{ success: boolean; error?: string }>;
   renderForm: (
     data: T,
     onChange: (updater: (prev: T) => T) => void,
-    locale: 'en' | 'id'
+    locale: 'en'
   ) => React.ReactNode;
   headerActions?: React.ReactNode;
 }
@@ -21,14 +20,11 @@ export function BilingualEditor<T>({
   title,
   description,
   enData: initialEn,
-  idData: initialId,
   onSave,
   renderForm,
   headerActions
-}: BilingualEditorProps<T>) {
+}: EditorProps<T>) {
   const [en, setEn] = useState<T>(initialEn);
-  const [id, setId] = useState<T>(initialId);
-  const [activeTab, setActiveTab] = useState<'en' | 'id'>('en');
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [pending, startTransition] = useTransition();
   const [dirty, setDirty] = useState(false);
@@ -59,25 +55,12 @@ export function BilingualEditor<T>({
     });
   };
 
-  const updateId = (updater: (prev: T) => T) => {
-    setId((prev) => {
-      const next = updater(prev);
-      setDirty(true);
-      return next;
-    });
-  };
-
-  const copyEnToId = () => {
-    setId(JSON.parse(JSON.stringify(en)));
-    setDirty(true);
-  };
-
   const handleSave = () => {
-    setSaveStage('Saving English...');
+    setSaveStage('Saving changes...');
     startTransition(async () => {
       try {
-        setSaveStage('Committing English to GitHub...');
-        const res = await onSave(en, id);
+        setSaveStage('Committing to GitHub...');
+        const res = await onSave(en);
         if (res.success) {
           setSaveStage('Done');
           setToast({ type: 'success', message: '✓ Saved to GitHub successfully' });
@@ -127,15 +110,6 @@ export function BilingualEditor<T>({
           {headerActions}
           <button
             type="button"
-            onClick={copyEnToId}
-            disabled={pending}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl glass text-xs hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100"
-            title="Copy English values to Indonesian as a starting point"
-          >
-            <span className="font-mono">EN → ID</span>
-          </button>
-          <button
-            type="button"
             onClick={handleSave}
             disabled={pending}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-bg-primary font-semibold hover:bg-accent-hover transition-all disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px] justify-center"
@@ -162,29 +136,11 @@ export function BilingualEditor<T>({
         </div>
       )}
 
-      <div className="flex items-center gap-1 border-b border-border">
-        {(['en', 'id'] as const).map((loc) => (
-          <button
-            key={loc}
-            type="button"
-            onClick={() => setActiveTab(loc)}
-            disabled={pending}
-            className={`px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors border-b-2 -mb-px disabled:opacity-50 ${
-              activeTab === loc
-                ? 'border-accent text-accent'
-                : 'border-transparent text-text-muted hover:text-text-secondary'
-            }`}
-          >
-            {loc === 'en' ? 'English' : 'Indonesia'}
-          </button>
-        ))}
-      </div>
-
       <div
         className={`rounded-2xl glass p-6 transition-opacity ${pending ? 'opacity-50 pointer-events-none' : ''}`}
         aria-hidden={pending}
       >
-        {activeTab === 'en' ? renderForm(en, updateEn, 'en') : renderForm(id, updateId, 'id')}
+        {renderForm(en, updateEn, 'en')}
       </div>
 
       {toast && (

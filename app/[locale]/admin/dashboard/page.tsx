@@ -25,7 +25,7 @@ export default async function AdminOverviewPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const content = await readContent(locale as 'en' | 'id');
+  const content = await readContent(locale as 'en');
   const arr = (key: string): unknown[] =>
     Array.isArray(content[key]) ? (content[key] as unknown[]) : [];
 

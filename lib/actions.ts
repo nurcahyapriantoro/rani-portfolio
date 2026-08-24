@@ -34,28 +34,25 @@ export async function loginAction(formData: FormData) {
 
   await setSessionCookie();
   revalidatePath('/admin');
-  redirect('/en/admin/dashboard');
+  redirect('/admin/dashboard');
 }
 
 export async function logoutAction() {
   await clearSessionCookie();
   revalidatePath('/admin');
-  redirect('/en/admin/login');
+  redirect('/admin/login');
 }
 
 function revalidateAll() {
   revalidatePath('/', 'layout');
-  revalidatePath('/en', 'page');
-  revalidatePath('/id', 'page');
   revalidatePath('/[locale]', 'page');
 }
 
 const storage = () => getContentStorage();
 
-export async function updateProfileAction(enData: unknown, idData: unknown) {
+export async function updateProfileAction(enData: unknown, _idData?: unknown) {
   const en = profileSchema.parse(enData);
-  const id = profileSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'profile');
+  await storage().updateSection('en', 'profile', en);
   revalidateAll();
   return { success: true as const };
 }
@@ -63,95 +60,83 @@ export async function updateProfileAction(enData: unknown, idData: unknown) {
 export async function updateStatsAction(data: unknown) {
   const parsed = statsSchema.parse(data);
   await storage().updateSection('en', 'stats', parsed);
-  await storage().updateSection('id', 'stats', parsed);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateBioAction(enData: unknown, idData: unknown) {
+export async function updateBioAction(enData: unknown, _idData?: unknown) {
   const en = bioSchema.parse(enData);
-  const id = bioSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'bio');
+  await storage().updateSection('en', 'bio', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateExperiencesAction(enData: unknown, idData: unknown) {
+export async function updateExperiencesAction(enData: unknown, _idData?: unknown) {
   const en = experiencesSchema.parse(enData);
-  const id = experiencesSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'experiences');
+  await storage().updateSection('en', 'experiences', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateSkillsAction(enData: unknown, idData: unknown) {
+export async function updateSkillsAction(enData: unknown, _idData?: unknown) {
   const en = skillsSchema.parse(enData);
-  const id = skillsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'skills');
+  await storage().updateSection('en', 'skills', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updatePublicationsAction(enData: unknown, idData: unknown) {
+export async function updatePublicationsAction(enData: unknown, _idData?: unknown) {
   const en = publicationsSchema.parse(enData);
-  const id = publicationsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'publications');
+  await storage().updateSection('en', 'publications', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateAwardsAction(enData: unknown, idData: unknown) {
+export async function updateAwardsAction(enData: unknown, _idData?: unknown) {
   const en = awardsSchema.parse(enData);
-  const id = awardsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'awards');
+  await storage().updateSection('en', 'awards', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateEducationsAction(enData: unknown, idData: unknown) {
+export async function updateEducationsAction(enData: unknown, _idData?: unknown) {
   const en = educationsSchema.parse(enData);
-  const id = educationsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'education');
+  await storage().updateSection('en', 'education', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateProjectsAction(enData: unknown, idData: unknown) {
+export async function updateProjectsAction(enData: unknown, _idData?: unknown) {
   const en = projectsSchema.parse(enData);
-  const id = projectsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'projects');
+  await storage().updateSection('en', 'projects', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateCertificationsAction(enData: unknown, idData: unknown) {
+export async function updateCertificationsAction(enData: unknown, _idData?: unknown) {
   const en = certificationsSchema.parse(enData);
-  const id = certificationsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'certifications');
+  await storage().updateSection('en', 'certifications', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateVolunteeringAction(enData: unknown, idData: unknown) {
+export async function updateVolunteeringAction(enData: unknown, _idData?: unknown) {
   const en = volunteeringsSchema.parse(enData);
-  const id = volunteeringsSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'volunteering');
+  await storage().updateSection('en', 'volunteering', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateHeroAction(enData: unknown, idData: unknown) {
+export async function updateHeroAction(enData: unknown, _idData?: unknown) {
   const en = heroSchema.parse(enData);
-  const id = heroSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'hero');
+  await storage().updateSection('en', 'hero', en);
   revalidateAll();
   return { success: true as const };
 }
 
-export async function updateFooterAction(enData: unknown, idData: unknown) {
+export async function updateFooterAction(enData: unknown, _idData?: unknown) {
   const en = footerSchema.parse(enData);
-  const id = footerSchema.parse(idData);
-  await storage().updateBilingualSection(en, id, 'footer');
+  await storage().updateSection('en', 'footer', en);
   revalidateAll();
   return { success: true as const };
 }

@@ -10,7 +10,7 @@ export default async function ProjectsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getProjects('en'), getProjects('id')]);
+  const en = await getProjects('en');
 
-  return <ProjectsEditor locale={locale} enProjects={en} idProjects={id} />;
+  return <ProjectsEditor locale={locale} enProjects={en} />;
 }

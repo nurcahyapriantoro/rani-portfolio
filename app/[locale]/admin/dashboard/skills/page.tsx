@@ -10,7 +10,7 @@ export default async function SkillsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [enSkills, idSkills] = await Promise.all([getSkills('en'), getSkills('id')]);
+  const enSkills = await getSkills('en');
 
-  return <SkillsEditor locale={locale} enSkills={enSkills} idSkills={idSkills} />;
+  return <SkillsEditor locale={locale} enSkills={enSkills} />;
 }

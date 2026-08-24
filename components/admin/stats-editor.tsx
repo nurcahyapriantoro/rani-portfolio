@@ -95,9 +95,8 @@ export default function StatsEditor({ stats, autoCounts }: StatsEditorProps) {
         <div>
           <h1 className="font-display text-3xl font-bold mb-2">Edit Stats</h1>
           <p className="text-text-muted text-sm">
-            Stats shown in the photo profile (hero badge) and About section. Stats apply to both
-            EN and ID locales — counts are auto-calculated from entries; override only if you
-            want a different value.
+            Stats shown in the photo profile (hero badge) and About section. Counts are
+            auto-calculated from entries; override only if you want a different value.
           </p>
         </div>
         <button

@@ -31,29 +31,4 @@ export class KVContentStorage implements ContentStorage {
     await this.writeContent(locale, content);
     return { success: true };
   }
-
-  async updateBilingualSection(
-    enData: unknown,
-    idData: unknown,
-    key: string
-  ): Promise<{ success: true }> {
-    const client = this.client;
-    const enKey = this.key('en');
-    const idKey = this.key('id');
-
-    const enBackup = await client.get<ContentShape>(enKey);
-    const idBackup = await client.get<ContentShape>(idKey);
-
-    const enContent: ContentShape = { ...(enBackup as ContentShape), [key]: enData };
-    await client.set(enKey, enContent);
-
-    try {
-      const idContent: ContentShape = { ...(idBackup as ContentShape), [key]: idData };
-      await client.set(idKey, idContent);
-    } catch (err) {
-      await client.set(enKey, enBackup);
-      throw err;
-    }
-    return { success: true };
-  }
 }

@@ -10,16 +10,12 @@ export default async function ExperiencesPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [enExperiences, idExperiences] = await Promise.all([
-    getExperiences('en'),
-    getExperiences('id')
-  ]);
+  const enExperiences = await getExperiences('en');
 
   return (
     <ExperiencesEditor
       locale={locale}
       enExperiences={enExperiences}
-      idExperiences={idExperiences}
     />
   );
 }

@@ -11,19 +11,16 @@ import type { AwardInput } from '@/lib/schemas';
 export default function AwardsEditor({
   locale,
   enAwards,
-  idAwards
 }: {
   locale: string;
   enAwards: AwardInput[];
-  idAwards: AwardInput[];
 }) {
   return (
     <BilingualEditor<AwardInput[]>
       title="Manage Awards"
       description="Honors and recognitions. Drag to reorder."
       enData={enAwards}
-      idData={idAwards}
-      onSave={async (en, id) => updateAwardsAction(en, id)}
+      onSave={(data) => updateAwardsAction(data)}
       renderForm={(list, update, loc) => <AwardsForm list={list} update={update} locale={loc} />}
     />
   );
@@ -36,7 +33,7 @@ function AwardsForm({
 }: {
   list: AwardInput[];
   update: (updater: (prev: AwardInput[]) => AwardInput[]) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const add = () =>
     update((prev) => [

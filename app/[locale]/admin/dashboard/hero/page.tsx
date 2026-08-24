@@ -10,7 +10,7 @@ export default async function HeroPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getHero('en'), getHero('id')]);
+  const en = await getHero('en');
 
-  return <HeroEditor locale={locale} enHero={en} idHero={id} />;
+  return <HeroEditor locale={locale} enHero={en} />;
 }

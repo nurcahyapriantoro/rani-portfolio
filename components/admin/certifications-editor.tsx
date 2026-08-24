@@ -9,20 +9,19 @@ import { TextArea } from '@/components/admin/ui/textarea';
 import { updateCertificationsAction } from '@/lib/actions';
 import type { CertificationInput } from '@/lib/schemas';
 
-export default function CertificationsEditor({ locale, enCertifications, idCertifications }: { locale: string; enCertifications: CertificationInput[]; idCertifications: CertificationInput[] }) {
+export default function CertificationsEditor({ locale, enCertifications }: { locale: string; enCertifications: CertificationInput[] }) {
   return (
     <BilingualEditor<CertificationInput[]>
       title="Manage Certifications"
       description="Professional certifications and credentials. Drag to reorder."
       enData={enCertifications}
-      idData={idCertifications}
-      onSave={async (en, id) => updateCertificationsAction(en, id)}
+      onSave={(data) => updateCertificationsAction(data)}
       renderForm={(list, update, loc) => <CertsForm list={list} update={update} locale={loc} />}
     />
   );
 }
 
-function CertsForm({ list, update, locale }: { list: CertificationInput[]; update: (updater: (prev: CertificationInput[]) => CertificationInput[]) => void; locale: 'en' | 'id' }) {
+function CertsForm({ list, update, locale }: { list: CertificationInput[]; update: (updater: (prev: CertificationInput[]) => CertificationInput[]) => void; locale: 'en' }) {
   const add = () =>
     update((prev) => [
       ...prev,

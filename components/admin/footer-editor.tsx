@@ -19,14 +19,13 @@ const SOCIAL_OPTIONS = [
   { value: 'website', label: 'Website' }
 ];
 
-export default function FooterEditor({ locale, enFooter, idFooter }: { locale: string; enFooter: FooterInput; idFooter: FooterInput }) {
+export default function FooterEditor({ locale, enFooter }: { locale: string; enFooter: FooterInput }) {
   return (
     <BilingualEditor<FooterInput>
       title="Edit Footer"
       description="Footer copyright text and social links."
       enData={enFooter}
-      idData={idFooter}
-      onSave={async (en, id) => updateFooterAction(en, id)}
+      onSave={(data) => updateFooterAction(data)}
       renderForm={(data, update, loc) => (
         <FooterForm data={data} update={update} locale={loc} />
       )}
@@ -34,7 +33,7 @@ export default function FooterEditor({ locale, enFooter, idFooter }: { locale: s
   );
 }
 
-function FooterForm({ data, update, locale }: { data: FooterInput; update: (updater: (prev: FooterInput) => FooterInput) => void; locale: 'en' | 'id' }) {
+function FooterForm({ data, update, locale }: { data: FooterInput; update: (updater: (prev: FooterInput) => FooterInput) => void; locale: 'en' }) {
   const set = (p: Partial<FooterInput>) => update((prev) => ({ ...prev, ...p }));
 
   const addSocial = () =>

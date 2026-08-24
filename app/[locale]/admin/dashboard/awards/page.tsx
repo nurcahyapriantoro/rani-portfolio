@@ -10,7 +10,7 @@ export default async function AwardsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getAwards('en'), getAwards('id')]);
+  const en = await getAwards('en');
 
-  return <AwardsEditor locale={locale} enAwards={en} idAwards={id} />;
+  return <AwardsEditor locale={locale} enAwards={en} />;
 }

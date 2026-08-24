@@ -9,20 +9,19 @@ import { TextArea } from '@/components/admin/ui/textarea';
 import { updateVolunteeringAction } from '@/lib/actions';
 import type { VolunteeringInput } from '@/lib/schemas';
 
-export default function VolunteeringEditor({ locale, enVolunteering, idVolunteering }: { locale: string; enVolunteering: VolunteeringInput[]; idVolunteering: VolunteeringInput[] }) {
+export default function VolunteeringEditor({ locale, enVolunteering }: { locale: string; enVolunteering: VolunteeringInput[] }) {
   return (
     <BilingualEditor<VolunteeringInput[]>
       title="Manage Volunteering"
       description="Community service and volunteer work. Drag to reorder."
       enData={enVolunteering}
-      idData={idVolunteering}
-      onSave={async (en, id) => updateVolunteeringAction(en, id)}
+      onSave={(data) => updateVolunteeringAction(data)}
       renderForm={(list, update, loc) => <VolForm list={list} update={update} locale={loc} />}
     />
   );
 }
 
-function VolForm({ list, update, locale }: { list: VolunteeringInput[]; update: (updater: (prev: VolunteeringInput[]) => VolunteeringInput[]) => void; locale: 'en' | 'id' }) {
+function VolForm({ list, update, locale }: { list: VolunteeringInput[]; update: (updater: (prev: VolunteeringInput[]) => VolunteeringInput[]) => void; locale: 'en' }) {
   const add = () =>
     update((prev) => [
       ...prev,

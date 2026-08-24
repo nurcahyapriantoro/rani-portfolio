@@ -25,20 +25,19 @@ const EMPTY_PROJECT: Omit<ProjectInput, 'id'> = {
   tags: []
 };
 
-export default function ProjectsEditor({ locale, enProjects, idProjects }: { locale: string; enProjects: ProjectInput[]; idProjects: ProjectInput[] }) {
+export default function ProjectsEditor({ locale, enProjects }: { locale: string; enProjects: ProjectInput[] }) {
   return (
     <BilingualEditor<ProjectInput[]>
       title="Manage Projects"
       description="Featured projects shown in the Projects section. Drag to reorder."
       enData={enProjects}
-      idData={idProjects}
-      onSave={async (en, id) => updateProjectsAction(en, id)}
+      onSave={(data) => updateProjectsAction(data)}
       renderForm={(list, update, loc) => <ProjectsForm list={list} update={update} locale={loc} />}
     />
   );
 }
 
-function ProjectsForm({ list, update, locale }: { list: ProjectInput[]; update: (updater: (prev: ProjectInput[]) => ProjectInput[]) => void; locale: 'en' | 'id' }) {
+function ProjectsForm({ list, update, locale }: { list: ProjectInput[]; update: (updater: (prev: ProjectInput[]) => ProjectInput[]) => void; locale: 'en' }) {
   const add = () => update((prev) => [...prev, { id: `proj-${Date.now()}`, ...EMPTY_PROJECT }]);
   const duplicate = (i: number) =>
     update((prev) => {

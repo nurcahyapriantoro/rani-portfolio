@@ -10,7 +10,7 @@ export default async function CertificationsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getCertifications('en'), getCertifications('id')]);
+  const en = await getCertifications('en');
 
-  return <CertificationsEditor locale={locale} enCertifications={en} idCertifications={id} />;
+  return <CertificationsEditor locale={locale} enCertifications={en} />;
 }

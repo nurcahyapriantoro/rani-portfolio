@@ -10,7 +10,7 @@ export default async function EducationPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getEducations('en'), getEducations('id')]);
+  const en = await getEducations('en');
 
-  return <EducationEditor locale={locale} enEducations={en} idEducations={id} />;
+  return <EducationEditor locale={locale} enEducations={en} />;
 }

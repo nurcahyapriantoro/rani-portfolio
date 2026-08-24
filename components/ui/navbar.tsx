@@ -1,14 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useLocale } from 'next-intl';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { Link, usePathname } from '@/lib/navigation';
 import { useTheme } from '@/components/theme-provider';
 import { useSmoothScroll } from '@/components/effects/smooth-scroll';
 import { useTranslations } from 'next-intl';
-import { LanguageSwitcher } from './language-switcher';
 import { cn } from '@/lib/utils';
 
 interface NavbarProps {
@@ -18,7 +16,6 @@ interface NavbarProps {
 
 export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
   const t = useTranslations('nav');
-  const locale = useLocale();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const { scrollTo } = useSmoothScroll();
@@ -102,7 +99,6 @@ export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
         </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
-          <LanguageSwitcher currentLocale={locale} />
           <button
             onClick={(e) => {
               const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();

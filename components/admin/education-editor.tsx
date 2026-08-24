@@ -14,19 +14,16 @@ import type { EducationInput } from '@/lib/schemas';
 export default function EducationEditor({
   locale,
   enEducations,
-  idEducations
 }: {
   locale: string;
   enEducations: EducationInput[];
-  idEducations: EducationInput[];
 }) {
   return (
     <BilingualEditor<EducationInput[]>
       title="Manage Education"
       description="Schools, degrees, and academic achievements. Drag to reorder."
       enData={enEducations}
-      idData={idEducations}
-      onSave={async (en, id) => updateEducationsAction(en, id)}
+      onSave={(data) => updateEducationsAction(data)}
       renderForm={(list, update, loc) => (
         <EducationForm list={list} update={update} locale={loc} />
       )}
@@ -41,7 +38,7 @@ function EducationForm({
 }: {
   list: EducationInput[];
   update: (updater: (prev: EducationInput[]) => EducationInput[]) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const add = () =>
     update((prev) => [

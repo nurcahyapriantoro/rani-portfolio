@@ -10,19 +10,16 @@ import type { ProfileInput } from '@/lib/schemas';
 export default function ProfileEditor({
   locale,
   enProfile,
-  idProfile
 }: {
   locale: string;
   enProfile: ProfileInput;
-  idProfile: ProfileInput;
 }) {
   return (
     <BilingualEditor<ProfileInput>
       title="Edit Profile"
       description="Personal information shown across the portfolio. Switch tabs to manage EN/ID translations, then save both at once."
       enData={enProfile}
-      idData={idProfile}
-      onSave={async (en, id) => updateProfileAction(en, id)}
+      onSave={(data) => updateProfileAction(data)}
       renderForm={(data, update, loc) => (
         <ProfileForm data={data} update={update} locale={loc} />
       )}
@@ -37,7 +34,7 @@ function ProfileForm({
 }: {
   data: ProfileInput;
   update: (updater: (prev: ProfileInput) => ProfileInput) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const [photoUploading, setPhotoUploading] = useState(false);
   const [photoError, setPhotoError] = useState<string | null>(null);

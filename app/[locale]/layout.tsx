@@ -83,14 +83,14 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!routing.locales.includes(locale as 'en' | 'id')) {
+  if (!routing.locales.includes(locale as 'en')) {
     notFound();
   }
   setRequestLocale(locale);
 
   const [messages, profile] = await Promise.all([
     getMessages(),
-    getProfile(locale as 'en' | 'id')
+    getProfile(locale as 'en')
   ]);
 
   return (

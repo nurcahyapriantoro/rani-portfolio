@@ -10,10 +10,7 @@ export default async function ProfilePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [enProfile, idProfile] = await Promise.all([
-    getProfile('en'),
-    getProfile('id')
-  ]);
+  const enProfile = await getProfile('en');
 
-  return <ProfileEditor locale={locale} enProfile={enProfile} idProfile={idProfile} />;
+  return <ProfileEditor locale={locale} enProfile={enProfile} />;
 }

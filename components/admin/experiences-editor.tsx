@@ -14,19 +14,16 @@ import type { ExperienceInput } from '@/lib/schemas';
 export default function ExperiencesEditor({
   locale,
   enExperiences,
-  idExperiences
 }: {
   locale: string;
   enExperiences: ExperienceInput[];
-  idExperiences: ExperienceInput[];
 }) {
   return (
     <BilingualEditor<ExperienceInput[]>
       title="Manage Experiences"
       description="Add, edit, reorder, or remove work experiences. Drag handles or arrow buttons to reorder."
       enData={enExperiences}
-      idData={idExperiences}
-      onSave={async (en, id) => updateExperiencesAction(en, id)}
+      onSave={(data) => updateExperiencesAction(data)}
       renderForm={(list, update, loc) => (
         <ExperiencesForm list={list} update={update} locale={loc} />
       )}
@@ -41,7 +38,7 @@ function ExperiencesForm({
 }: {
   list: ExperienceInput[];
   update: (updater: (prev: ExperienceInput[]) => ExperienceInput[]) => void;
-  locale: 'en' | 'id';
+  locale: 'en';
 }) {
   const add = () => {
     update((prev) => [

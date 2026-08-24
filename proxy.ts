@@ -6,7 +6,7 @@ const intlMiddleware = createIntlMiddleware(routing);
 
 const ADMIN_COOKIE = 'rani_admin_session';
 
-// Match /admin, /en/admin, /id/admin (with or without locale prefix)
+// Match /admin (with or without legacy locale prefix)
 const ADMIN_PATH_REGEX = /^\/(?:en|id)?(?:\/)?admin(?:\/|$)/;
 const ADMIN_LOGIN_REGEX = /^\/(?:en|id)?(?:\/)?admin\/login\/?$/;
 
@@ -22,16 +22,14 @@ export default async function proxy(request: NextRequest) {
     const isAuthed = session === expected;
 
     if (!isAuthed && !isLoginPath) {
-      const locale = routing.defaultLocale;
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/admin/login`;
+      url.pathname = '/admin/login';
       return NextResponse.redirect(url);
     }
 
     if (isAuthed && isLoginPath) {
-      const locale = routing.defaultLocale;
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/admin/dashboard`;
+      url.pathname = '/admin/dashboard';
       return NextResponse.redirect(url);
     }
 

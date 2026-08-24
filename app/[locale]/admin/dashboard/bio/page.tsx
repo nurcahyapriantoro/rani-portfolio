@@ -10,7 +10,7 @@ export default async function BioPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [enBio, idBio] = await Promise.all([getBio('en'), getBio('id')]);
+  const enBio = await getBio('en');
 
-  return <BioEditor locale={locale} enBio={enBio} idBio={idBio} />;
+  return <BioEditor locale={locale} enBio={enBio} />;
 }

@@ -10,7 +10,7 @@ export default async function FooterPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getFooter('en'), getFooter('id')]);
+  const en = await getFooter('en');
 
-  return <FooterEditor locale={locale} enFooter={en} idFooter={id} />;
+  return <FooterEditor locale={locale} enFooter={en} />;
 }

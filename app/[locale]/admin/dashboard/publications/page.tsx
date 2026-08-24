@@ -10,7 +10,7 @@ export default async function PublicationsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [en, id] = await Promise.all([getPublications('en'), getPublications('id')]);
+  const en = await getPublications('en');
 
-  return <PublicationsEditor locale={locale} enPublications={en} idPublications={id} />;
+  return <PublicationsEditor locale={locale} enPublications={en} />;
 }
