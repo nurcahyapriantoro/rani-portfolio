@@ -6,7 +6,7 @@ const intlMiddleware = createIntlMiddleware(routing);
 
 const ADMIN_COOKIE = 'rani_admin_session';
 
-// Match /admin (with or without legacy locale prefix)
+// trigger redeploy 2026-09-08 23:02:37Z
 const ADMIN_PATH_REGEX = /^\/(?:en|id)?(?:\/)?admin(?:\/|$)/;
 const ADMIN_LOGIN_REGEX = /^\/(?:en|id)?(?:\/)?admin\/login\/?$/;
 
