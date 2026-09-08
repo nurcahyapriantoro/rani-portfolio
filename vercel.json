@@ -1,25 +1,20 @@
-
-  "_comment": "force-redeploy 2026-09-08 23:01:52Z",
+{
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "regions": ["sin1"],
   "headers": [
-    
-  "_comment": "force-redeploy 2026-09-08 23:01:52Z",
+    {
       "source": "/(.*)",
       "headers": [
-        
-  "_comment": "force-redeploy 2026-09-08 23:01:52Z",
+        {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
-        
-  "_comment": "force-redeploy 2026-09-08 23:01:52Z",
+        {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
         },
-        
-  "_comment": "force-redeploy 2026-09-08 23:01:52Z",
+        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         }
