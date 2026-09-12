@@ -12,6 +12,9 @@ const ADMIN_LOGIN_REGEX = /^(?:\/(?:en))?\/admin\/login\/?$/;
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Static assets must bypass locale rewriting even when the matcher runs.
+  if (pathname.includes('.')) return NextResponse.next();
+
   const isAdminPath = ADMIN_PATH_REGEX.test(pathname);
   const isLoginPath = ADMIN_LOGIN_REGEX.test(pathname);
   const hasLocalePrefix = pathname === '/en' || pathname.startsWith('/en/');
