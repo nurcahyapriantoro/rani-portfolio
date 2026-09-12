@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
 import { Trophy, Award, Medal, Crown } from 'lucide-react';
 
 interface Award {
@@ -20,8 +19,13 @@ function getRankIcon(rank: string) {
   return Award;
 }
 
+const T = {
+  label: 'Honors & Awards',
+  title: 'Recognitions',
+  subtitle: 'Milestones in academic and competition journey'
+};
+
 export function Awards({ awards }: { awards: Award[] }) {
-  const t = useTranslations('awards');
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -51,14 +55,14 @@ export function Awards({ awards }: { awards: Award[] }) {
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px w-10 bg-accent" />
           <span className="text-xs font-mono uppercase tracking-widest text-accent">
-            {t('label')}
+            {T.label}
           </span>
         </div>
 
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
-          {t('title')}
+          {T.title}
         </h2>
-        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{t('subtitle')}</p>
+        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{T.subtitle}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {awards.map((award) => {

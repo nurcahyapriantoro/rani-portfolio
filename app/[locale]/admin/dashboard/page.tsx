@@ -40,6 +40,7 @@ export default async function AdminOverviewPage({
 
   const quickLinks = [
     { href: '/admin/dashboard/profile', label: 'Edit Profile', icon: User },
+    { href: '/admin/dashboard/cv', label: 'Manage CV', icon: FileText },
     { href: '/admin/dashboard/hero', label: 'Edit Hero', icon: GraduationCap },
     { href: '/admin/dashboard/stats', label: 'Edit Stats', icon: BarChart3 },
     { href: '/admin/dashboard/bio', label: 'Edit Bio', icon: FileText },

@@ -1,45 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-import createIntlMiddleware from 'next-intl/middleware';
-import { routing } from './lib/routing';
-
-const intlMiddleware = createIntlMiddleware(routing);
 
 const ADMIN_COOKIE = 'rani_admin_session';
 
-// trigger redeploy 2026-09-08 23:02:37Z
-const ADMIN_PATH_REGEX = /^\/(?:en|id)?(?:\/)?admin(?:\/|$)/;
-const ADMIN_LOGIN_REGEX = /^\/(?:en|id)?(?:\/)?admin\/login\/?$/;
+// The admin panel lives under [locale] in the App Router. Public URLs do not
+// carry the locale prefix (localePrefix: 'never'), so the proxy rewrites
+// everything to /en/* internally and redirects /admin/* through the locale
+// segment so the App Router can match `app/[locale]/admin/**`.
+const ADMIN_PATH_REGEX = /^(?:\/(?:en))?\/admin(?:\/|$)/;
+const ADMIN_LOGIN_REGEX = /^(?:\/(?:en))?\/admin\/login\/?$/;
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isAdminPath = ADMIN_PATH_REGEX.test(pathname);
   const isLoginPath = ADMIN_LOGIN_REGEX.test(pathname);
+  const hasLocalePrefix = pathname === '/en' || pathname.startsWith('/en/');
+  const adminPath = pathname.replace(/^\/en/, '') || '/';
+
+  if (pathname.startsWith('/admin')) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/en${pathname}`;
+    return NextResponse.redirect(url);
+  }
 
   if (isAdminPath) {
     const session = request.cookies.get(ADMIN_COOKIE)?.value;
-    const expected = process.env.COOKIE_SECRET || 'dev-cookie-secret-change-in-production';
-    const isAuthed = session === expected;
+    const expected = process.env.COOKIE_SECRET ?? (
+      process.env.NODE_ENV === 'production' ? '' : 'dev-cookie-secret-change-in-production'
+    );
+    const isAuthed = Boolean(expected && session === expected);
 
     if (!isAuthed && !isLoginPath) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/admin/login';
-      return NextResponse.redirect(url);
+      return NextResponse.redirect(new URL('/en/admin/login', request.url));
     }
-
     if (isAuthed && isLoginPath) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/admin/dashboard';
-      return NextResponse.redirect(url);
+      return NextResponse.redirect(new URL('/en/admin/dashboard', request.url));
     }
 
-    // Pass through with x-pathname header so layout can detect login page
     const response = NextResponse.next();
-    response.headers.set('x-pathname', pathname);
+    response.headers.set('x-pathname', adminPath);
     return response;
   }
 
-  return intlMiddleware(request);
+  if (!hasLocalePrefix) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/en${pathname === '/' ? '' : pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

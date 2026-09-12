@@ -1,6 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 import { BookOpen, ExternalLink, Users } from 'lucide-react';
@@ -19,8 +18,14 @@ interface Publication {
   url?: string;
 }
 
+const T = {
+  label: 'Publications',
+  title: 'Research & Writing',
+  subtitle: 'Contributions to scientific community',
+  view: 'View Publication'
+};
+
 export function Publications({ publications }: { publications: Publication[] }) {
-  const t = useTranslations('publications');
 
   return (
     <section id="publications" className="py-14 md:py-20 relative">
@@ -28,14 +33,14 @@ export function Publications({ publications }: { publications: Publication[] }) 
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px w-10 bg-accent" />
           <span className="text-xs font-mono uppercase tracking-widest text-accent">
-            {t('label')}
+            {T.label}
           </span>
         </div>
 
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
-          {t('title')}
+          {T.title}
         </h2>
-        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{t('subtitle')}</p>
+        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{T.subtitle}</p>
 
         <Swiper
           effect={'coverflow'}
@@ -96,7 +101,7 @@ export function Publications({ publications }: { publications: Publication[] }) 
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:gap-2 transition-all"
                   >
-                    View Publication
+                    {T.view}
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 )}

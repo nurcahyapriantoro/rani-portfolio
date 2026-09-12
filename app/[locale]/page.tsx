@@ -10,6 +10,7 @@ import { Skills } from '@/components/sections/skills';
 import { Projects } from '@/components/sections/projects';
 import { Publications } from '@/components/sections/publications';
 import { Awards } from '@/components/sections/awards';
+import { Cv } from '@/components/sections/cv';
 import { Contact } from '@/components/sections/contact';
 import { Footer } from '@/components/sections/footer';
 import {
@@ -73,6 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Projects projects={projects} certifications={certifications} volunteering={volunteering} />
       <Publications publications={publications} />
       <Awards awards={awards} />
+      <Cv profile={profile} />
       <Contact profile={profile} />
       <Footer profile={profile} footer={footer} />
     </>

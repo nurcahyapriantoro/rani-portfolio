@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Mail, Sparkles, MapPin } from 'lucide-react';
+import { FileText, Mail, Sparkles, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { DNASceneClient } from '../three/dna-scene-client';
 import type { ProfileInput, HeroInput } from '@/lib/schemas';
@@ -132,6 +132,15 @@ export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: Hero
                   <Mail className="w-3.5 h-3.5" />
                   Get in touch
                 </a>
+                {profile.cvUrl && (
+                  <a
+                    href="#cv"
+                    className="group inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl glass text-sm font-semibold hover:scale-105 transition-all shine"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-accent" />
+                    View CV
+                  </a>
+                )}
               </div>
             </div>
           </div>

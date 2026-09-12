@@ -1,15 +1,11 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { ThemeProvider } from '@/components/theme-provider';
 import { SmoothScrollProvider } from '@/components/effects/smooth-scroll';
 import { Navbar } from '@/components/ui/navbar';
-import { routing } from '@/lib/routing';
 import { getProfile } from '@/lib/content';
-import '../globals.css';
+import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
@@ -71,30 +67,17 @@ export const metadata: Metadata = {
   }
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+export const dynamic = 'force-dynamic';
 
-export default async function LocaleLayout({
-  children,
-  params
+export default async function RootLayout({
+  children
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  if (!routing.locales.includes(locale as 'en')) {
-    notFound();
-  }
-  setRequestLocale(locale);
-
-  const [messages, profile] = await Promise.all([
-    getMessages(),
-    getProfile(locale as 'en')
-  ]);
+  const profile = await getProfile('en');
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
           {themeInitScript}
@@ -102,16 +85,14 @@ export default async function LocaleLayout({
       </head>
       <body>
         <ThemeProvider defaultTheme="light" storageKey="rani-theme">
-          <NextIntlClientProvider messages={messages}>
-            <SmoothScrollProvider>
-              <Navbar
-                photoUrl={profile.photoUrl || undefined}
-                avatarInitials={profile.avatarInitials || 'RT'}
-                showCv={Boolean(profile.cvUrl)}
-              />
-              {children}
-            </SmoothScrollProvider>
-          </NextIntlClientProvider>
+          <SmoothScrollProvider>
+            <Navbar
+              photoUrl={profile.photoUrl || undefined}
+              avatarInitials={profile.avatarInitials || 'RT'}
+              showCv={Boolean(profile.cvUrl)}
+            />
+            {children}
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
 import { Microscope, Atom, BarChart3, Users } from 'lucide-react';
 
 interface Skill {
@@ -17,8 +16,19 @@ const CATEGORY_ICONS = {
   soft: Users
 } as const;
 
+const T = {
+  label: 'Skills',
+  title: 'What I Bring',
+  subtitle: 'Laboratory techniques, molecular tools, and soft skills',
+  categories: {
+    molecular: 'Molecular Biology',
+    analysis: 'Analysis',
+    laboratory: 'Laboratory',
+    soft: 'Soft Skills'
+  }
+};
+
 export function Skills({ skills }: { skills: Skill[] }) {
-  const t = useTranslations('skills');
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -56,14 +66,14 @@ export function Skills({ skills }: { skills: Skill[] }) {
         <div className="flex items-center gap-2 mb-3">
           <div className="h-px w-10 bg-accent" />
           <span className="text-xs font-mono uppercase tracking-widest text-accent">
-            {t('label')}
+            {T.label}
           </span>
         </div>
 
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
-          {t('title')}
+          {T.title}
         </h2>
-        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{t('subtitle')}</p>
+        <p className="text-xs md:text-sm text-text-muted mb-10 md:mb-14 max-w-2xl">{T.subtitle}</p>
 
         <div className="grid md:grid-cols-2 gap-3 md:gap-4">
           {Object.entries(grouped).map(([category, items]) => {
@@ -78,7 +88,7 @@ export function Skills({ skills }: { skills: Skill[] }) {
                     <Icon className="w-4 h-4 text-accent" />
                   </div>
                   <h3 className="font-display text-base md:text-lg font-bold capitalize">
-                    {t(`categories.${category}`)}
+                    {T.categories[category as keyof typeof T.categories] || category}
                   </h3>
                 </div>
 

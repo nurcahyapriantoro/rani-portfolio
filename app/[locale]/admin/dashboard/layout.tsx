@@ -27,6 +27,7 @@ export default async function AdminDashboardLayout({
   const sections = [
     { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
     { href: '/admin/dashboard/profile', label: 'Profile', icon: User },
+    { href: '/admin/dashboard/cv', label: 'CV / Resume', icon: FileText },
     { href: '/admin/dashboard/hero', label: 'Hero', icon: GraduationCap },
     { href: '/admin/dashboard/stats', label: 'Stats', icon: BarChart3 },
     { href: '/admin/dashboard/bio', label: 'Bio', icon: FileText },

@@ -2,25 +2,31 @@
 
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
-import Image from 'next/image';
-import { Link, usePathname } from '@/lib/navigation';
-import { useTheme } from '@/components/theme-provider';
-import { useSmoothScroll } from '@/components/effects/smooth-scroll';
-import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 interface NavbarProps {
   photoUrl?: string;
   avatarInitials: string;
+  showCv?: boolean;
 }
 
-export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
-  const t = useTranslations('nav');
-  const { theme, toggleTheme } = useTheme();
-  const pathname = usePathname();
-  const { scrollTo } = useSmoothScroll();
+const NAV_ITEMS = [
+  { href: '#about', label: 'About' },
+  { href: '#education', label: 'Education' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#publications', label: 'Publications' },
+  { href: '#awards', label: 'Awards' },
+  { href: '#contact', label: 'Contact' }
+];
+
+export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, showCv = false }: NavbarProps) {
+  const navItems = showCv
+    ? [...NAV_ITEMS.slice(0, -1), { href: '#cv', label: 'CV' }, NAV_ITEMS[NAV_ITEMS.length - 1]]
+    : NAV_ITEMS;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -29,20 +35,36 @@ export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { href: '#about', label: t('about') },
-    { href: '#education', label: t('education') },
-    { href: '#experience', label: t('experience') },
-    { href: '#skills', label: t('skills') },
-    { href: '#publications', label: t('publications') },
-    { href: '#awards', label: t('awards') },
-    { href: '#contact', label: t('contact') }
-  ];
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('rani-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+      setTheme(initial);
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(initial);
+    } catch {}
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    try {
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(next);
+      document.documentElement.style.colorScheme = next;
+      localStorage.setItem('rani-theme', next);
+    } catch {}
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileOpen(false);
-    scrollTo(href, { offset: -64, duration: 1.2 });
+    const target = document.querySelector(href);
+    if (target) {
+      const top = (target as HTMLElement).getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
     if (typeof window !== 'undefined') {
       window.history.replaceState(null, '', href);
     }
@@ -56,33 +78,17 @@ export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
       )}
     >
       <nav className="container mx-auto px-3 md:px-5 flex items-center justify-between gap-2">
-        <Link
+        <a
           href="/"
-          onClick={(e) => {
-            if (pathname === '/') {
-              e.preventDefault();
-              scrollTo(0, { duration: 1.5 });
-            }
-          }}
           className="flex items-center gap-1.5 group shrink-0"
         >
           <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-bg-primary font-bold text-xs transition-transform group-hover:scale-110 group-hover:rotate-3 overflow-hidden shrink-0">
-            {photoUrl ? (
-              <Image
-                src={photoUrl}
-                alt={avatarInitials || 'avatar'}
-                width={32}
-                height={32}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              avatarInitials || 'RT'
-            )}
+            {_avatarInitials || 'RT'}
           </div>
           <span className="hidden sm:inline font-display font-semibold text-sm text-text-primary">
             Rani<span className="text-accent">.</span>
           </span>
-        </Link>
+        </a>
 
         <div className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
           {navItems.map((item) => (
@@ -100,10 +106,7 @@ export function Navbar({ photoUrl, avatarInitials }: NavbarProps) {
 
         <div className="flex items-center gap-1.5 shrink-0">
           <button
-            onClick={(e) => {
-              const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-              toggleTheme(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            }}
+            onClick={toggleTheme}
             aria-label="Toggle theme"
             className="w-8 h-8 rounded-lg glass flex items-center justify-center hover:scale-110 transition-transform relative overflow-hidden"
           >

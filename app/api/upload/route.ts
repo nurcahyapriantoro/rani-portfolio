@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getUploadStorage } from '@/lib/storage';
-import { cookies } from 'next/headers';
+import { isAuthenticated } from '@/lib/auth';
 
 export const runtime = 'nodejs';
 
@@ -17,16 +17,12 @@ const ALLOWED_SECTIONS = new Set([
   'misc'
 ]);
 
-const COOKIE_NAME = 'rani_admin_session';
-
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(COOKIE_NAME)?.value;
-  const expected = process.env.COOKIE_SECRET || 'dev-cookie-secret-change-in-production';
-  if (!sessionCookie || sessionCookie !== expected) {
+  if (!(await isAuthenticated())) {
     return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
   }
+
+  const formData = await request.formData();
 
   const section = (formData.get('section') as string) ?? 'misc';
   if (!ALLOWED_SECTIONS.has(section)) {
@@ -36,6 +32,25 @@ export async function POST(request: NextRequest) {
   const files = formData.getAll('files').filter((f): f is File => f instanceof File);
   if (files.length === 0) {
     return NextResponse.json({ ok: false, error: 'No files' }, { status: 400 });
+  }
+
+  if (section === 'cv') {
+    if (files.length !== 1) {
+      return NextResponse.json({ ok: false, error: 'Upload one CV at a time' }, { status: 400 });
+    }
+
+    const file = files[0];
+    if (file.type !== 'application/pdf' || !file.name.toLowerCase().endsWith('.pdf')) {
+      return NextResponse.json({ ok: false, error: 'Only PDF files are allowed' }, { status: 400 });
+    }
+    if (file.size === 0 || file.size > 1024 * 1024) {
+      return NextResponse.json({ ok: false, error: 'PDF must be between 1 byte and 1MB' }, { status: 400 });
+    }
+
+    const signature = new Uint8Array(await file.slice(0, 5).arrayBuffer());
+    if (String.fromCharCode(...signature) !== '%PDF-') {
+      return NextResponse.json({ ok: false, error: 'The selected file is not a valid PDF' }, { status: 400 });
+    }
   }
 
   const storage = getUploadStorage();

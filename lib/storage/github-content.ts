@@ -1,4 +1,5 @@
 import type { ContentStorage, ContentShape, Locale } from './types';
+import fallbackContent from '../../content/en.json';
 
 interface GitHubRepo {
   owner: string;
@@ -137,17 +138,21 @@ export class GitHubContentStorage implements ContentStorage {
 
   async readContent(locale: Locale): Promise<ContentShape> {
     const repo = await this.getRepo();
-    if (!repo) throw new Error('GitHub storage not configured (missing GH_TOKEN)');
+    if (!repo) return locale === 'en' ? (fallbackContent as ContentShape) : {};
 
     const cached = cache[locale];
     if (cached && Date.now() - cached.ts < CACHE_TTL_MS) {
       return cached.data;
     }
 
-    const file = await getFile(repo, `content/${locale}.json`);
+    let file: GitHubContentFile | null;
+    try {
+      file = await getFile(repo, `content/${locale}.json`);
+    } catch {
+      return locale === 'en' ? (fallbackContent as ContentShape) : {};
+    }
     if (!file) {
-      // First-time read: return empty shape (will be populated on first write)
-      return {};
+      return locale === 'en' ? (fallbackContent as ContentShape) : {};
     }
     const decoded = Buffer.from(file.content, 'base64').toString('utf-8');
     const data = JSON.parse(decoded) as ContentShape;

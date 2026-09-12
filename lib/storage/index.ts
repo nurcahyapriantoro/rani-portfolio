@@ -6,13 +6,15 @@ import { KVContentStorage } from './kv-content';
 import { BlobUploadStorage } from './blob-upload';
 import { GitHubContentStorage } from './github-content';
 import { GitHubUploadStorage } from './github-upload';
+import { PostgresContentStorage } from './postgres-content';
 
 let _content: ContentStorage | null = null;
 let _upload: UploadStorage | null = null;
 
-export type StorageBackend = 'fs' | 'kv' | 'github';
+export type StorageBackend = 'fs' | 'kv' | 'github' | 'postgres';
 
 function detectContentBackend(): StorageBackend {
+  if (process.env.SUPABASE_DB_URL || process.env.DATABASE_URL) return 'postgres';
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) return 'kv';
   if (process.env.GH_TOKEN || process.env.GITHUB_TOKEN) return 'github';
   return 'fs';
@@ -28,6 +30,9 @@ export function getContentStorage(): ContentStorage {
   if (_content) return _content;
   const backend = detectContentBackend();
   switch (backend) {
+    case 'postgres':
+      _content = new PostgresContentStorage();
+      break;
     case 'kv':
       _content = new KVContentStorage();
       break;
@@ -43,6 +48,9 @@ export function getContentStorage(): ContentStorage {
 export function getUploadStorage(): UploadStorage {
   if (_upload) return _upload;
   const backend = detectUploadBackend();
+  if (backend === 'fs' && process.env.VERCEL) {
+    throw new Error('Persistent upload storage is not configured. Set BLOB_READ_WRITE_TOKEN or GH_TOKEN.');
+  }
   switch (backend) {
     case 'kv':
       _upload = new BlobUploadStorage();

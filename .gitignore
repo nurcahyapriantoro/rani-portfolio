@@ -51,3 +51,6 @@ dev-server.err.log
 .env.production
 
 .vercel
+
+.vercel
+.env*

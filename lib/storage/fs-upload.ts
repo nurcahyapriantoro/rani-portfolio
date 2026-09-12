@@ -15,7 +15,7 @@ const ALLOWED_MIME = new Set([
 ]);
 
 const MAX_BYTES = 5 * 1024 * 1024;
-const MAX_BYTES_CV = 20 * 1024 * 1024;
+const MAX_BYTES_CV = 1024 * 1024;
 
 const SECTION_MAX_BYTES: Record<string, number> = {
   cv: MAX_BYTES_CV
