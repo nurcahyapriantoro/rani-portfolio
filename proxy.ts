@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { ADMIN_COOKIE_NAME, getCookieSecret } from '@/lib/auth';
 
-const ADMIN_COOKIE = 'rani_admin_session';
+const ADMIN_COOKIE = ADMIN_COOKIE_NAME;
 
 // The admin panel lives under [locale] in the App Router. Public URLs do not
 // carry the locale prefix (localePrefix: 'never'), so the proxy rewrites
@@ -28,9 +29,7 @@ export default async function proxy(request: NextRequest) {
 
   if (isAdminPath) {
     const session = request.cookies.get(ADMIN_COOKIE)?.value;
-    const expected = process.env.COOKIE_SECRET ?? (
-      process.env.NODE_ENV === 'production' ? '' : 'dev-cookie-secret-change-in-production'
-    );
+    const expected = getCookieSecret();
     const isAuthed = Boolean(expected && session === expected);
 
     if (!isAuthed && !isLoginPath) {
