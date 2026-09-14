@@ -74,8 +74,8 @@ npm run dev
 ```
 
 ### Default Admin Credentials
-- **URL**: `http://localhost:3000/en/admin/login`
-- **Password**: `admin123` (change in `.env.local` → `ADMIN_PASSWORD`)
+- **URL**: `http://localhost:3000/en/admin/login` (production: `/en/admin/login` on your deployment)
+- **Password**: `ranicantik` — baked into `lib/auth.ts` as the fallback. Override in production by setting `ADMIN_PASSWORD_HASH` (or `ADMIN_PASSWORD`) and `COOKIE_SECRET` env vars in Vercel.
 
 ---
 
