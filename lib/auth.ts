@@ -9,9 +9,9 @@ const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 // ADMIN_PASSWORD) and COOKIE_SECRET in Vercel project settings.
 //
 // Default password: `ranicantik`.
-//   node -e "console.log(require('bcryptjs').hashSync('ranicantik', 10))"
+//   node -e "console.log(JSON.stringify(require('bcryptjs').hashSync('ranicantik',10)))"
 const FALLBACK_PASSWORD_HASH =
-  '$2b$10$w5zl9u.94HwbMGcsEiCNm.M.Dxca6qb7iaRNwq6JfUxslnaItbO';
+  '$2b$10$/yEFQHtCNNDvT3GQCTxbq.NQCS9fRz6Aa0cFCO7ECfLZf/mF9eYUq';
 const FALLBACK_COOKIE_SECRET = 'rani-cookie-fallback-7b9c4f2e8a1d6e3b5f7a9c1e';
 
 export function getCookieSecret(): string {
