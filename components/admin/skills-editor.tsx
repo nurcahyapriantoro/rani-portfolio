@@ -7,7 +7,7 @@ import { Select } from '@/components/admin/ui/select';
 import { updateSkillsAction } from '@/lib/actions';
 import type { SkillInput } from '@/lib/schemas';
 
-const CATEGORIES = ['molecular', 'analysis', 'laboratory', 'soft'] as const;
+const CATEGORIES = ['molecular', 'microbiology', 'analysis', 'laboratory', 'soft'] as const;
 
 export default function SkillsEditor({
   locale,

@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Microscope, Atom, BarChart3, Users } from 'lucide-react';
+import { Microscope, Atom, BarChart3, Users, Bug } from 'lucide-react';
 
 interface Skill {
   name: string;
-  category: 'molecular' | 'analysis' | 'laboratory' | 'soft';
+  category: 'molecular' | 'microbiology' | 'analysis' | 'laboratory' | 'soft';
   level: number;
 }
 
 const CATEGORY_ICONS = {
   molecular: Atom,
+  microbiology: Bug,
   analysis: BarChart3,
   laboratory: Microscope,
   soft: Users
@@ -22,6 +23,7 @@ const T = {
   subtitle: 'Laboratory techniques, molecular tools, and soft skills',
   categories: {
     molecular: 'Molecular Biology',
+    microbiology: 'Microbiology',
     analysis: 'Analysis',
     laboratory: 'Laboratory',
     soft: 'Soft Skills'

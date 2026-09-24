@@ -58,7 +58,7 @@ export const experiencesSchema = z.array(experienceSchema);
 
 export const skillSchema = z.object({
   name: z.string(),
-  category: z.enum(['molecular', 'analysis', 'laboratory', 'soft']),
+  category: z.enum(['molecular', 'microbiology', 'analysis', 'laboratory', 'soft']),
   level: z.number().min(0).max(100)
 });
 
