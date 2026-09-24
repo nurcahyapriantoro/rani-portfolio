@@ -87,7 +87,10 @@ function SkillsForm({
                 <Select
                   value={skill.category}
                   onChange={(v) => patch(i, { category: v as SkillInput['category'] })}
-                  options={CATEGORIES.map((c) => ({ value: c, label: c }))}
+                   options={CATEGORIES.map((c) => ({
+                     value: c,
+                     label: c === 'molecular' ? 'Molecular Biology' : c
+                   }))}
                   className="w-36 text-sm"
                 />
                 <div className="flex items-center gap-1.5">
