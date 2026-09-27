@@ -71,6 +71,10 @@ export function getStorageInfo() {
   };
 }
 
+// Exported so the /api/_debug/storage diagnostic endpoint can show users the
+// actually-resolved backend names in production.
+export { detectContentBackend, detectUploadBackend };
+
 // Convenience wrappers re-exporting the interface
 export async function readContent(locale: Locale): Promise<ContentShape> {
   return getContentStorage().readContent(locale);
