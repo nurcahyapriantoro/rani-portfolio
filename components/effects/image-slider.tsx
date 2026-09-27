@@ -26,17 +26,19 @@ const MAX_WIDTH_CLASS: Record<NonNullable<ImageSliderProps['maxWidth']>, string>
 };
 
 /**
- * Responsive grid classes for the per-page image count. The grid always
- * collapses to a single column on small screens so portrait images stay
- * legible, and uses 2-up on tablet. On desktop it scales to the page size.
+ * Responsive grid classes for the per-page image count. Defaults to a 2x2
+ * layout for 4 images (which feels more portfolio-like than the cramped
+ * 4-up). On mobile everything collapses to 1 column so portrait images
+ * stay legible, then it scales up to 2 columns on tablet/desktop.
+ * Use the optional `perPage` prop to switch to a tighter 4-up grid.
  */
 function gridCols(perPage: number): string {
   // col-mobile col-tablet col-desktop
   if (perPage <= 1) return 'grid-cols-1';
   if (perPage === 2) return 'grid-cols-1 sm:grid-cols-2';
   if (perPage === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-  // perPage 4+ (default)
-  return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4';
+  // perPage 4+ (default — keep grid wide so individual thumbnails read big)
+  return 'grid-cols-1 sm:grid-cols-2';
 }
 
 export function ImageSlider({
@@ -93,7 +95,7 @@ export function ImageSlider({
                 src={src}
                 alt={`${alt} - ${globalIndex + 1}`}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, 50vw"
                 className="object-cover"
               />
             </button>
@@ -230,6 +232,7 @@ function Lightbox({ images, startIndex, alt, onClose }: LightboxProps) {
           sizes="90vw"
           className="object-contain"
           quality={90}
+          priority
         />
       </div>
 

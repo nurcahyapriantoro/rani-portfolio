@@ -129,7 +129,7 @@ export function Experience({ experiences }: { experiences: ExperienceInput[] }) 
                   )}
 
                   {exp.images && exp.images.length > 0 && (
-                    <ImageSlider images={exp.images} alt={exp.role} maxWidth="xs" />
+                    <ImageSlider images={exp.images} alt={exp.role} maxWidth="full" />
                   )}
                 </div>
               </div>
