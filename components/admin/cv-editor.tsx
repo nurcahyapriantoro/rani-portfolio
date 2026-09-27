@@ -49,13 +49,19 @@ export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
       formData.append('hint', file.name);
 
       const response = await fetch('/api/upload', { method: 'POST', body: formData });
-      const result = await response.json();
-      if (!response.ok || !result.ok) {
-        setUploadError(result.error ?? 'Upload failed');
+      const body = await response.text();
+      let result: { ok?: boolean; error?: string; files?: Array<{ url: string }> };
+      try {
+        result = body ? JSON.parse(body) : {};
+      } catch {
+        result = {};
+      }
+      if (!response.ok || !result.ok || !result.files?.[0]?.url) {
+        setUploadError(result.error ?? `Upload failed (HTTP ${response.status})`);
         return;
       }
 
-      setCvUrl(result.files[0].url as string);
+      setCvUrl(result.files[0].url);
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : 'Upload failed');
     } finally {

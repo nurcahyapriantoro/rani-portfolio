@@ -51,9 +51,15 @@ function ProfileForm({
       fd.append('section', 'profile');
       fd.append('hint', file.name);
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      const result = await res.json();
-      if (!res.ok || !result.ok) {
-        setPhotoError(result.error ?? 'Upload failed');
+      const body = await res.text();
+      let result: { ok?: boolean; error?: string; files?: Array<{ url: string }> };
+      try {
+        result = body ? JSON.parse(body) : {};
+      } catch {
+        result = {};
+      }
+      if (!res.ok || !result.ok || !Array.isArray(result.files)) {
+        setPhotoError(result.error ?? `Upload failed (HTTP ${res.status})`);
         return;
       }
       const url = result.files[0].url as string;

@@ -62,12 +62,20 @@ export function ImageListPicker({
       }
       fd.append('section', section);
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        setError(data.error ?? 'Upload failed');
+      // Read text first so an empty/non-JSON server response becomes a useful
+      // upload error instead of the opaque "Unexpected end of JSON input".
+      const body = await res.text();
+      let data: { ok?: boolean; error?: string; files?: Array<{ url: string }> };
+      try {
+        data = body ? JSON.parse(body) : {};
+      } catch {
+        data = {};
+      }
+      if (!res.ok || !data.ok || !Array.isArray(data.files)) {
+        setError(data.error ?? `Upload failed (HTTP ${res.status})`);
         return;
       }
-      const urls: string[] = data.files.map((f: { url: string }) => f.url);
+      const urls: string[] = data.files.map((f) => f.url);
       onChange([...values, ...urls]);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Upload failed');
