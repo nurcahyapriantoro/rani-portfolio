@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import type { UploadStorage, UploadResult, UploadError } from './types';
+import { MAX_UPLOAD_BYTES, MAX_CV_BYTES, formatMB } from './constants';
 
 interface GitHubRepo {
   owner: string;
@@ -140,8 +141,8 @@ const ALLOWED_MIME = new Set([
   'application/pdf'
 ]);
 
-const MAX_BYTES = 5 * 1024 * 1024;
-const MAX_BYTES_CV = 1024 * 1024;
+const MAX_BYTES = MAX_UPLOAD_BYTES;
+const MAX_BYTES_CV = MAX_CV_BYTES;
 
 const SECTION_MAX_BYTES: Record<string, number> = {
   cv: MAX_BYTES_CV
@@ -154,7 +155,10 @@ export class GitHubUploadStorage implements UploadStorage {
     }
     const maxBytes = SECTION_MAX_BYTES[section] ?? MAX_BYTES;
     if (file.size > maxBytes) {
-      return { ok: false, error: `File too large (max ${maxBytes / 1024 / 1024}MB)` };
+      return {
+        ok: false,
+        error: `File too large: "${file.name}" is ${formatMB(file.size)}. Maximum upload size is ${formatMB(maxBytes)}. Please compress or resize the image and try again.`
+      };
     }
     if (file.size === 0) {
       return { ok: false, error: 'Empty file' };
@@ -174,6 +178,21 @@ export class GitHubUploadStorage implements UploadStorage {
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const contentBase64 = buffer.toString('base64');
+
+    // GitHub Contents API receives base64 in the JSON body, which Vercel will
+    // also size-check against the request body limit (~4.5 MB on Hobby). Base64
+    // inflates the payload by ~33%, so guard against oversized encodings too.
+    const encodedBytes = Buffer.byteLength(contentBase64, 'utf8');
+    const VERCEL_BODY_LIMIT_BYTES = 4.5 * 1024 * 1024;
+    if (encodedBytes > VERCEL_BODY_LIMIT_BYTES * 0.7) {
+      return {
+        ok: false,
+        error:
+          `"${file.name}" is ${formatMB(file.size)} which becomes ${formatMB(encodedBytes)} ` +
+          `after base64 encoding. The hosting platform (Vercel) caps uploads at ~3 MB for ` +
+          `this backend. Please compress or resize the image to under 2 MB and try again.`
+      };
+    }
 
     try {
       await putFile(

@@ -5,6 +5,13 @@ import { Upload } from 'lucide-react';
 import { BilingualEditor } from '@/components/admin/bilingual-editor';
 import { Field } from '@/components/admin/ui/field';
 import { updateProfileAction } from '@/lib/actions';
+import {
+  MAX_UPLOAD_BYTES,
+  MAX_UPLOAD_MB,
+  formatMB,
+  isAllowedImageMime,
+  overSizeMessage
+} from '@/lib/storage/constants';
 import type { ProfileInput } from '@/lib/schemas';
 
 export default function ProfileEditor({
@@ -44,6 +51,22 @@ function ProfileForm({
 
   const uploadPhoto = async (file: File) => {
     setPhotoError(null);
+
+    // Reject oversize / wrong-type files BEFORE issuing the request. Without
+    // this, an oversize photo gets a 0-byte response from Vercel and the user
+    // sees the cryptic "Unexpected end of JSON input" SyntaxError.
+    if (!isAllowedImageMime(file)) {
+      setPhotoError(
+        `"${file.name}" is not a supported image (${file.type || 'unknown file type'}). ` +
+          `Please upload a JPG, PNG, WebP, GIF, or SVG.`
+      );
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setPhotoError(overSizeMessage(file.name, file.size));
+      return;
+    }
+
     setPhotoUploading(true);
     try {
       const fd = new FormData();
@@ -59,13 +82,25 @@ function ProfileForm({
         result = {};
       }
       if (!res.ok || !result.ok || !Array.isArray(result.files)) {
-        setPhotoError(result.error ?? `Upload failed (HTTP ${res.status})`);
+        const reason =
+          result.error ||
+          (res.status === 413
+            ? `File too large for the server. Maximum upload size is ${formatMB(MAX_UPLOAD_BYTES)}.`
+            : body
+              ? `Upload failed (HTTP ${res.status})`
+              : `Upload failed (HTTP ${res.status}): the server returned an empty response. ` +
+                `Maximum upload size is ${formatMB(MAX_UPLOAD_BYTES)}. ` +
+                `Please compress or resize the image and try again.`);
+        setPhotoError(reason);
+        console.error('[profile-photo upload]', { status: res.status, body, result });
         return;
       }
       const url = result.files[0].url as string;
       set('photoUrl', url);
     } catch (e) {
-      setPhotoError(e instanceof Error ? e.message : 'Upload failed');
+      const msg = e instanceof Error ? e.message : 'Upload failed';
+      setPhotoError(`Upload failed: ${msg}. Check your connection and try again.`);
+      console.error('[profile-photo upload] network/runtime error', e);
     } finally {
       setPhotoUploading(false);
     }
@@ -173,7 +208,21 @@ function ProfileForm({
                 </button>
               )}
             </div>
-            {photoError && <p className="text-xs text-red-500">{photoError}</p>}
+            <p className="text-[11px] text-text-muted">
+              Max {MAX_UPLOAD_MB.toFixed(1)} MB · JPG, PNG, WebP, GIF, or SVG.
+            </p>
+            {photoError && (
+              <div
+                role="alert"
+                className="px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-xs space-y-1"
+              >
+                <p className="font-semibold">Upload failed</p>
+                <p>{photoError}</p>
+                <p className="text-red-400/80">
+                  Tip: maximum upload size is {formatMB(MAX_UPLOAD_BYTES)}. Compress or resize the image and try again.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { put } from '@vercel/blob';
 import crypto from 'crypto';
 import type { UploadStorage, UploadResult, UploadError } from './types';
+import { MAX_UPLOAD_BYTES, MAX_CV_BYTES, formatMB } from './constants';
 
 const ALLOWED_MIME = new Set([
   'image/jpeg',
@@ -11,8 +12,8 @@ const ALLOWED_MIME = new Set([
   'application/pdf'
 ]);
 
-const MAX_BYTES = 5 * 1024 * 1024;
-const MAX_BYTES_CV = 1024 * 1024;
+const MAX_BYTES = MAX_UPLOAD_BYTES;
+const MAX_BYTES_CV = MAX_CV_BYTES;
 
 const SECTION_MAX_BYTES: Record<string, number> = {
   cv: MAX_BYTES_CV
@@ -52,7 +53,10 @@ export class BlobUploadStorage implements UploadStorage {
     }
     const maxBytes = SECTION_MAX_BYTES[section] ?? MAX_BYTES;
     if (file.size > maxBytes) {
-      return { ok: false, error: `File too large (max ${maxBytes / 1024 / 1024}MB)` };
+      return {
+        ok: false,
+        error: `File too large: "${file.name}" is ${formatMB(file.size)}. Maximum upload size is ${formatMB(maxBytes)}. Please compress or resize the image and try again.`
+      };
     }
     if (file.size === 0) {
       return { ok: false, error: 'Empty file' };

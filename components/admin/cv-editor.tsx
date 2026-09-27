@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from 'react';
 import { AlertCircle, Check, Download, ExternalLink, FileText, Loader2, Save, Trash2, Upload, X } from 'lucide-react';
 import { updateCvUrlAction } from '@/lib/actions';
 import { Field } from '@/components/admin/ui/field';
+import { MAX_CV_BYTES, MAX_CV_MB, formatMB } from '@/lib/storage/constants';
 
 export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
   const [cvUrl, setCvUrl] = useState(initialCvUrl);
@@ -23,15 +24,18 @@ export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
   const uploadCv = async (file: File) => {
     setUploadError(null);
     if (file.type !== 'application/pdf' || !file.name.toLowerCase().endsWith('.pdf')) {
-      setUploadError('Only PDF files are allowed');
-      return;
-    }
-    if (file.size > 1024 * 1024) {
-      setUploadError('PDF must be 1MB or smaller');
+      setUploadError(`"${file.name}" is not a PDF. Please upload a PDF file.`);
       return;
     }
     if (file.size === 0) {
       setUploadError('PDF cannot be empty');
+      return;
+    }
+    if (file.size > MAX_CV_BYTES) {
+      setUploadError(
+        `"${file.name}" is ${formatMB(file.size)}. Maximum CV size is ${formatMB(MAX_CV_BYTES)}. ` +
+          `Please compress the PDF and try again.`
+      );
       return;
     }
 
@@ -57,7 +61,16 @@ export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
         result = {};
       }
       if (!response.ok || !result.ok || !result.files?.[0]?.url) {
-        setUploadError(result.error ?? `Upload failed (HTTP ${response.status})`);
+        const reason =
+          result.error ||
+          (response.status === 413
+            ? `File too large for the server. Maximum CV size is ${formatMB(MAX_CV_BYTES)}.`
+            : body
+              ? `Upload failed (HTTP ${response.status})`
+              : `Upload failed (HTTP ${response.status}): the server returned an empty response. ` +
+                `Maximum CV size is ${formatMB(MAX_CV_BYTES)}. Please compress the PDF and try again.`);
+        setUploadError(reason);
+        console.error('[cv upload]', { status: response.status, body, result });
         return;
       }
 
@@ -121,7 +134,12 @@ export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
         />
 
         <div>
-            <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">Upload CV (PDF, max 1MB)</label>
+            <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
+              Upload CV (PDF, max {MAX_CV_MB.toFixed(0)} MB)
+            </label>
+            <p className="text-[11px] text-text-muted mb-2">
+              Maximum size is {formatMB(MAX_CV_BYTES)}. Use a compressed PDF if your file is large.
+            </p>
           <div className="flex items-center gap-2 flex-wrap">
             <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg glass text-xs hover:scale-105 transition-all cursor-pointer">
               <Upload className="w-3.5 h-3.5" />
@@ -150,7 +168,18 @@ export default function CvEditor({ initialCvUrl }: { initialCvUrl: string }) {
               </button>
             )}
           </div>
-          {uploadError && <p className="mt-2 text-xs text-red-500">{uploadError}</p>}
+          {uploadError && (
+            <div
+              role="alert"
+              className="mt-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-xs space-y-1"
+            >
+              <p className="font-semibold">Upload failed</p>
+              <p>{uploadError}</p>
+              <p className="text-red-400/80">
+                Tip: maximum CV size is {formatMB(MAX_CV_BYTES)}. Compress the PDF and try again.
+              </p>
+            </div>
+          )}
         </div>
 
         {cvUrl ? (

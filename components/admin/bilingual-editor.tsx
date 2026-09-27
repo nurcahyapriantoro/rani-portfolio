@@ -59,22 +59,37 @@ export function BilingualEditor<T>({
     setSaveStage('Saving changes...');
     startTransition(async () => {
       try {
-        setSaveStage('Committing to GitHub...');
+        setSaveStage('Committing changes...');
+        // Server actions now return either { success: true } or
+        // { success: false, error: string }, and never throw. We still keep
+        // the safety net in case the network layer itself fails (which is
+        // what used to surface as "Failed to execute 'json' on 'Response'").
         const res = await onSave(en);
-        if (res.success) {
-          setSaveStage('Done');
-          setToast({ type: 'success', message: '✓ Saved to GitHub successfully' });
-          setDirty(false);
+        if (res && typeof res === 'object' && 'success' in res) {
+          if (res.success) {
+            setSaveStage('Done');
+            setToast({ type: 'success', message: '✓ Saved successfully' });
+            setDirty(false);
+          } else {
+            setSaveStage('');
+            setToast({
+              type: 'error',
+              message: `Save failed: ${res.error ?? 'Unknown error'}`
+            });
+          }
         } else {
-          setToast({ type: 'error', message: res.error ?? 'Save failed' });
+          // Defensive fallback if the action returned an unexpected shape.
+          setSaveStage('Done');
+          setToast({ type: 'success', message: '✓ Saved' });
+          setDirty(false);
         }
       } catch (e) {
+        setSaveStage('');
         setToast({
           type: 'error',
-          message: e instanceof Error ? e.message : 'Save failed'
+          message: `Save failed: ${e instanceof Error ? e.message : 'Network or server error'}`
         });
-      } finally {
-        setSaveStage('');
+        console.error('[bilingual-editor] save error', e);
       }
     });
   };

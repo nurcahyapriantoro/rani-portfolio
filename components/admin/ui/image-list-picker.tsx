@@ -19,6 +19,13 @@ import {
   rectSortingStrategy
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import {
+  MAX_UPLOAD_BYTES,
+  MAX_UPLOAD_MB,
+  formatMB,
+  isAllowedImageMime,
+  overSizeMessage
+} from '@/lib/storage/constants';
 
 interface ImageListPickerProps {
   label?: string;
@@ -27,6 +34,42 @@ interface ImageListPickerProps {
   section: string;
   hint?: string;
   maxItems?: number;
+}
+
+// Describe a failed /api/upload response in terms the user can act on.
+// Returns a copy-friendly string that ALWAYS mentions the 3.5 MB cap so
+// users know why their file was rejected and what to do next.
+function describeUploadFailure(
+  status: number,
+  rawBody: string,
+  serverMessage?: string
+): string {
+  if (serverMessage) {
+    // Trust the server's error verbatim — it already includes the cap and the
+    // actual file size, so we don't need to re-state the limit unless the
+    // server message somehow missed it.
+    if (/MB|MB\)|max|limit/i.test(serverMessage)) return serverMessage;
+    return `${serverMessage} (Max upload size is ${formatMB(MAX_UPLOAD_BYTES)}.)`;
+  }
+
+  if (status === 0) {
+    return 'Network error — the request never reached the server. Check your connection and try again.';
+  }
+  if (status === 401) {
+    return 'Your admin session has expired. Please refresh the page and log in again.';
+  }
+  if (status === 413) {
+    return `File too large for the server. Maximum upload size is ${formatMB(MAX_UPLOAD_BYTES)}. Please compress or resize the image and try again.`;
+  }
+  if (!rawBody) {
+    // The server returned nothing — almost always a Vercel body-size cap.
+    return (
+      `Upload failed (HTTP ${status}): the server returned an empty response. ` +
+      `Maximum upload size is ${formatMB(MAX_UPLOAD_BYTES)}. ` +
+      `Please compress or resize the image and try again.`
+    );
+  }
+  return `Upload failed (HTTP ${status}). Maximum upload size is ${formatMB(MAX_UPLOAD_BYTES)}.`;
 }
 
 export function ImageListPicker({
@@ -46,24 +89,51 @@ export function ImageListPicker({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
+  // Compose the hint so the user always sees the size limit, even if a parent
+  // form did not supply one.
+  const limitHint =
+    `Max ${MAX_UPLOAD_MB.toFixed(1)} MB per image · ${hint ?? 'JPG, PNG, WebP, GIF, or SVG. Drag to reorder.'}`;
+
   const upload = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     setError(null);
+
+    const fileArr = Array.from(files);
+
+    // ---- Client-side validation BEFORE issuing the request ----
+    // Without this, oversized files get rejected by Vercel with an empty body
+    // and the user sees the cryptic "Unexpected end of JSON input".
+    for (const f of fileArr) {
+      if (!isAllowedImageMime(f)) {
+        setError(
+          `"${f.name}" is not a supported image (${f.type || 'unknown file type'}). ` +
+            `Please upload a JPG, PNG, WebP, GIF, or SVG.`
+        );
+        return;
+      }
+      if (f.size > MAX_UPLOAD_BYTES) {
+        setError(overSizeMessage(f.name, f.size));
+        return;
+      }
+    }
+    if (maxItems && values.length + fileArr.length > maxItems) {
+      setError(`Maximum ${maxItems} images. You currently have ${values.length} and tried to add ${fileArr.length}.`);
+      return;
+    }
+
     setUploading(true);
     try {
       const fd = new FormData();
-      for (const f of Array.from(files)) {
-        if (maxItems && values.length + (files.length - (Array.from(files).indexOf(f))) > maxItems) {
-          setError(`Max ${maxItems} items`);
-          break;
-        }
+      for (const f of fileArr) {
         fd.append('files', f);
         fd.append('hint', f.name);
       }
       fd.append('section', section);
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      // Read text first so an empty/non-JSON server response becomes a useful
-      // upload error instead of the opaque "Unexpected end of JSON input".
+      // Read the raw body first so an empty/non-JSON server response (which
+      // happens when Vercel closes the connection because of body-size limits)
+      // becomes a useful upload error instead of the opaque
+      // "Unexpected end of JSON input" SyntaxError.
       const body = await res.text();
       let data: { ok?: boolean; error?: string; files?: Array<{ url: string }> };
       try {
@@ -72,13 +142,18 @@ export function ImageListPicker({
         data = {};
       }
       if (!res.ok || !data.ok || !Array.isArray(data.files)) {
-        setError(data.error ?? `Upload failed (HTTP ${res.status})`);
+        const reason = describeUploadFailure(res.status, body, data.error);
+        setError(reason);
+        // Console-log for debugging without changing UX
+        console.error('[upload]', { status: res.status, body, parsedError: data.error });
         return;
       }
       const urls: string[] = data.files.map((f) => f.url);
       onChange([...values, ...urls]);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Upload failed');
+      const msg = e instanceof Error ? e.message : 'Upload failed';
+      setError(`Upload failed: ${msg}. Check your network connection and try again.`);
+      console.error('[upload] network/runtime error', e);
     } finally {
       setUploading(false);
       if (inputRef.current) inputRef.current.value = '';
@@ -147,8 +222,19 @@ export function ImageListPicker({
           onChange={(e) => upload(e.target.files)}
         />
       </div>
-      {hint && !error && <p className="mt-1 text-xs text-text-muted">{hint}</p>}
-      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+      {hint && !error && <p className="mt-1 text-xs text-text-muted">{limitHint}</p>}
+      {error && (
+        <div
+          role="alert"
+          className="mt-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-xs space-y-1"
+        >
+          <p className="font-semibold">Upload failed</p>
+          <p>{error}</p>
+          <p className="text-red-400/80">
+            Tip: maximum upload size is {formatMB(MAX_UPLOAD_BYTES)}. Compress or resize the image and try again.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
