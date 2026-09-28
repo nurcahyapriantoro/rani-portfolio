@@ -1,5 +1,13 @@
 -- Supabase / Postgres schema for Rani portfolio CMS
 -- One row per (locale, section) keyed JSON payload.
+--
+-- RLS policies that reference `auth.role()` were intentionally removed: that
+-- schema is Supabase-specific and trips "schema 'auth' does not exist" on plain
+-- Postgres (Neon, Vercel Postgres, self-hosted). The connection used by the
+-- app is the table owner (`neondb_owner` / `postgres`), which bypasses RLS, so
+-- no extra policy is needed. If you ever wire this to Supabase Auth with a
+-- non-owner role, add policies referencing `auth.role()` in a separate
+-- migration.
 
 create table if not exists portfolio_content (
   locale text not null,
@@ -24,15 +32,3 @@ create table if not exists portfolio_assets (
 
 create index if not exists portfolio_assets_section_idx
   on portfolio_assets (section, created_at desc);
-
-alter table portfolio_content enable row level security;
-alter table portfolio_assets enable row level security;
-
-drop policy if exists "service_role_all" on portfolio_content;
-drop policy if exists "service_role_all" on portfolio_assets;
-
-create policy "service_role_all" on portfolio_content
-  for all using (auth.role() = 'service_role') with check (auth.role() = 'service_role');
-
-create policy "service_role_all" on portfolio_assets
-  for all using (auth.role() = 'service_role') with check (auth.role() = 'service_role');
