@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { FileText, Mail, Sparkles, MapPin } from 'lucide-react';
+import { FileText, FolderOpen, Mail, Sparkles, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { DNASceneClient } from '../three/dna-scene-client';
 import type { ProfileInput, HeroInput } from '@/lib/schemas';
@@ -14,6 +14,7 @@ interface HeroProfile {
   photoUrl?: string;
   avatarInitials: string;
   cvUrl: string;
+  portfolioPdfUrl?: string;
 }
 
 export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: HeroInput; gpa?: string }) {
@@ -121,7 +122,7 @@ export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: Hero
               </div>
 
               <div
-                className="flex flex-col sm:flex-row gap-2 mt-5 lg:justify-start animate-fade-up opacity-0"
+                className="flex flex-col sm:flex-row flex-wrap gap-2 mt-5 lg:justify-start animate-fade-up opacity-0"
                 style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}
               >
                 <a
@@ -139,6 +140,15 @@ export function Hero({ profile, hero, gpa }: { profile: ProfileInput; hero: Hero
                   >
                     <FileText className="w-3.5 h-3.5 text-accent" />
                     View CV
+                  </a>
+                )}
+                {profile.portfolioPdfUrl && (
+                  <a
+                    href="#portfolio"
+                    className="group inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl glass text-sm font-semibold hover:scale-105 transition-all shine"
+                  >
+                    <FolderOpen className="w-3.5 h-3.5 text-accent" />
+                    View Portfolio
                   </a>
                 )}
               </div>

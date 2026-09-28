@@ -34,12 +34,13 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
   })();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string>('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -53,6 +54,31 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
       document.documentElement.classList.add(initial);
     } catch {}
   }, []);
+
+  // Highlight the nav link that matches the current scroll target so users
+  // know which section they're reading without having to scroll back up.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter((el): el is Element => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          setActiveHref(`#${visible.target.id}`);
+        }
+      },
+      { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [navItems]);
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
@@ -88,6 +114,7 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
       <nav className="container mx-auto px-3 md:px-5 flex items-center justify-between gap-2">
         <a
           href="/"
+          aria-label="Rani Andriani Tunggal — Home"
           className="flex items-center gap-1.5 group shrink-0"
         >
           <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-bg-primary font-bold text-xs transition-transform group-hover:scale-110 group-hover:rotate-3 overflow-hidden shrink-0">
@@ -98,24 +125,38 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
           </span>
         </a>
 
-        <div className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="px-2.5 py-1.5 text-xs font-medium text-text-secondary hover:text-accent transition-colors relative group whitespace-nowrap"
-            >
-              {item.label}
-              <span className="absolute bottom-0.5 left-2.5 right-2.5 h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-            </a>
-          ))}
+        <div className="hidden lg:flex items-center p-0.5 rounded-full border border-border bg-bg-secondary/40 backdrop-blur-sm flex-1 justify-center max-w-2xl mx-2">
+          {navItems.map((item) => {
+            const isActive = activeHref === item.href;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  'relative px-3 py-1.5 text-xs font-medium rounded-full transition-colors whitespace-nowrap',
+                  isActive
+                    ? 'text-bg-primary'
+                    : 'text-text-secondary hover:text-accent'
+                )}
+              >
+                {isActive && (
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 rounded-full bg-accent -z-10"
+                  />
+                )}
+                <span className="relative">{item.label}</span>
+              </a>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={toggleTheme}
-            aria-label="Toggle theme"
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             className="w-8 h-8 rounded-lg glass flex items-center justify-center hover:scale-110 transition-transform relative overflow-hidden"
           >
             <span
@@ -131,7 +172,8 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
             className="lg:hidden w-8 h-8 rounded-lg glass flex items-center justify-center"
           >
             {mobileOpen ? <X className="w-3.5 h-3.5" /> : <Menu className="w-3.5 h-3.5" />}
@@ -142,16 +184,26 @@ export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, s
       {mobileOpen && (
         <div className="lg:hidden glass border-t border-border mt-2">
           <div className="container mx-auto px-3 py-2 flex flex-col gap-0.5">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="px-2.5 py-2 text-xs font-medium text-text-secondary hover:text-accent transition-colors rounded-lg hover:bg-accent-soft"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = activeHref === item.href;
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'px-3 py-2 text-xs font-medium rounded-lg transition-colors flex items-center gap-2',
+                    isActive
+                      ? 'bg-accent text-bg-primary'
+                      : 'text-text-secondary hover:text-accent hover:bg-accent-soft'
+                  )}
+                >
+                  {isActive && <span aria-hidden className="w-1 h-3 rounded-full bg-bg-primary" />}
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
