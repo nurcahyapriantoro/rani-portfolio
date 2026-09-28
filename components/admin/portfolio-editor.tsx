@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from 'react';
 import { AlertCircle, Check, Download, ExternalLink, FileText, Loader2, Save, Trash2, Upload, X } from 'lucide-react';
+import { upload } from '@vercel/blob/client';
 import { updatePortfolioPdfUrlAction } from '@/lib/actions';
 import { Field } from '@/components/admin/ui/field';
 import { MAX_PORTFOLIO_BYTES, MAX_PORTFOLIO_MB, formatMB } from '@/lib/storage/constants';
@@ -48,36 +49,35 @@ export default function PortfolioEditor({ initialPortfolioPdfUrl }: { initialPor
 
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('files', file);
-      formData.append('hint', file.name);
+      // Direct upload to Vercel Blob — bypasses the 4.5 MB Vercel serverless
+      // body limit. The SDK asks our `/api/portfolio-upload` for a signed token,
+      // then PUTs the file bytes straight to Blob storage. Only a tiny JSON
+      // event crosses our serverless function.
+      const ext = file.name.toLowerCase().endsWith('.pdf') ? 'pdf' : 'bin';
+      const slug =
+        file.name
+          .replace(/\.[^.]+$/, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9-]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 40) || 'portfolio';
+      const pathname = `portfolio/${slug}-${Date.now()}.${ext}`;
 
-      const response = await fetch('/api/portfolio-upload', { method: 'POST', body: formData });
-      const body = await response.text();
-      let result: { ok?: boolean; error?: string; files?: Array<{ url: string }> };
-      try {
-        result = body ? JSON.parse(body) : {};
-      } catch {
-        result = {};
-      }
-      if (!response.ok || !result.ok || !result.files?.[0]?.url) {
-        const reason =
-          result.error ||
-          (response.status === 413
-            ? `File too large for the server. Maximum portfolio size is ${formatMB(MAX_PORTFOLIO_BYTES)}.`
-            : body
-              ? `Upload failed (HTTP ${response.status})`
-              : `Upload failed (HTTP ${response.status}): the server returned an empty response. ` +
-                `Maximum portfolio size is ${formatMB(MAX_PORTFOLIO_BYTES)}. ` +
-                `Please compress the PDF and try again.`);
-        setUploadError(reason);
-        console.error('[portfolio upload]', { status: response.status, body, result });
-        return;
-      }
+      const blob = await upload(pathname, file, {
+        access: 'public',
+        contentType: 'application/pdf',
+        handleUploadUrl: '/api/portfolio-upload'
+      });
 
-      setPortfolioPdfUrl(result.files[0].url);
+      setPortfolioPdfUrl(blob.url);
     } catch (error) {
-      setUploadError(error instanceof Error ? error.message : 'Upload failed');
+      const raw = error instanceof Error ? error.message : 'Upload failed';
+      const message =
+        /MB|MB\)|max|limit/i.test(raw)
+          ? raw
+          : `${raw} Maximum portfolio size is ${formatMB(MAX_PORTFOLIO_BYTES)}.`;
+      setUploadError(message);
+      console.error('[portfolio upload]', error);
     } finally {
       setUploading(false);
     }
