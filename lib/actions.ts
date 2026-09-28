@@ -102,11 +102,32 @@ function validateCvUrl(cvUrl: string): string {
   return normalizedCvUrl;
 }
 
+function validatePortfolioPdfUrl(portfolioPdfUrl: string): string {
+  const normalized = portfolioPdfUrl.trim();
+  const isLocal = /^\/uploads\/portfolio\/[a-z0-9][a-z0-9-]*\.pdf$/i.test(normalized);
+  let isHttpsPdf = false;
+  if (normalized) {
+    try {
+      const url = new URL(normalized);
+      isHttpsPdf = url.protocol === 'https:' && url.pathname.toLowerCase().endsWith('.pdf');
+    } catch {
+      isHttpsPdf = false;
+    }
+  }
+
+  if (normalized && !isLocal && !isHttpsPdf) {
+    throw new Error('Portfolio URL must be a public HTTPS PDF URL or a local portfolio upload path');
+  }
+
+  return normalized;
+}
+
 export async function updateProfileAction(enData: unknown, _idData?: unknown): Promise<ActionResult> {
   return safeAction(async () => {
     await requireAuthentication();
     const en = profileSchema.parse(enData);
     en.cvUrl = validateCvUrl(en.cvUrl);
+    en.portfolioPdfUrl = validatePortfolioPdfUrl(en.portfolioPdfUrl ?? '');
     await storage().updateSection('en', 'profile', en);
     revalidateAll();
     return { success: true as const };
@@ -121,6 +142,23 @@ export async function updateCvUrlAction(cvUrl: string): Promise<ActionResult> {
 
     const content = await storage().readContent('en');
     const profile = profileSchema.parse({ ...(content.profile as Record<string, unknown>), cvUrl: normalizedCvUrl });
+    await storage().updateSection('en', 'profile', profile);
+    revalidateAll();
+    return { success: true as const };
+  }) as Promise<ActionResult>;
+}
+
+export async function updatePortfolioPdfUrlAction(portfolioPdfUrl: string): Promise<ActionResult> {
+  return safeAction(async () => {
+    await requireAuthentication();
+
+    const normalized = validatePortfolioPdfUrl(portfolioPdfUrl);
+
+    const content = await storage().readContent('en');
+    const profile = profileSchema.parse({
+      ...(content.profile as Record<string, unknown>),
+      portfolioPdfUrl: normalized
+    });
     await storage().updateSection('en', 'profile', profile);
     revalidateAll();
     return { success: true as const };

@@ -11,9 +11,11 @@
 
 export const MAX_UPLOAD_BYTES = 3.5 * 1024 * 1024;
 export const MAX_CV_BYTES = 1 * 1024 * 1024;
+export const MAX_PORTFOLIO_BYTES = 20 * 1024 * 1024;
 
 export const MAX_UPLOAD_MB = MAX_UPLOAD_BYTES / 1024 / 1024;
 export const MAX_CV_MB = MAX_CV_BYTES / 1024 / 1024;
+export const MAX_PORTFOLIO_MB = MAX_PORTFOLIO_BYTES / 1024 / 1024;
 
 export function formatMB(bytes: number): string {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`;

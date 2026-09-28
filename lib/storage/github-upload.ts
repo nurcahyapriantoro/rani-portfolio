@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import type { UploadStorage, UploadResult, UploadError } from './types';
-import { MAX_UPLOAD_BYTES, MAX_CV_BYTES, formatMB } from './constants';
+import { MAX_UPLOAD_BYTES, MAX_CV_BYTES, MAX_PORTFOLIO_BYTES, formatMB } from './constants';
 
 interface GitHubRepo {
   owner: string;
@@ -143,9 +143,11 @@ const ALLOWED_MIME = new Set([
 
 const MAX_BYTES = MAX_UPLOAD_BYTES;
 const MAX_BYTES_CV = MAX_CV_BYTES;
+const MAX_BYTES_PORTFOLIO = MAX_PORTFOLIO_BYTES;
 
 const SECTION_MAX_BYTES: Record<string, number> = {
-  cv: MAX_BYTES_CV
+  cv: MAX_BYTES_CV,
+  portfolio: MAX_BYTES_PORTFOLIO
 };
 
 export class GitHubUploadStorage implements UploadStorage {

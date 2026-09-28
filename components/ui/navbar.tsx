@@ -8,6 +8,7 @@ interface NavbarProps {
   photoUrl?: string;
   avatarInitials: string;
   showCv?: boolean;
+  showPortfolio?: boolean;
 }
 
 const NAV_ITEMS = [
@@ -20,10 +21,17 @@ const NAV_ITEMS = [
   { href: '#contact', label: 'Contact' }
 ];
 
-export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, showCv = false }: NavbarProps) {
-  const navItems = showCv
-    ? [...NAV_ITEMS.slice(0, -1), { href: '#cv', label: 'CV' }, NAV_ITEMS[NAV_ITEMS.length - 1]]
-    : NAV_ITEMS;
+export function Navbar({ photoUrl: _photoUrl, avatarInitials: _avatarInitials, showCv = false, showPortfolio = false }: NavbarProps) {
+  const navItems = (() => {
+    let items = NAV_ITEMS;
+    if (showCv) {
+      items = [...items.slice(0, -1), { href: '#cv', label: 'CV' }, items[items.length - 1]];
+    }
+    if (showPortfolio) {
+      items = [...items.slice(0, -1), { href: '#portfolio', label: 'Portfolio' }, items[items.length - 1]];
+    }
+    return items;
+  })();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');

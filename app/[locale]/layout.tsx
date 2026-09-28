@@ -108,6 +108,7 @@ export default async function LocaleLayout({
                 photoUrl={profile.photoUrl || undefined}
                 avatarInitials={profile.avatarInitials || 'RT'}
                 showCv={Boolean(profile.cvUrl)}
+                showPortfolio={Boolean(profile.portfolioPdfUrl)}
               />
               {children}
             </SmoothScrollProvider>

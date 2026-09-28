@@ -19,6 +19,7 @@ export const profileSchema = z.object({
   github: z.string().url().or(z.literal('')),
   instagram: z.string().url().or(z.literal('')),
   cvUrl: z.string(),
+  portfolioPdfUrl: z.string().optional().default(''),
   avatarInitials: z.string().max(5),
   avatarColor: z.string(),
   photoUrl: z.string().optional().default('')

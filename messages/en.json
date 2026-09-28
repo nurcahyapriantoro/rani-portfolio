@@ -75,6 +75,14 @@
     "title": "Recognitions",
     "subtitle": "Milestones in academic and competition journey"
   },
+  "portfolio": {
+    "label": "Portfolio",
+    "title": "Project Portfolio",
+    "subtitle": "A complete PDF overview of Rani's project portfolio.",
+    "open": "Open PDF",
+    "download": "Download Portfolio",
+    "hint": "Having trouble previewing the document? Open or download the PDF instead."
+  },
   "contact": {
     "label": "Contact",
     "title": "Let's Connect",
